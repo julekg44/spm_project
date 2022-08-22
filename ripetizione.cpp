@@ -1,16 +1,16 @@
 //12.06.22 inizio video c++
 
-#include<iostream>
-
 //std::cout<<.. == using namespace;
 //                 cout<<...
 
+/*
 int main(){
 
 printf("Hello world :) \n");
 
 //endl == \n;
 }
+*/
 
 
 //----------------------------------------------------------
@@ -140,13 +140,13 @@ printf("Hello world :) \n");
  * OPPURE possiamo mettere solo la firma nella classe ed all'esterno della classe
  * possiamo scrivere il corpo della funzione usando i '::'
  * es:
- * class Auto{
- * public:
- *         void funzione();
- * }
+ *      class Auto{
+ *      public:
+ *              void funzione();
+ *      }
  *
- * void Auto::funzione() {
- * }
+ *      void Auto::funzione() {
+ *      }
  *
  * COSTRUTTORE: uguale a java, nella classe Auto(string nome...)
  * {this.x = x...} QUI PERO' IL THIS NON CI VUOLE
@@ -161,6 +161,7 @@ printf("Hello world :) \n");
  *
  *  l'extends qua si fa con i ':'
  *  class Stud : public Persona (perche' public)
+ *  //class Stud EXTENDS Persona
  *
  *  qui possiamo fare la specializzazione su piu' classi,
  *  quindi mettiamo extends su piu' classi
@@ -171,10 +172,12 @@ printf("Hello world :) \n");
  *  ti permette di definire fuori dalla classe il metodo 'Data'
  *  ovvero il costruttore in questo caso
  *
+ * 
  *	string Data::StampaNome(){ print nome...} qui il metodo ritorna string non dimenticarlo
+ *  //-> così ti sta dicendo che AL DI FUORI della classe data stiamo definendo il metodo 'StampaNome' che ritorna string
  *
- *	int mese() {return mm}; //metodo inline utile da tenere nella classe (che è messa in 
- *		file .h come le struct)
+ *	int mese() {return mm}; //metodo inline(tutto su una riga) utile da tenere nella classe 
+ *  (che è messa in file .h come le struct)
  * 
  *
  * */
@@ -183,6 +186,7 @@ printf("Hello world :) \n");
 #include<iostream>
 
 using namespace std;
+void swap(int &x, int &y);
 
 class Person{
 public:
@@ -195,16 +199,19 @@ public:
 };
 
 
-
-
-
 int main(int argc, char* argv[]){
 
     printf("***Programma di ripetizione***\n");
-    int var;
-    cin>>var;
+    int var1,var2;
+    std::cout<<"inserisci var1 e 2\n";
+    std::cin>>var1;
+    std::cin>>var2;
 
+    std::cout<<"hai inserito"<<var1<<"e"<<var2<<std::endl;
 
+    swap(var1,var2);
+
+    std::cout<<"hai swappato"<<var1<<"e"<<var2<<std::endl;
 
     return 0;
 }

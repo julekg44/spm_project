@@ -1,5 +1,5 @@
 #include<iostream>
-#include "mioheader.h"
+#include "mioheader.hpp"
 
 void myPrint(){
     std::cout<<("Stampa")<<std::endl;
