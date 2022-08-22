@@ -1,0 +1,3 @@
+/tmp/progetto/cmake-build-docker-debug/CMakeFiles/progetto.dir
+/tmp/progetto/cmake-build-docker-debug/CMakeFiles/edit_cache.dir
+/tmp/progetto/cmake-build-docker-debug/CMakeFiles/rebuild_cache.dir
