@@ -16,7 +16,6 @@ printf("Hello world :) \n");
 //----------------------------------------------------------
 
 
-// aggiunto a GIT il 22/08/22 ok
 // Created by Giuliano Galloppi on 26/03/22.
 //
 //  RIPETIZIONE =
