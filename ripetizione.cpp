@@ -91,18 +91,18 @@ printf("Hello world :) \n");
  *  intPtr = &var;
  *
  *
- *
+ * *********IMPORTANTE*******
  * a differenza dello C per fare il passaggio per riferimento (ovvero passi l'indirizzo
- * di riferimento a quella variabile) qui si mette l'& commerciale invece del puntatore
- * nel prototipo
- * e firma della funzione, e poi nel main passi la variabile 'normalmente'
+ * di riferimento a quella variabile) 
+ * qui si mette l'& commerciale invece del puntatore nel prototipo e firma della funzione,
+ * e poi nel main passi la variabile 'normalmente'
  * senza &
  *
  *
- * da f(int *a) -> f(int &a)
- * nel main: f(&a) -> f(a)
+ * da c: FIRMA/PROT: f(int *a) -> MAIN: f(int &a)
+ * QUI:  FIRMA/PROT: f(&a)     -> MAIN: f(a)
  *
- * (secondo me si puo' scrivere comunqeu anche nel modo dello c)
+ * (secondo me si puo' scrivere comunque anche nel modo dello c)
  *
  * 
  * ------- PUNTATORE A FUNZIONE
@@ -124,6 +124,7 @@ printf("Hello world :) \n");
  *	
  *	enum class t_sapori; //classe per la quale poi il tipo enum ha anche delle funzioni
  *
+ * --------------------------------
  * --------------------------------
  * programmazione ad oggetti in C++
  *

@@ -1,3 +1,4 @@
+//si usa .h per misto tra c e c++, .hpp solo per c++
 #include <string>
 
 
