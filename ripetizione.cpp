@@ -122,7 +122,13 @@ printf("Hello world :) \n");
  *	
  *		giornoSettimana giorno = LUN;
  *	
+ * non si possono avere gli stessi valori di enumerazione in due 'enum' diversi, ad es. due 'verde'
+ * con enum class si può fare invece
+ *
  *	enum class t_sapori; //classe per la quale poi il tipo enum ha anche delle funzioni
+ *  t_sapori var = t_sapori::dolce;
+ * 
+ * la classe si può anche definire tra i prototipi ad inizio file
  *
  * --------------------------------
  * --------------------------------
@@ -131,6 +137,10 @@ printf("Hello world :) \n");
  * i modificatori come quelli di java qua si usano
  * con un ':' alla fine es. public:
  *
+ * METTERE PRIMA LA PARTE PUBBLICA NELLA CLASSE
+ * E METTERE ESTERNAMENTE LA DEFINIZIONE DEI METODI DELLA CLASSE
+ * 
+ * 
  * alla fine sono come associabili alle struct
  *
  * anche qui per accedere agli attributi dell'oggetto(variabile)
