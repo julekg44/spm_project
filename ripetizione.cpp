@@ -199,9 +199,9 @@ public:
 };
 
 
-int main(int argc, char* argv[]){
+int main(int argc, char *argv[]){
 
-    printf("***Programma di ripetizione***\n");
+    std::cout<<"Programma di ripetizione"<<endl;
     int var1,var2;
     std::cout<<"inserisci var1 e 2\n";
     std::cin>>var1;
