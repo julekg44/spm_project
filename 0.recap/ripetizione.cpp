@@ -1,3 +1,4 @@
+//ORDINE DI LETTURA: 1
 //12.06.22 inizio video c++
 
 //std::cout<<.. == using namespace;

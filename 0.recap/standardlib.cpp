@@ -1,3 +1,5 @@
+//ORDINE DI LETTURA: 3
+
 #include<iostream>
 #include<vector>
 #include<string>
@@ -10,7 +12,7 @@ using namespace std;
 template <typename T>
 void stampa(vector<T> vettore){
 
-    std::cout<<"============"<<endl;
+    std::cout<<endl<<"======INIZIO NUOVA STAMPA======"<<endl;
     for(T elem: vettore){ //un for each in pratica
         std::cout<<elem<<endl;
     }
@@ -49,7 +51,7 @@ int main(){
     //vedi riga 6
 
 
-    std::vector<string> persone {"geppetto","pinocchio","tarzan"};
+    std::vector<string> persone {"geppetto","pinocchio","tarzan"}; //e' il container su cui usiamo l'iteratore
     stampa(persone);
 
     persone.insert(persone.begin(),"Topolino");
@@ -60,6 +62,22 @@ int main(){
 
     //LIBRERIA ALGORITHM
     //vedi riga 4
+    //metodo find(iteratore inizio intervallo, it fine interv, "valore cercato")
+
+    auto iteratore_valore_trovato = find(persone.begin(),persone.end(),"Topolino");
+    cout<<"Ho trovato"<<*iteratore_valore_trovato<<endl;
+
+   if (iteratore_valore_trovato!=persone.end()){
+    persone.erase(iteratore_valore_trovato);
+   }
+
+    stampa(persone);
+
+    cout<<count(persone.begin(),persone.end(),"geppetto")<<endl; //se hai stringhe devi mettere stringa, non conta i caratteri
+   
+
+
+
 
     return 0;
 }
