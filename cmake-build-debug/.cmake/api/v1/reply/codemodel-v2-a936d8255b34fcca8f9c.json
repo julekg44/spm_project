@@ -49,8 +49,8 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
-		"build" : "/tmp/progetto/cmake-build-debug",
-		"source" : "/tmp/progetto"
+		"build" : "/tmp/spm_project/cmake-build-debug",
+		"source" : "/tmp/spm_project"
 	},
 	"version" : 
 	{

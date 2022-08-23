@@ -55,7 +55,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "/tmp/progetto/cmake-build-debug"
+			"value" : "/tmp/spm_project/cmake-build-debug"
 		},
 		{
 			"name" : "CMAKE_CACHE_MAJOR_VERSION",
@@ -679,7 +679,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "/tmp/progetto"
+			"value" : "/tmp/spm_project"
 		},
 		{
 			"name" : "CMAKE_INSTALL_PREFIX",
@@ -1247,7 +1247,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "/tmp/progetto/cmake-build-debug"
+			"value" : "/tmp/spm_project/cmake-build-debug"
 		},
 		{
 			"name" : "progetto_IS_TOP_LEVEL",
@@ -1271,7 +1271,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "/tmp/progetto"
+			"value" : "/tmp/spm_project"
 		}
 	],
 	"kind" : "cache",
