@@ -41,9 +41,9 @@ int main(){
     //CAST IN SEC E MICROSEC
     auto microsec = std::chrono::duration_cast<std::chrono::microseconds>(orarioFine-orarioInizio);
     auto sec = std::chrono::duration_cast<std::chrono::seconds>(orarioFine-orarioInizio);
-    std::cout<<std::endl;
-    std::cout<<"RICERCA SEQ FIND: valore in microsecondi = "<<microsec.count()<<std::endl; //SI USA IL COUNT PER LA STAMPA
-    std::cout<<"RICERCA SEQ FIND: valore in secondi = "<<sec.count()<<std::endl<<std::endl;
+    
+    std::cout<<"RICERCA SEQ FIND:valore in microsecondi = "<<microsec.count()<<std::endl; //SI USA IL COUNT PER LA STAMPA
+    std::cout<<"RICERCA SEQ FIND:valore in secondi = "<<sec.count()<<std::endl;
     //===================================
 
 
