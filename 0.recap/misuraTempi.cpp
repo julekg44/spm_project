@@ -16,7 +16,7 @@ int main(){
 
 
     std::vector<int> tantiNumeri;
-    const int QUANTI = 1000000;
+    const int QUANTI = 10000;
 
     tantiNumeri.reserve(QUANTI); //pre alloca la memoria per il vector per 'quanti' numeri
 
@@ -24,7 +24,7 @@ int main(){
     for(int i=0; i<QUANTI; i++){
         tantiNumeri.push_back(i); //sarebbe l'append di una lista
     }
-    const int QUANTE_RICERCHE = 10000;
+    const int QUANTE_RICERCHE = 1000;
     std::cout<<"Inizia la gara!";
 
     //===================================
