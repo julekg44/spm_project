@@ -7,7 +7,7 @@
 #include<chrono>
 
 
-//MISURA TEMPI DI UN ESE SEQUENZIALE
+//MISURA TEMPI DI UN ESE SEQUENZIALE - gara find e binary search
 //continuo video STDLIB
 //https://www.youtube.com/watch?v=jaDkjcbx5Xo&list=PL0qAPtx8YtJcdF_posHZldxX9IaY5wfPm&index=10
 int main(){
@@ -24,7 +24,8 @@ int main(){
     for(int i=0; i<QUANTI; i++){
         tantiNumeri.push_back(i); //sarebbe l'append di una lista
     }
-    const int QUANTE_RICERCHE = 1000;
+    const int QUANTE_RICERCHE = 10000;
+    std::cout<<"Inizia la gara!";
 
     //===================================
     //===================================
@@ -39,11 +40,33 @@ int main(){
     auto orarioFine = std::chrono::high_resolution_clock::now();
 
     //CAST IN SEC E MICROSEC
+    //IL METODO DURATION CAST E' PARAMETRICO, DOVE MICROSECONDS E' UN TIPO DEFINITO NELLA LIB CHRONO
     auto microsec = std::chrono::duration_cast<std::chrono::microseconds>(orarioFine-orarioInizio);
     auto sec = std::chrono::duration_cast<std::chrono::seconds>(orarioFine-orarioInizio);
     
     std::cout<<std::endl<<"RICERCA SEQ FIND:valore in microsecondi = "<<microsec.count()<<std::endl; //SI USA IL COUNT PER LA STAMPA
     std::cout<<"RICERCA SEQ FIND:valore in secondi = "<<sec.count()<<std::endl;
+    //===================================
+
+
+
+
+    //RICERCA SEQUENZIALE CON BINARY SEARCH
+    orarioInizio = std::chrono::high_resolution_clock::now();
+
+    for(int i=0; i<QUANTE_RICERCHE; i++){
+        int rVal = rand()%(QUANTI*2);
+
+        bool trovato = std::binary_search(tantiNumeri.begin(),tantiNumeri.end(),rVal);
+    
+    }
+    orarioFine = std::chrono::high_resolution_clock::now();
+
+    microsec = std::chrono::duration_cast<std::chrono::microseconds>(orarioFine-orarioInizio);
+    sec = std::chrono::duration_cast<std::chrono::seconds>(orarioFine-orarioInizio);
+    
+    std::cout<<std::endl<<"RICERCA binaria FIND:valore in microsecondi = "<<microsec.count()<<std::endl;
+    std::cout<<"RICERCA binaria FIND:valore in secondi = "<<sec.count()<<std::endl;
     //===================================
 
 
