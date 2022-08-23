@@ -1,5 +1,5 @@
-#include<iostream>
-#include"util.hpp"
+#include <iostream>
+#include "util.hpp"
 
 //std::cout == using namespace; cout<<
 
