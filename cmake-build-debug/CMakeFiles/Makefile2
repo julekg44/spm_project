@@ -81,12 +81,12 @@ clean: CMakeFiles/progetto.dir/clean
 CMakeFiles/progetto.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/progetto.dir/build.make CMakeFiles/progetto.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/progetto.dir/build.make CMakeFiles/progetto.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/tmp/spm_project/cmake-build-debug/CMakeFiles --progress-num=1,2 "Built target progetto"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/tmp/spm_project/cmake-build-debug/CMakeFiles --progress-num=1,2,3 "Built target progetto"
 .PHONY : CMakeFiles/progetto.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/progetto.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /tmp/spm_project/cmake-build-debug/CMakeFiles 2
+	$(CMAKE_COMMAND) -E cmake_progress_start /tmp/spm_project/cmake-build-debug/CMakeFiles 3
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/progetto.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /tmp/spm_project/cmake-build-debug/CMakeFiles 0
 .PHONY : CMakeFiles/progetto.dir/rule

@@ -85,6 +85,12 @@
 		<Unit filename="/tmp/spm_project/main_seq.cpp">
 			<Option target="progetto"/>
 		</Unit>
+		<Unit filename="/tmp/spm_project/util.cpp">
+			<Option target="progetto"/>
+		</Unit>
+		<Unit filename="/tmp/spm_project/util.hpp">
+			<Option target="progetto"/>
+		</Unit>
 		<Unit filename="/tmp/spm_project/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>
