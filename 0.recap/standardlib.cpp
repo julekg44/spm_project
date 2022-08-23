@@ -5,6 +5,9 @@
 #include<string>
 #include<algorithm>
 #include<set>
+#include<map>
+#include<list>
+#include<deque>
 
 using namespace std;
 
@@ -101,6 +104,25 @@ int main(){
     setNomi.insert("giulio");
 
     stampa(setNomi);
+
+    //vedi riga 8 MAPPE
+    map<int,string> mappa;
+    multimap<int,string> map2 { //cambia solo che accetta i duplicati , lo stesso per il multiset
+        {10,"ciro"},{20,"mertens"}
+    };
+
+
+    mappa.insert(std::pair<int,string>(1,"ciro"));
+
+
+    //abbiamo ovviamente anche liste(doppiamente puntate qui)
+    //ed abbiamo code con doppio ingresso (dequeue)
+
+    list<int> listaInteri {1,3,456,6};
+
+    for(int elem: listaInteri){
+        printf("elemento %d\n",elem);
+    }    
 
 
 
