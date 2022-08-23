@@ -4,6 +4,7 @@
 #include<vector>
 #include<string>
 #include<algorithm>
+#include<set>
 
 using namespace std;
 
@@ -12,7 +13,17 @@ using namespace std;
 template <typename T>
 void stampa(vector<T> vettore){
 
-    std::cout<<endl<<"======INIZIO NUOVA STAMPA======"<<endl;
+    std::cout<<endl<<"======INIZIO NUOVA STAMPA vector======"<<endl;
+    for(T elem: vettore){ //un for each in pratica
+        std::cout<<elem<<endl;
+    }
+    std::cout<<"============"<<endl;
+}
+
+template <typename T>
+void stampa(set<T> vettore){
+
+    std::cout<<endl<<"======INIZIO NUOVA STAMPA set======"<<endl;
     for(T elem: vettore){ //un for each in pratica
         std::cout<<elem<<endl;
     }
@@ -51,7 +62,8 @@ int main(){
     //vedi riga 6
 
 
-    std::vector<string> persone {"geppetto","pinocchio","tarzan"}; //e' il container su cui usiamo l'iteratore
+    std::vector<string> persone {"geppetto","pinocchio","tarzan","asdrubbale", "ascanio","sempronio",
+                            "gesu","goofy","marcofaella"}; //e' il container su cui usiamo l'iteratore
     stampa(persone);
 
     persone.insert(persone.begin(),"Topolino");
@@ -74,7 +86,22 @@ int main(){
     stampa(persone);
 
     cout<<count(persone.begin(),persone.end(),"geppetto")<<endl; //se hai stringhe devi mettere stringa, non conta i caratteri
-   
+    
+    std::sort(persone.begin(),persone.end());
+    stampa(persone);
+
+
+
+    //-------------------
+    //esistono anche le altre collezioni come in java, set mappe ecc
+    //vedi riga 7-------------------------
+
+    set<string> setNomi;
+
+    setNomi.insert("giulio");
+
+    stampa(setNomi);
+
 
 
 
