@@ -9,6 +9,13 @@
 #include<list>
 #include<deque>
 
+/* SOLO LO USING DEFINISCE CHE QUELLE FUNZIONI NON HANNO BISOGNO DI 'STD::'
+using std::cout; // program uses cout
+using std::cin; // program uses cin
+using std::endl; // program uses endl”
+*/
+
+
 using namespace std;
 
 //https://www.youtube.com/watch?v=I4ALm-NOMfU&list=PL0qAPtx8YtJcdF_posHZldxX9IaY5wfPm&index=1

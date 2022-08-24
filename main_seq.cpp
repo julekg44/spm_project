@@ -2,7 +2,11 @@
 #include "util.hpp"
 
 //std::cout == using namespace; cout<<
-
+/* SOLO LO USING DEFINISCE CHE QUELLE FUNZIONI NON HANNO BISOGNO DI 'STD::'
+using std::cout; // program uses cout
+using std::cin; // program uses cin
+using std::endl; // program uses endl”
+*/
 int main() {
 
     std::cout << "Hello world xd" << std::endl;
