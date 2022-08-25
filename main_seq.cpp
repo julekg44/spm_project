@@ -78,7 +78,7 @@ int main() {
     }
     int vettoreB[N_LENGHT] = {6,4};
 
-        printTest();
+    printTest();
 
     //printSistema(matriceA,N_LENGHT,vettoreX,vettoreB);
     
@@ -86,6 +86,8 @@ int main() {
     int somma=0;
     int temp1 = 0;
     int temp2 = 0;
+        printTest();
+
     
     for(int i=1; i<=N_LENGHT; i++) { //for esterno
     cout<<"INIZIO FOR";
