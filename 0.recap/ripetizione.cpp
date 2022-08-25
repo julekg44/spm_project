@@ -93,8 +93,8 @@ printf("Hello world :) \n");
  *
  *
  * *********IMPORTANTE*******
- * a differenza dello C per fare il passaggio per riferimento (ovvero passi l'indirizzo
- * di riferimento a quella variabile) 
+ * a differenza dello C per fare il passaggio per riferimento 
+ * (ovvero passi l'indirizzo di riferimento a quella variabile) 
  * qui si mette l'& commerciale invece del puntatore nel prototipo e firma della funzione,
  * e poi nel main passi la variabile 'normalmente'
  * senza &

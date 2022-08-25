@@ -14,6 +14,7 @@ using namespace std;
 void printMatrix(int* A[],int n);
 void initTest(int n_input,int* n_len, int* A[], int x[], int B[]); //* QUI:  FIRMA/PROT: f(&a)     -> MAIN: f(a); con gli array vale lo stesso
 
+void initTest2(int n_input,int &n_len, int* A[], int x[], int B[]); //* QUI:  FIRMA/PROT: f(&a)     -> MAIN: f(a); con gli array vale lo stesso
 
 
 
@@ -40,6 +41,11 @@ int main() {
     cout<<"il valore cambiato di n_len è:"<<n_len_vector<<endl;
     printMatrix(matriceA,n_len_vector);
 
+    printTest();
+
+    initTest2(3,n_len_vector,matriceA,vettoreX,vettoreB); //versione c++
+    cout<<"il valore cambiato di n_len è:"<<n_len_vector<<endl;
+    printMatrix(matriceA,n_len_vector);
 
 
 
@@ -64,6 +70,18 @@ void initTest(int n_input,int* n_len, int* A[], int x[], int B[]){
     for(int i =0;i<*n_len;i++){
         A[i] = new int[*n_len];//allocazione dinamica
         for(int j=0;j<*n_len;j++){
+            A[i][j] = j;
+        }
+    }
+}
+
+
+void initTest2(int n_input,int &n_len, int* A[], int x[], int B[]){ //in c++ si fa cosi'
+    
+    n_len=n_input;
+    for(int i =0;i<n_len;i++){
+        A[i] = new int[n_len];//allocazione dinamica
+        for(int j=0;j<n_len;j++){
             A[i][j] = j;
         }
     }
