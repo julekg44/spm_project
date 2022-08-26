@@ -22,7 +22,7 @@ void riempiMatrice(int** mat, int n);
 int** generaMatrice(int size);
 
 void printArray(string msg, int array[], int array_size);
-void printArray(string msg, float array[], int array_size);
+void printArray(string msg, vector<float> array, int array_size);
 
 
 
@@ -46,13 +46,13 @@ int main() {
     //cin>>n_len_vector;
     //int matriceA[n_len_vector][n_len_vector]; //Matrice
     /*CANCELLARE DA QUA
-    initTest(2,&n_len_vector,matDinamica,vettoreX,vettoreB);
+    initTest(2,&n_len_vector,matDinamica,currentIt_vec_X,vettoreB);
     cout<<"il valore cambiato di n_len è:"<<n_len_vector<<endl;
     printMatrix(matDinamica,n_len_vector);
 
     printTest();
 
-    initTest2(3,n_len_vector,matDinamica,vettoreX,vettoreB); //versione c++
+    initTest2(3,n_len_vector,matDinamica,currentIt_vec_X,vettoreB); //versione c++
     cout<<"il valore cambiato di n_len è:"<<n_len_vector<<endl;
     printMatrix(matDinamica,n_len_vector);
     */
@@ -85,7 +85,9 @@ int main() {
     float temp1 = 0;
     float temp2 = 0;
     const int K_MAX_ITER = 5;
-    vector<float>vettoreX(N_LENGHT,0);
+    vector<float>currentIt_vec_X(N_LENGHT,0);
+    vector<float>nextIt_vec_X(N_LENGHT,0);
+
 
 
     //k e' il numero delle iterazioni
@@ -100,27 +102,27 @@ int main() {
 
             for(int j=0;j<N_LENGHT;j++){
                 if (j != i ){
-                    printf("SOMMA INTERNA i=%d j=%d\nsomma=%.2f , mat[%d][%d] = %.2f , vettore x[%d]=%.2f\n",i,j,somma,i,j,matriceA[i][j],j,vettoreX[j]);
-                    somma = somma + ( matriceA[i][j] * vettoreX[j] ) ;
+                    printf("SOMMA INTERNA i=%d j=%d\nsomma=%.2f , mat[%d][%d] = %.2f , vettore x[%d]=%.2f\n",i,j,somma,i,j,matriceA[i][j],j,currentIt_vec_X[j]);
+                    somma = somma + ( matriceA[i][j] * currentIt_vec_X[j] ) ;
                 }
             }//fine for delle j
             cout<<"\ntemp 2: "<< temp2<<" = "<<vettoreB[i]<< "-"<<somma<<endl;
             temp2 = vettoreB[i] - somma;
             cout<<"RISULTATO temp1="<<temp1<<"temp 2 = "<<temp2<<endl;
-            vettoreX[i] = temp1*temp2;
-            cout<<"vettoreX["<<i<<"]= "<<vettoreX[i]<<endl<<endl;
-            temp1=0;
+            nextIt_vec_X[i] = temp1*temp2;
+            cout<<"currentIt_vec_X["<<i<<"]= "<<currentIt_vec_X[i]<<endl<<endl;
 
         } //--------------------------------------------------
         // fine for delle 'i'
-
+        cout<<"Aggiorno il nuovo vettore prima dell'iteraz k+1 current=next";
+        currentIt_vec_X= nextIt_vec_X;
         cout<<endl;
     }//fine for delle iterazioni
 
 
 
 
-    printArray("\nvettore x\n",vettoreX,N_LENGHT);
+    printArray("\nvettore x\n",currentIt_vec_X,N_LENGHT);
 
         
 
@@ -232,7 +234,7 @@ void printArray(string msg, int array[], int array_size){
 }
 
 
-void printArray(string msg, float array[], int array_size){
+void printArray(string msg, vector<float> array, int array_size){
     std::cout<<msg;
     for(int h=0;h<array_size;h++){
         printf ("x[%d]: %.2f \n",h, array[h]);
@@ -242,8 +244,37 @@ void printArray(string msg, float array[], int array_size){
 
 
 
+/*
+void jacobi(){
+    //k e' il numero delle iterazioni
+    for(int k=0;k<K_MAX_ITER;k++){
+        cout<<"\nITERAZIONE k="<<k<<"\n";
+        for(int i=0; i<N_LENGHT; i++) { //for esterno DELLA FORMULA
 
+            //x[i] = temp1 * temp2;
+            somma = 0;
+            temp1 = (1 / matriceA[i][i]);
+            //cout<<"temp1 = "<<temp1<<endl;
 
+            for(int j=0;j<N_LENGHT;j++){
+                if (j != i ){
+                    printf("SOMMA INTERNA i=%d j=%d\nsomma=%.2f , mat[%d][%d] = %.2f , vettore x[%d]=%.2f\n",i,j,somma,i,j,matriceA[i][j],j,currentIt_vec_X[j]);
+                    somma = somma + ( matriceA[i][j] * currentIt_vec_X[j] ) ;
+                }
+            }//fine for delle j
+            cout<<"\ntemp 2: "<< temp2<<" = "<<vettoreB[i]<< "-"<<somma<<endl;
+            temp2 = vettoreB[i] - somma;
+            cout<<"RISULTATO temp1="<<temp1<<"temp 2 = "<<temp2<<endl;
+            nextIt_vec_X[i] = temp1*temp2;
+            cout<<"currentIt_vec_X["<<i<<"]= "<<currentIt_vec_X[i]<<endl<<endl;
+            temp1=0;
+
+        } //--------------------------------------------------
+        // fine for delle 'i'
+
+        cout<<endl;
+    }//fine for delle iterazioni
+}*/
 
 
 
