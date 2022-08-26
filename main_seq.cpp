@@ -72,69 +72,66 @@ int main() {
 
     const int N_LENGHT = 2; //lunghezza della matrice e dei vettori
     float matriceA [N_LENGHT][N_LENGHT];
-    matriceA[0][0]= 2;
-    matriceA[0][1] = 1;
-    matriceA[1][0]= 3;
-    matriceA[1][1] = 1;
+    matriceA[0][0]= 4;
+    matriceA[0][1] = 2;
+    matriceA[1][0]= 1;
+    matriceA[1][1] = 3;
 
-    float vettoreB[N_LENGHT] = {6,4};
+    float vettoreB[N_LENGHT] = {8,8};
 
-    //------------------------------------------------------------------------------
     // tutto il calcolo del for mi serve a trovare le x
     float somma=0;
     float temp1 = 0;
     float temp2 = 0;
-    const int K_MAX_ITER = 30;
+    const int K_MAX_ITER = 110;
     vector<float>currentIt_vec_X(N_LENGHT,0);//x_k
     vector<float>nextIt_vec_X(N_LENGHT,0); //x_k+1
 
-
+    int val;
 
     //k e' il numero delle iterazioni
     for(int k=0;k<K_MAX_ITER;k++){
-        cout<<"\nITERAZIONE k="<<k<<"\n";
+        cout<<"\nITERAZIONE k ="<<k<<"\n";
         cout<<"Array delle x iterazione"<<k<<":"<<endl;
         printArray("",currentIt_vec_X,N_LENGHT);
 
         for(int i=0; i<N_LENGHT; i++) { //for esterno DELLA FORMULA
+            cout<<"\nENTRA CICLO i = "<<i<<endl;
             somma = 0;
+            cout<<"valore Mat["<<i<<"]"<<"["<<i<<"]"<<" = "<<matriceA[i][i]<<endl;
+            cout<<"temp1 = 1 / mat[i][i]:"<<matriceA[i][i]<<endl;
             temp1 = (1 / matriceA[i][i]);
-            cout<<"valore temp1= "<<temp1<<"valore somma="<<somma<<endl;
-
+            cout<<"valore temp1 = "<<temp1<<", valore somma = "<<somma<<endl;
 
             for(int j=0;j<N_LENGHT;j++){
+                cout<<"\nENTRA CICLO J = "<<j<<endl;
+                cout<<"valore Mat["<<i<<"]"<<"["<<j<<"]"<<" = "<<matriceA[i][j]<<endl;
+                cout<<"valore somma:"<<somma<<" PRIMA del ciclo con I="<<i<<" e J = "<<j<<endl;
                 if (j != i ){
+
                     somma = somma + ( matriceA[i][j] * currentIt_vec_X[j] ) ;
+
                 }
             }//fine for delle j
 
-            cout<<"RISULTATO somma ciclo j ="<<somma<<endl;
+            cout<<"VALORE somma DOPO ciclo ="<<somma<<endl;
             temp2 = vettoreB[i] - somma;
             cout<<"RISULTATO temp1="<<temp1<<" temp 2 = "<<temp2<<endl;
             nextIt_vec_X[i] = temp1*temp2;
             cout<<"valore di x[i] nella nuova iterazione nextX["<<i<<"]= "<<nextIt_vec_X[i]<<endl<<endl;
 
-        } // FINE CICLO I
+        } // FINE CICLO i
         cout<<"Aggiorno il nuovo vettore prima dell'iteraz k+1 current=next"<<endl;;
         currentIt_vec_X= nextIt_vec_X;
+        temp1=0;
+        temp2=0;
 
     }//fine for delle iterazioni
 
 
 
 
-    printArray("\nvettore x\n",currentIt_vec_X,N_LENGHT);
-
-        
-
-
-
-
-
-
-
-
-
+    printArray("\nvettore x\n",nextIt_vec_X,N_LENGHT);
 
 
 
@@ -238,50 +235,10 @@ void printArray(string msg, int array[], int array_size){
 void printArray(string msg, vector<float> array, int array_size){
     std::cout<<msg;
     for(int h=0;h<array_size;h++){
-        printf ("x[%d]: %.2f \n",h, array[h]);
+        printf ("x[%d]: %.3f \n",h, array[h]);
     }
 
 }
-
-
-
-/*
-void jacobi(){
-    //k e' il numero delle iterazioni
-    for(int k=0;k<K_MAX_ITER;k++){
-        cout<<"\nITERAZIONE k="<<k<<"\n";
-        for(int i=0; i<N_LENGHT; i++) { //for esterno DELLA FORMULA
-
-            //x[i] = temp1 * temp2;
-            somma = 0;
-            temp1 = (1 / matriceA[i][i]);
-            //cout<<"temp1 = "<<temp1<<endl;
-
-            for(int j=0;j<N_LENGHT;j++){
-                if (j != i ){
-                    printf("SOMMA INTERNA i=%d j=%d\nsomma=%.2f , mat[%d][%d] = %.2f , vettore x[%d]=%.2f\n",i,j,somma,i,j,matriceA[i][j],j,currentIt_vec_X[j]);
-                    somma = somma + ( matriceA[i][j] * currentIt_vec_X[j] ) ;
-                }
-            }//fine for delle j
-            cout<<"\ntemp 2: "<< temp2<<" = "<<vettoreB[i]<< "-"<<somma<<endl;
-            temp2 = vettoreB[i] - somma;
-            cout<<"RISULTATO temp1="<<temp1<<"temp 2 = "<<temp2<<endl;
-            nextIt_vec_X[i] = temp1*temp2;
-            cout<<"currentIt_vec_X["<<i<<"]= "<<currentIt_vec_X[i]<<endl<<endl;
-            temp1=0;
-
-        } //--------------------------------------------------
-        // fine for delle 'i'
-
-        cout<<endl;
-    }//fine for delle iterazioni
-}*/
-
-
-
-
-
-
 
 
 
@@ -302,4 +259,43 @@ void jacobi(){
 
     std::cout << "x=" << x << std::endl;
     std::cout << "y=" << y << std::endl;
+*/
+
+
+/*
+ * ULTIMO
+ *  //k e' il numero delle iterazioni
+    for(int k=0;k<K_MAX_ITER;k++){
+        cout<<"\nITERAZIONE k ="<<k<<"\n";
+        cout<<"Array delle x iterazione"<<k<<":"<<endl;
+        printArray("",currentIt_vec_X,N_LENGHT);
+
+        for(int i=0; i<N_LENGHT; i++) { //for esterno DELLA FORMULA
+            somma = 0;
+            temp1 = (1 / matriceA[i][i]);
+            cout<<"valore temp1= "<<temp1<<" valore somma = "<<somma<<endl;
+
+            for(int j=0;j<N_LENGHT;j++){
+                cout<<"\nENTRA CICLO J = "<<j<<endl;
+                cout<<"valore somma:"<<somma<<" PRIMA del ciclo con I="<<i<<" e J = "<<j<<endl;
+                if (j != i ){
+
+                    somma = somma + ( matriceA[i][j] * currentIt_vec_X[j] ) ;
+
+                }
+            }//fine for delle j
+
+            cout<<"VALORE somma DOPO ciclo ="<<somma<<endl;
+            temp2 = vettoreB[i] - somma;
+            cout<<"RISULTATO temp1="<<temp1<<" temp 2 = "<<temp2<<endl;
+            nextIt_vec_X[i] = temp1*temp2;
+            cout<<"valore di x[i] nella nuova iterazione nextX["<<i<<"]= "<<nextIt_vec_X[i]<<endl<<endl;
+
+        } // FINE CICLO i
+        cout<<"Aggiorno il nuovo vettore prima dell'iteraz k+1 current=next"<<endl;;
+        currentIt_vec_X= nextIt_vec_X;
+        temp1=0;
+        temp2=0;
+
+    }//fine for delle iterazioni
 */
