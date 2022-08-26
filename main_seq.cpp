@@ -20,6 +20,9 @@ void initTest2(int n_input,int &n_len, int* A[], int x[], int B[]); //* QUI:  FI
 void riempiMatrice(int** mat, int n);
 int** generaMatrice(int size);
 
+void printArray(string msg, int array[], int array_size);
+void printArray(string msg, float array[], int array_size);
+
 
 
 
@@ -33,11 +36,10 @@ int main() {
     //n lunghezza di 'x'
     //B vettore di termini conosciuti di lunghezza n
     printStr("===== Inizio Jacobi Sequenziale =====\n");
-    int n_len_vector = 0; //lunghezza n del vettore    
-    int** matDinamica; //Matrice
-    int** matriceA;
-    int* x; //vettore x di lunghezza n
-    int* B; // vettore risultato di lunghezza n
+    //int n_len_vector = 0; //lunghezza n del vettore
+    //int** matDinamica; //Matrice
+    //int* x; //vettore x di lunghezza n
+    //int* B; // vettore risultato di lunghezza n
 
     //printStr("Inserisci n elementi matrice");
     //cin>>n_len_vector;
@@ -62,49 +64,59 @@ int main() {
     //------------------------------------------------------------
     printStr("Alloco Matrice ed elementi\n");
     //la matrice è necessariamente quadrata
-    const int N_LENGHT = 2; //lunghezza della matrice e dei vettori
-    matriceA = new int*[N_LENGHT]; //IL SIMBOLO DEL PUNTATORE VA DOPO L'INT E MAI PRIMA PORCO ZIO, alloco due puntatori
-    matriceA[0] = new int[N_LENGHT]; //ogni puntatore è un vettore di due elementi
-    matriceA[1] = new int[N_LENGHT];
 
+    //matriceA = new int*[N_LENGHT]; //IL SIMBOLO DEL PUNTATORE VA DOPO L'INT E MAI PRIMA PORCO ZIO, alloco due puntatori
+    //matriceA[0] = new int[N_LENGHT]; //ogni puntatore è un vettore di due elementi
+    //matriceA[1] = new int[N_LENGHT];
+
+    const int N_LENGHT = 2; //lunghezza della matrice e dei vettori
+    float matriceA [N_LENGHT][N_LENGHT];
     matriceA[0][0]= 2;
     matriceA[0][1] = 1;
     matriceA[1][0]= 3;
     matriceA[1][1] = 1;
 
-    int vettoreX[N_LENGHT]; //vettore delle x
-    for(int h=0;h<N_LENGHT;h++){
-        vettoreX[h]=h+2;
-    }
-    int vettoreB[N_LENGHT] = {6,4};
+    float vettoreX[N_LENGHT] = {0,0}; //vettore delle x
+    float vettoreB[N_LENGHT] = {6,4};
 
-    printTest();
+    //------------------------------------------------------------------------------
+    // tutto il calcolo del for mi serve a trovare le x
+    float somma=0;
+    float temp1 = 0;
+    float temp2 = 0;
+    const int K_MAX_ITER = 10;
 
-    //printSistema(matriceA,N_LENGHT,vettoreX,vettoreB);
-    
-    //tutto il calcolo del for mi serve a trovare le x
-    int somma=0;
-    int temp1 = 0;
-    int temp2 = 0;
-        printTest();
+    //k e' il numero delle iterazioni
+    for(int k=0;k<K_MAX_ITER;k++){
+        cout<<"ITERAZIONE k="<<k<<"\n";
+        for(int i=0; i<N_LENGHT; i++) { //for esterno DELLA FORMULA
 
-    
-    for(int i=1; i<=N_LENGHT; i++) { //for esterno
-    cout<<"INIZIO FOR";
+            //x[i] = temp1 * temp2;
+            somma = 0;
+            temp1 = (1 / matriceA[i][i]);
+            //cout<<"temp1 = "<<temp1<<endl;
 
-        //x[i] = temp1 * temp2;
-        somma = 0;
-        int temp1 = (1 / matriceA[i][i]);
+            for(int j=0;j<N_LENGHT;j++){
+                if (j != i ){
+                    printf("Valore di j=%d , somma=%.2f , mat[%d][%d] = %.2f , x[%d]=%.2f\n",j,somma,i,j,matriceA[i][j],j,vettoreX[j]);
+                    somma = somma + ( matriceA[i][j] * vettoreX[j] ) ;
+                }
+            }//fine for delle j
+            temp2 = vettoreB[i] - somma;
+            cout<<"temp 2 = "<<temp2<<endl;
+            vettoreX[i] = temp1*temp2;
 
-        for(int j=1;j<=N_LENGHT;j++){
-            if (j!=i){
-                somma = somma + matriceA[i][j] * vettoreX[j];
-            }
-        }//fine for delle j
-        temp2 = B[i] - somma; 
-        vettoreX[i] = temp1*temp2;
+        } //--------------------------------------------------
+        // fine for delle 'i'
 
-    } //fine for delle 'i'
+        cout<<endl;
+    }//fine for delle iterazioni
+
+
+
+
+    printArray("\nvettore x\n",vettoreX,N_LENGHT);
+
         
 
 
@@ -204,6 +216,23 @@ int** generaMatrice(int size){ //ROTTO
     riempiMatrice(mat,size);
 
     return mat;
+}
+
+void printArray(string msg, int array[], int array_size){
+    std::cout<<msg;
+    for(int h=0;h<array_size;h++){
+        cout<<"["<<h<<"] = "<<array[h]<<endl;
+    }
+
+}
+
+
+void printArray(string msg, float array[], int array_size){
+    std::cout<<msg;
+    for(int h=0;h<array_size;h++){
+        printf ("x[%d]: %.2f \n",h, array[h]);
+    }
+
 }
 
 
