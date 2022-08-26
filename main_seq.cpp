@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <vector>
 #include "util.hpp"
 
 //std::cout == using namespace; cout<<
@@ -76,7 +77,6 @@ int main() {
     matriceA[1][0]= 3;
     matriceA[1][1] = 1;
 
-    float vettoreX[N_LENGHT] = {0,0}; //vettore delle x
     float vettoreB[N_LENGHT] = {6,4};
 
     //------------------------------------------------------------------------------
@@ -84,11 +84,13 @@ int main() {
     float somma=0;
     float temp1 = 0;
     float temp2 = 0;
-    const int K_MAX_ITER = 10;
+    const int K_MAX_ITER = 5;
+    vector<float>vettoreX(N_LENGHT,0);
+
 
     //k e' il numero delle iterazioni
     for(int k=0;k<K_MAX_ITER;k++){
-        cout<<"ITERAZIONE k="<<k<<"\n";
+        cout<<"\nITERAZIONE k="<<k<<"\n";
         for(int i=0; i<N_LENGHT; i++) { //for esterno DELLA FORMULA
 
             //x[i] = temp1 * temp2;
@@ -98,13 +100,16 @@ int main() {
 
             for(int j=0;j<N_LENGHT;j++){
                 if (j != i ){
-                    printf("Valore di j=%d , somma=%.2f , mat[%d][%d] = %.2f , x[%d]=%.2f\n",j,somma,i,j,matriceA[i][j],j,vettoreX[j]);
+                    printf("SOMMA INTERNA i=%d j=%d\nsomma=%.2f , mat[%d][%d] = %.2f , vettore x[%d]=%.2f\n",i,j,somma,i,j,matriceA[i][j],j,vettoreX[j]);
                     somma = somma + ( matriceA[i][j] * vettoreX[j] ) ;
                 }
             }//fine for delle j
+            cout<<"\ntemp 2: "<< temp2<<" = "<<vettoreB[i]<< "-"<<somma<<endl;
             temp2 = vettoreB[i] - somma;
-            cout<<"temp 2 = "<<temp2<<endl;
+            cout<<"RISULTATO temp1="<<temp1<<"temp 2 = "<<temp2<<endl;
             vettoreX[i] = temp1*temp2;
+            cout<<"vettoreX["<<i<<"]= "<<vettoreX[i]<<endl<<endl;
+            temp1=0;
 
         } //--------------------------------------------------
         // fine for delle 'i'
