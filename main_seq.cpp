@@ -84,39 +84,40 @@ int main() {
     float somma=0;
     float temp1 = 0;
     float temp2 = 0;
-    const int K_MAX_ITER = 5;
-    vector<float>currentIt_vec_X(N_LENGHT,0);
-    vector<float>nextIt_vec_X(N_LENGHT,0);
+    const int K_MAX_ITER = 30;
+    vector<float>currentIt_vec_X(N_LENGHT,0);//x_k
+    vector<float>nextIt_vec_X(N_LENGHT,0); //x_k+1
 
 
 
     //k e' il numero delle iterazioni
     for(int k=0;k<K_MAX_ITER;k++){
         cout<<"\nITERAZIONE k="<<k<<"\n";
-        for(int i=0; i<N_LENGHT; i++) { //for esterno DELLA FORMULA
+        cout<<"Array delle x iterazione"<<k<<":"<<endl;
+        printArray("",currentIt_vec_X,N_LENGHT);
 
-            //x[i] = temp1 * temp2;
+        for(int i=0; i<N_LENGHT; i++) { //for esterno DELLA FORMULA
             somma = 0;
             temp1 = (1 / matriceA[i][i]);
-            //cout<<"temp1 = "<<temp1<<endl;
+            cout<<"valore temp1= "<<temp1<<"valore somma="<<somma<<endl;
+
 
             for(int j=0;j<N_LENGHT;j++){
                 if (j != i ){
-                    printf("SOMMA INTERNA i=%d j=%d\nsomma=%.2f , mat[%d][%d] = %.2f , vettore x[%d]=%.2f\n",i,j,somma,i,j,matriceA[i][j],j,currentIt_vec_X[j]);
                     somma = somma + ( matriceA[i][j] * currentIt_vec_X[j] ) ;
                 }
             }//fine for delle j
-            cout<<"\ntemp 2: "<< temp2<<" = "<<vettoreB[i]<< "-"<<somma<<endl;
-            temp2 = vettoreB[i] - somma;
-            cout<<"RISULTATO temp1="<<temp1<<"temp 2 = "<<temp2<<endl;
-            nextIt_vec_X[i] = temp1*temp2;
-            cout<<"currentIt_vec_X["<<i<<"]= "<<currentIt_vec_X[i]<<endl<<endl;
 
-        } //--------------------------------------------------
-        // fine for delle 'i'
-        cout<<"Aggiorno il nuovo vettore prima dell'iteraz k+1 current=next";
+            cout<<"RISULTATO somma ciclo j ="<<somma<<endl;
+            temp2 = vettoreB[i] - somma;
+            cout<<"RISULTATO temp1="<<temp1<<" temp 2 = "<<temp2<<endl;
+            nextIt_vec_X[i] = temp1*temp2;
+            cout<<"valore di x[i] nella nuova iterazione nextX["<<i<<"]= "<<nextIt_vec_X[i]<<endl<<endl;
+
+        } // FINE CICLO I
+        cout<<"Aggiorno il nuovo vettore prima dell'iteraz k+1 current=next"<<endl;;
         currentIt_vec_X= nextIt_vec_X;
-        cout<<endl;
+
     }//fine for delle iterazioni
 
 
