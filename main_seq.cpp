@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <random>
 #include "util.hpp"
 
 //std::cout == using namespace; cout<<
@@ -19,56 +20,33 @@ void initTest(int n_input,int* n_len, int* A[], int x[], int B[]); //* QUI:  FIR
 
 void initTest2(int n_input,int &n_len, int* A[], int x[], int B[]); //* QUI:  FIRMA/PROT: f(&a)     -> MAIN: f(a); con gli array vale lo stesso
 void riempiMatrice(int** mat, int n);
-int** generaMatrice(int size);
 
 void printArray(string msg, int array[], int array_size);
 void printArray(string msg, vector<float> array, int array_size);
 
-
-
+vector<vector<float>> generateRandomSquareMatrix(int size);
+void printVectorMatrix(vector<vector<float>> vector1,int size);
+float randomBetween( int lowerBound, int upperBound );
+vector<float> generateRandomVector(int size,int lowerBound, int upperBound);
 
 
 
 int main() {
+    const int K_MAX_ITER = 2;
+
+    vector<vector<float>> generata = generateRandomSquareMatrix(2);
+    printVectorMatrix(generata,2);
 
     //A x = B
     //A[][] matrice
-    //x vettore di variabili di lunghezza 'n'
+    //x vettore delle variabili incognite di lunghezza 'n'
     //n lunghezza di 'x'
     //B vettore di termini conosciuti di lunghezza n
+    printStr("0.Aggiungere caso random e default =====\n");
     printStr("===== Inizio Jacobi Sequenziale =====\n");
-    //int n_len_vector = 0; //lunghezza n del vettore
-    //int** matDinamica; //Matrice
-    //int* x; //vettore x di lunghezza n
-    //int* B; // vettore risultato di lunghezza n
-
-    //printStr("Inserisci n elementi matrice");
-    //cin>>n_len_vector;
-    //int matriceA[n_len_vector][n_len_vector]; //Matrice
-    /*CANCELLARE DA QUA
-    initTest(2,&n_len_vector,matDinamica,currentIt_vec_X,vettoreB);
-    cout<<"il valore cambiato di n_len è:"<<n_len_vector<<endl;
-    printMatrix(matDinamica,n_len_vector);
-
-    printTest();
-
-    initTest2(3,n_len_vector,matDinamica,currentIt_vec_X,vettoreB); //versione c++
-    cout<<"il valore cambiato di n_len è:"<<n_len_vector<<endl;
-    printMatrix(matDinamica,n_len_vector);
-    */
-
-    //int rows = ..., cols = ...;
-    //int** matrix = new int*[rows];
-    //for (int i = 0; i < rows; ++i)
-    //matrix[i] = new int[cols];
 
     //------------------------------------------------------------
     printStr("Alloco Matrice ed elementi\n");
-    //la matrice è necessariamente quadrata
-
-    //matriceA = new int*[N_LENGHT]; //IL SIMBOLO DEL PUNTATORE VA DOPO L'INT E MAI PRIMA PORCO ZIO, alloco due puntatori
-    //matriceA[0] = new int[N_LENGHT]; //ogni puntatore è un vettore di due elementi
-    //matriceA[1] = new int[N_LENGHT];
 
     const int N_LENGHT = 2; //lunghezza della matrice e dei vettori
     float matriceA [N_LENGHT][N_LENGHT];
@@ -80,10 +58,10 @@ int main() {
     float vettoreB[N_LENGHT] = {8,8};
 
     // tutto il calcolo del for mi serve a trovare le x
+    //const int K_MAX_ITER = 2;
     float somma=0;
     float temp1 = 0;
     float temp2 = 0;
-    const int K_MAX_ITER = 110;
     vector<float>currentIt_vec_X(N_LENGHT,0);//x_k
     vector<float>nextIt_vec_X(N_LENGHT,0); //x_k+1
 
@@ -140,6 +118,19 @@ int main() {
 }
 
 
+
+/*
+     //la matrice è necessariamente quadrata
+
+    //matriceA = new int*[N_LENGHT]; //IL SIMBOLO DEL PUNTATORE VA DOPO L'INT E MAI PRIMA PORCO ZIO, alloco due puntatori
+    //matriceA[0] = new int[N_LENGHT]; //ogni puntatore è un vettore di due elementi
+    //matriceA[1] = new int[N_LENGHT];
+
+    //int rows = ..., cols = ...;
+    //int** matrix = new int*[rows];
+    //for (int i = 0; i < rows; ++i)
+    //matrix[i] = new int[cols];
+*/
 
 
 
@@ -209,19 +200,8 @@ void riempiMatrice(int** mat, int n){ //ROTTO
             mat[i][j] = j;
         }
     }
-
-
-
 }
 
-int** generaMatrice(int size){ //ROTTO
-
-    int** mat;
-
-    riempiMatrice(mat,size);
-
-    return mat;
-}
 
 void printArray(string msg, int array[], int array_size){
     std::cout<<msg;
@@ -238,6 +218,51 @@ void printArray(string msg, vector<float> array, int array_size){
         printf ("x[%d]: %.3f \n",h, array[h]);
     }
 
+}
+
+vector<vector<float>> generateRandomSquareMatrix(int size){
+    int rows = size;
+    int col = size;
+    vector<vector<float>> m(rows,vector<float>(col));
+
+    for(int i=0;i<size;i++){
+        for(int j=0;j<size;j++){
+            m[i][j] = randomBetween(1,20);
+        }
+    }
+    return m;
+}
+
+void printVectorMatrix(vector<vector<float>> vector1,int size) {
+    for(int i =0;i<size;i++){
+        for(int j=0;j<size;j++){
+            printf("[%d][%d] = %.2f ",i,j,vector1[i][j]);
+        }
+        std::cout<<endl;
+    }
+}
+
+
+float randomBetween( int lowerBound, int upperBound ) //FORTISSIMA
+{
+    random_device rd;
+    default_random_engine eng(rd());
+    //uniform_real_distribution<float> dist(lowerBound, upperBound);
+    uniform_int_distribution<int> dist(lowerBound, upperBound);
+    float r = dist(eng);
+    /*int upperbound, lowerbound;
+    //float randomBetween = rand() % (upperbound-lowerbound) + upperbound;
+    return randomBetween;*/
+    return r;
+}
+
+vector<float> generateRandomVector(int size,int lowerBound, int upperBound){
+    vector<float> v(size);
+
+        for(int j=0;j<size;j++){
+            v[j] = randomBetween(1,20);
+    }
+    return v;
 }
 
 

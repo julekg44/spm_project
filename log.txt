@@ -1,0 +1,6 @@
+26/08:
+
+Risolto sequenziale con vettore dedicato alla next iteration ed una per la current iteration
+Usare matrice e vettori nel codice come 'default'
+Create funzioni per vettori e matrici random
+
