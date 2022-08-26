@@ -24,7 +24,7 @@ void riempiMatrice(int** mat, int n);
 void printArray(string msg, int array[], int array_size);
 void printArray(string msg, vector<float> array, int array_size);
 
-vector<vector<float>> generateRandomSquareMatrix(int size);
+vector<vector<float>> generateRandomSquareMatrix(int size, int lowerBound, int upperBound);
 void printVectorMatrix(vector<vector<float>> vector1,int size);
 float randomBetween( int lowerBound, int upperBound );
 vector<float> generateRandomVector(int size,int lowerBound, int upperBound);
@@ -32,17 +32,21 @@ vector<float> generateRandomVector(int size,int lowerBound, int upperBound);
 
 
 int main() {
-    const int K_MAX_ITER = 2;
+    const int K_MAX_ITER = 1;
 
-    vector<vector<float>> generata = generateRandomSquareMatrix(2);
-    printVectorMatrix(generata,2);
+    int size=3;
+    vector<vector<float>> generata = generateRandomSquareMatrix(size,1,10);
+    printVectorMatrix(generata,size);
+
+    vector<float> randVec = generateRandomVector(size,1,10);
+    printArray("",randVec,size);
 
     //A x = B
     //A[][] matrice
     //x vettore delle variabili incognite di lunghezza 'n'
     //n lunghezza di 'x'
     //B vettore di termini conosciuti di lunghezza n
-    printStr("0.Aggiungere caso random e default =====\n");
+
     printStr("===== Inizio Jacobi Sequenziale =====\n");
 
     //------------------------------------------------------------
@@ -220,14 +224,14 @@ void printArray(string msg, vector<float> array, int array_size){
 
 }
 
-vector<vector<float>> generateRandomSquareMatrix(int size){
+vector<vector<float>> generateRandomSquareMatrix(int size, int lowerBound, int upperBound){
     int rows = size;
     int col = size;
     vector<vector<float>> m(rows,vector<float>(col));
 
     for(int i=0;i<size;i++){
         for(int j=0;j<size;j++){
-            m[i][j] = randomBetween(1,20);
+            m[i][j] = randomBetween(lowerBound,upperBound);
         }
     }
     return m;
