@@ -22,7 +22,7 @@ void initTest2(int n_input,int &n_len, int* A[], int x[], int B[]); //* QUI:  FI
 void riempiMatrice(int** mat, int n);
 
 void printArray(string msg, int array[], int array_size);
-void printArray(string msg, vector<float> array, int array_size);
+
 
 vector<vector<float>> generateRandomSquareMatrix(int size, int lowerBound, int upperBound);
 void printVectorMatrix(vector<vector<float>> vector1,int size);
@@ -216,13 +216,7 @@ void printArray(string msg, int array[], int array_size){
 }
 
 
-void printArray(string msg, vector<float> array, int array_size){
-    std::cout<<msg;
-    for(int h=0;h<array_size;h++){
-        printf ("x[%d]: %.3f \n",h, array[h]);
-    }
 
-}
 
 vector<vector<float>> generateRandomSquareMatrix(int size, int lowerBound, int upperBound){
     int rows = size;

@@ -9,6 +9,7 @@ using namespace std;
 
 
 int main() {
+    cout<<"jacobi VERSIONE THREAD"<<endl;
     const int K_MAX_ITER = 1;
     const int N_LENGHT = 2; //lunghezza della matrice e dei vettori
 
@@ -45,6 +46,8 @@ int main() {
         } // FINE CICLO i
         currentIt_vec_X= nextIt_vec_X;
     }//fine for delle iterazioni
+
+    printArray("\nvettore x\n",nextIt_vec_X,N_LENGHT);
 
     cout<<"Fine programma"<<endl;
     return 0;
