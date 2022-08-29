@@ -45,22 +45,23 @@ int main() {
     float temp2 = 0;
     vector<float>currentIt_vec_X(N_LENGHT,0);//x_k
     
-
     vector<thread> arrayThread(N_LENGHT); //array dei thread tanti quante le righe della mat ovvero n
-    int val;
     auto inizio = chrono::high_resolution_clock::now();
     auto fine = chrono::high_resolution_clock::now();
-
-
-
+    int n_thread = 3;
 
     //PER ESEGUIRE THREAD QUI threads[i] = thread(body, i);
+
+
     inizio = chrono::high_resolution_clock::now();
     for(int k=0;k<K_MAX_ITER;k++){ //Qui l'iterazione comunque resta come for
 
         //ora qui lancio n thread dove ognuno si occupa di una riga della matrice
         //ovvero prenderà in ingresso tutta la riga della matrice, il vettore current, n che è la lunghezza della matrice
         //ed in uscita nulla perchè scriverà nel vettore next_x che sarà condiviso tra i thread
+        //-----------------------
+        //DEVO LAVORARE SUL VETTORE DELLE X, HO TOT THREAD CHE LAVORANO SU X QUINDI MI SINCRONIZZO SU X ?
+
         
         //FIRMA: void eseguiRigaThread(float matriceA[][N_LENGHT],int n_lenght, vector<float> currentIt_vec_X, float vettoreB[N_LENGHT]);
         //SEQUENZIALE: eseguiRigaThread(matriceA, N_LENGHT, currentIt_vec_X, vettoreB);
@@ -134,14 +135,6 @@ int main() {
 
 
 
-
-
-
-
-
-
-
-
 void eseguiRigaThread(float matriceA[][N_LENGHT],int n_lenght, vector<float> currentIt_vec_X, float vettoreB[N_LENGHT], int row){
     //OGNI THREAD LAVORA SU UNA SOLA RIGA, AD OGNI ITERAZIONE POI LAVORA SEMPRE SU QUELLA RIGA MA CAMBIA L'ITERAZIONE
         std::cout<<endl<<"il thread ha avviato la funzione"<<endl;
@@ -187,6 +180,16 @@ void eseguiJacobiSenzaK(float matriceA[][N_LENGHT],int n_lenght, vector<float> c
         nextIt_vec_X[row] = temp1 * temp2;
     }// FINE CICLO i*/
 }
+
+void eseguiParteThread(float matriceA[][N_LENGHT],int n_lenght, vector<float> currentIt_vec_X, float vettoreB[N_LENGHT]){
+    //c'è un punto dove il thread inizia e finisce sul vettore delle X
+
+
+}
+
+
+
+
 
 
 /*funzione lambda
