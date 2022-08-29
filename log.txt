@@ -4,3 +4,6 @@ Risolto sequenziale con vettore dedicato alla next iteration ed una per la curre
 Usare matrice e vettori nel codice come 'default'
 Create funzioni per vettori e matrici random
 
+29/08:
+TO DO:
+Inzio versione thread

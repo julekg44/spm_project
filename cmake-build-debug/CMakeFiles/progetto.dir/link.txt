@@ -1,1 +1,1 @@
-/usr/bin/g++ -g CMakeFiles/progetto.dir/main_seq.cpp.o CMakeFiles/progetto.dir/util.cpp.o -o progetto 
+/usr/bin/g++ -g CMakeFiles/progetto.dir/main_th.cpp.o CMakeFiles/progetto.dir/util.cpp.o -o progetto 
