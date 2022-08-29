@@ -5,5 +5,13 @@ Usare matrice e vettori nel codice come 'default'
 Create funzioni per vettori e matrici random
 
 29/08:
-TO DO:
+TO DO: pulire poi sequenziale
+TO DO: aggiungere codice per prendere il tempo d'esecuzione da inizio a fine del set
+
+-speedup, efficiency e scalability
+
 Inzio versione thread
+Spostato printArray con vector in util.h
+
+Prendi l'array, dividi in n parti dove n è il numero di thread dove ognuno lavora sulla sua parte
+Ed alla fine lo sincronizzi con una barriera
