@@ -74,8 +74,8 @@ int main() {
     int val;
 
     //k e' il numero delle iterazioni
+    inizio = chrono::high_resolution_clock::now();
     for(int k=0;k<K_MAX_ITER;k++){
-        inizio = chrono::high_resolution_clock::now();
         cout<<"\nITERAZIONE k ="<<k<<"\n";
         cout<<"Array delle x iterazione"<<k<<":"<<endl;
         printArray("",currentIt_vec_X,N_LENGHT);
