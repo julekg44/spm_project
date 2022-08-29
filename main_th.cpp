@@ -10,10 +10,16 @@ using namespace std;
 const int N_LENGHT = 2; //lunghezza della matrice e dei vettori
 vector<float>nextIt_vec_X(N_LENGHT,0); //x_k+1 E' condiviso tra i thread
 
-void eseguiRigaThread(int* matriceA[],int n_lenght, int currentIt_vec_X[], int vettoreB[]);
+void eseguiRigaThread(float matriceA[][N_LENGHT],int n_lenght, vector<float> currentIt_vec_X, float vettoreB[N_LENGHT]);
+//void eseguiRigaThread(vector<vector<float>>() matriceA,int n_lenght, vector<float> currentIt_vec_X, int vettoreB[]);
+
+
+
+//funzioni quando devi modificare una variabile metti nel prot & e main nulla
 
 int main() {
-
+    std::thread::id main_tid = std::this_thread::get_id();
+    cout<<"TID DEL MAIN="<<main_tid<<endl;
     //In seq il MAIN THREAD, PER OGNI ITERAZIONE elabora una riga per volta
     //Coi thread quindi lancio tanti thread quante sono le righe della matrice,
     //ovvero n, così ogni riga darà il risultato di 'Xi' che appartiene al vettore della prossima iterazione
@@ -23,6 +29,7 @@ int main() {
     cout<<"jacobi VERSIONE THREAD"<<endl;
     const int K_MAX_ITER = 1;
 
+    //vector<vector<float>> matriceA(N_LENGHT,vector<float>(N_LENGHT));
     float matriceA [N_LENGHT][N_LENGHT];
     matriceA[0][0]= 4;
     matriceA[0][1] = 2;
@@ -50,10 +57,16 @@ int main() {
         //ovvero prenderà in ingresso tutta la riga della matrice, il vettore current, n che è la lunghezza della matrice
         //ed in uscita nulla perchè scriverà nel vettore next_x che sarà condiviso tra i thread
         
-        //void eseguiRigaThread(int* matriceA[],int n_lenght, int currentIt_vec_X[], int vettoreB[]);
-        //arrayThread[0] = thread(eseguiRigaThread,&matriceA,N_LENGHT,&currentIt_vec_X,&vettoreB);
-        thread t(eseguiRigaThread,&matriceA,N_LENGHT,&currentIt_vec_X,&vettoreB);
-        t.join();
+        //FIRMA: void eseguiRigaThread(float matriceA[][N_LENGHT],int n_lenght, vector<float> currentIt_vec_X, float vettoreB[N_LENGHT]);
+        //SEQUENZIALE: eseguiRigaThread(matriceA, N_LENGHT, currentIt_vec_X, vettoreB);
+        /*CON UN THREAD: thread t {eseguiRigaThread,matriceA,N_LENGHT,currentIt_vec_X,vettoreB};
+        t.join();*/
+
+        arrayThread[0] = thread(eseguiRigaThread,matriceA,N_LENGHT,currentIt_vec_X,vettoreB);
+        arrayThread[0].join();
+
+
+
 
         //DA PARALLELIZZARE
         /*for(int i=0; i<N_LENGHT; i++) { //for esterno DELLA FORMULA
@@ -71,7 +84,6 @@ int main() {
             nextIt_vec_X[i] = temp1*temp2;
         } // FINE CICLO i*/
 
-        array[0].join();
 
         currentIt_vec_X= nextIt_vec_X;
     }//fine for delle iterazioni
@@ -84,10 +96,12 @@ int main() {
 
 //(eseguiSuRigaFunctio,MatriceA,currentVettoreX,nextVettoreX,n,VETTORE_B);
 
-void eseguiRigaThread(int* matriceA[],int n_lenght, int currentIt_vec_X[], int vettoreB[]){
-        std::cout<<"il thread ha avviato la funzione"<<endl;
-        int somma;
-        int temp1, temp2;
+void eseguiRigaThread(float matriceA[][N_LENGHT],int n_lenght, vector<float> currentIt_vec_X, float vettoreB[N_LENGHT]){
+        std::cout<<endl<<"il thread ha avviato la funzione"<<endl;
+        std::thread::id this_id = std::this_thread::get_id();
+        cout<<"Thread ID = "<<this_id<<endl;
+        float somma;
+        float temp1, temp2;
         for(int i=0; i<n_lenght; i++) { //for esterno DELLA FORMULA
             somma = 0;
             temp1 = (1 / matriceA[i][i]);
