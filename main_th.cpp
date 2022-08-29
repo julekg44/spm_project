@@ -70,7 +70,7 @@ int main() {
             nextIt_vec_X[i] = temp1*temp2;
         } // FINE CICLO i*/
 
-
+        array[0].join();
 
         currentIt_vec_X= nextIt_vec_X;
     }//fine for delle iterazioni
