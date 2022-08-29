@@ -5,8 +5,8 @@ Usare matrice e vettori nel codice come 'default'
 Create funzioni per vettori e matrici random
 
 29/08:
-TO DO: pulire poi sequenziale
-TO DO: aggiungere codice per prendere il tempo d'esecuzione da inizio a fine del set
+TODO: pulire poi sequenziale
+TODO: aggiungere codice per prendere il tempo d'esecuzione da inizio a fine del set
 
 -speedup, efficiency e scalability
 

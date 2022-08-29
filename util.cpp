@@ -3,6 +3,7 @@
 //
 #include <iostream>
 #include <vector>
+#include <chrono>
 #include "util.hpp"
 
 
@@ -20,4 +21,14 @@ void printArray(std::string msg, std::vector<float> array, int array_size){
         printf ("x[%d]: %.3f \n",h, array[h]);
     }
 
+}
+
+void printMilliSec(std::chrono::_V2::system_clock::time_point inizio, std::chrono::_V2::system_clock::time_point fine){
+    auto int_millisec = std::chrono::duration_cast<std::chrono::milliseconds>(fine-inizio).count();
+    std::cout<<"Secondi: "<<int_millisec<<std::endl;
+}
+
+void printMicroSec(std::chrono::_V2::system_clock::time_point inizio, std::chrono::_V2::system_clock::time_point fine){
+    auto microsec = std::chrono::duration_cast<std::chrono::microseconds>(fine-inizio).count();
+    std::cout<<"Microsecondi: "<<microsec<<std::endl;
 }
