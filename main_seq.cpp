@@ -68,11 +68,14 @@ int main() {
     float temp2 = 0;
     vector<float>currentIt_vec_X(N_LENGHT,0);//x_k
     vector<float>nextIt_vec_X(N_LENGHT,0); //x_k+1
+    auto inizio = chrono::high_resolution_clock::now();
+    auto fine = chrono::high_resolution_clock::now();
 
     int val;
 
     //k e' il numero delle iterazioni
     for(int k=0;k<K_MAX_ITER;k++){
+        inizio = chrono::high_resolution_clock::now();
         cout<<"\nITERAZIONE k ="<<k<<"\n";
         cout<<"Array delle x iterazione"<<k<<":"<<endl;
         printArray("",currentIt_vec_X,N_LENGHT);
@@ -109,12 +112,13 @@ int main() {
         temp2=0;
 
     }//fine for delle iterazioni
+    fine = chrono::high_resolution_clock::now();
 
 
 
 
     printArray("\nvettore x\n",nextIt_vec_X,N_LENGHT);
-
+    printMicroSec(inizio,fine);
 
 
     cout<<"Fine programma"<<endl;

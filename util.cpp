@@ -30,5 +30,5 @@ void printMilliSec(std::chrono::_V2::system_clock::time_point inizio, std::chron
 
 void printMicroSec(std::chrono::_V2::system_clock::time_point inizio, std::chrono::_V2::system_clock::time_point fine){
     auto microsec = std::chrono::duration_cast<std::chrono::microseconds>(fine-inizio).count();
-    std::cout<<"Microsecondi: "<<microsec<<std::endl;
+    std::cout<<"Tempo in Microsecondi: "<<microsec<<std::endl;
 }
