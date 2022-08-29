@@ -15,3 +15,8 @@ Spostato printArray con vector in util.h
 
 Prendi l'array, dividi in n parti dove n è il numero di thread dove ognuno lavora sulla sua parte
 Ed alla fine lo sincronizzi con una barriera
+
+TODO: FARE UNA FUNCTION PRINTMS()
+fatto: FARE UNA FUNCTION PRINTMS()
+
+METTI IL CRONOMETRAGGIO STESSO NEL BODY DEL THREAD 
