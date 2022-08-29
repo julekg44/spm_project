@@ -51,8 +51,9 @@ int main() {
         //ed in uscita nulla perchè scriverà nel vettore next_x che sarà condiviso tra i thread
         
         //void eseguiRigaThread(int* matriceA[],int n_lenght, int currentIt_vec_X[], int vettoreB[]);
-        arrayThread[0] = thread(eseguiRigaThread,&matriceA,N_LENGHT,&currentIt_vec_X,&vettoreB);
-
+        //arrayThread[0] = thread(eseguiRigaThread,&matriceA,N_LENGHT,&currentIt_vec_X,&vettoreB);
+        thread t(eseguiRigaThread,&matriceA,N_LENGHT,&currentIt_vec_X,&vettoreB);
+        t.join();
 
         //DA PARALLELIZZARE
         /*for(int i=0; i<N_LENGHT; i++) { //for esterno DELLA FORMULA
