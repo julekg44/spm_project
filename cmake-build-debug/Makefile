@@ -129,29 +129,29 @@ progetto/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/progetto.dir/build.make CMakeFiles/progetto.dir/build
 .PHONY : progetto/fast
 
-main_th.o: main_th.cpp.o
-.PHONY : main_th.o
+main_seq.o: main_seq.cpp.o
+.PHONY : main_seq.o
 
 # target to build an object file
-main_th.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/progetto.dir/build.make CMakeFiles/progetto.dir/main_th.cpp.o
-.PHONY : main_th.cpp.o
+main_seq.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/progetto.dir/build.make CMakeFiles/progetto.dir/main_seq.cpp.o
+.PHONY : main_seq.cpp.o
 
-main_th.i: main_th.cpp.i
-.PHONY : main_th.i
+main_seq.i: main_seq.cpp.i
+.PHONY : main_seq.i
 
 # target to preprocess a source file
-main_th.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/progetto.dir/build.make CMakeFiles/progetto.dir/main_th.cpp.i
-.PHONY : main_th.cpp.i
+main_seq.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/progetto.dir/build.make CMakeFiles/progetto.dir/main_seq.cpp.i
+.PHONY : main_seq.cpp.i
 
-main_th.s: main_th.cpp.s
-.PHONY : main_th.s
+main_seq.s: main_seq.cpp.s
+.PHONY : main_seq.s
 
 # target to generate assembly for a file
-main_th.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/progetto.dir/build.make CMakeFiles/progetto.dir/main_th.cpp.s
-.PHONY : main_th.cpp.s
+main_seq.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/progetto.dir/build.make CMakeFiles/progetto.dir/main_seq.cpp.s
+.PHONY : main_seq.cpp.s
 
 util.o: util.cpp.o
 .PHONY : util.o
@@ -186,9 +186,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... progetto"
-	@echo "... main_th.o"
-	@echo "... main_th.i"
-	@echo "... main_th.s"
+	@echo "... main_seq.o"
+	@echo "... main_seq.i"
+	@echo "... main_seq.s"
 	@echo "... util.o"
 	@echo "... util.i"
 	@echo "... util.s"

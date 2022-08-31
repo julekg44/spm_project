@@ -29,8 +29,10 @@ void printVectorMatrix(vector<vector<float>> vector1,int size);
 
 
 
-int main() {
-    const int K_MAX_ITER = 1;
+int main(int argc, char* argv[]) {
+
+    //int K_MAX_ITER = atoi(argv[1]);
+    const int K_MAX_ITER = 3;
 
     printStr("===== Inizio Jacobi Sequenziale =====\n");
     //------------------------------------------------------------
