@@ -82,7 +82,7 @@
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/tmp/spm_project/main_seq.cpp">
+		<Unit filename="/tmp/spm_project/main_th.cpp">
 			<Option target="progetto"/>
 		</Unit>
 		<Unit filename="/tmp/spm_project/util.cpp">

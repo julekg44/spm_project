@@ -12,12 +12,13 @@ using namespace std;
 //Default values with N_LENGHT = 3 :  x=4; y=-5; z=9;
 //Default values with N_LENGHT = 2 :  x=1; y=2;
 const int N_LENGHT = 2; //lunghezza della matrice e dei
-
-///var globali
-float matriceA [N_LENGHT][N_LENGHT];
-float vettoreB[N_LENGHT];
-//currentIt_vec_X
 vector<float>nextIt_vec_X(N_LENGHT,0); //x_k+1 E' condiviso tra i thread
+
+vector<vector<float>> getDefaultMatrixN2();
+vector<float> getDefaultVectorBN2();
+
+vector<vector<float>> getDefaultMatrixN3();
+vector<float> getDefaultVectorBN3();
 
 void defaultMatrix2N();
 void defaultMatrix3N();
@@ -30,35 +31,31 @@ void work (std::string name);
         //funzioni quando devi modificare una variabile metti nel prot & e main nulla
 int main() {
     /*Nel seq il MAIN THREAD, PER OGNI ITERAZIONE elabora una riga per volta
-            //Coi thread quindi lancio tanti thread A MIA SCELTA che si suddividono il vettore
-            //ognuno collabora a finalizzare il risultato di 'Xi' che appartiene al vettore della prossima iterazione
-            //il quale questo sarà aggiornato solo prima del cambio dell'iterazione,
-            //sincronizzato con una barrier[vedi nelle note]*/
+    //Coi thread quindi lancio tanti thread A MIA SCELTA che si suddividono il vettore
+    //ognuno collabora a finalizzare il risultato di 'Xi' che appartiene al vettore della prossima iterazione
+    //il quale questo sarà aggiornato solo prima del cambio dell'iterazione,
+    //sincronizzato con una barrier[vedi nelle note]*/
 
     ///dichiarazione variabili
-    cout<<"jacobi VERSIONE THREAD"<<endl;
     const int K_MAX_ITER = 3;
-    int n_thread = 2; //thread
-
-
-    matriceA[0][0]= 4;
-    matriceA[0][1] = 2;
-    matriceA[1][0]= 1;
-    matriceA[1][1] = 3;
-
-    vettoreB[0] = 8;
-    vettoreB[1] = 8;
-
-
+    vector<vector<float>> matriceA = getDefaultMatrixN2();
+    vector<float> vettoreB = getDefaultVectorBN2();
+    //i vettori x sono inizializzati entrambi a 0
     vector<float>currentIt_vec_X(N_LENGHT,0);//x_k con tutti 0 per la prima iterazione
+
+    cout<<"jacobi VERSIONE THREAD"<<endl;
+
+    int n_thread = 2; //thread
+    int pezzoVettorePerThread = N_LENGHT / n_thread;
+    //int pezzoWorkOnPerThread = N_LENGHT / n_thread;
+    vector<thread> arrayThread(N_LENGHT); //array dei thread tanti quante le righe della mat ovvero n
+
 
     auto inizioTempo = chrono::high_resolution_clock::now();
     auto fineTempo = chrono::high_resolution_clock::now();
 
-    int pezzoVettorePerThread = N_LENGHT / n_thread;
 
-    vector<thread> arrayThread(N_LENGHT); //array dei thread tanti quante le righe della mat ovvero n
-
+    //----------------------------------------------------------------------------------------------------------------------
     //FINITA UN ITERAZIONE SUL VETTORE X DA PARTE DI TUTTI I THREAD SI AGGIORNA IL VETTORE DELLE X DELLA NEXT_ITERATION
     auto on_completion = [&]() noexcept {
         static auto phase = "Iterazione finita thread hanno raggiunto la barriera e si cambia iterazione\n";
@@ -100,10 +97,6 @@ int main() {
     };
 
 
-
-
-
-
     /*
     //la funzione on completion viene avviata ogni volta che i thread raggiungono tutti la barriera e quinid
     //si sincronizzano, la puoi usare come fa roberto per uscire dal ciclo o per fare altro in quel certo momento
@@ -138,6 +131,13 @@ int main() {
 
 
 
+
+
+
+//----------------------------------------------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------------------------------------------
+//FUNCTIONS
+
 void printTID_thread(){
     std::cout<<endl<<"il thread ha avviato la funzione ";
     std::thread::id this_id = std::this_thread::get_id();
@@ -145,14 +145,33 @@ void printTID_thread(){
 }
 
 
-void defaultMatrix2N(){
-    matriceA[0][0]= 4;
-    matriceA[0][1] = 2;
-    matriceA[1][0]= 1;
-    matriceA[1][1] = 3;
+
+//-----------------------------------------------------
+vector<vector<float>> getDefaultMatrixN2(){
+    int rows=2;
+    int cols=2;
+    vector<vector<float>> matrix(rows, vector<float>(cols));
+    matrix[0][0]= 4;
+    matrix[0][1] = 2;
+    matrix[1][0]= 1;
+    matrix[1][1] = 3;
+
+    return matrix;
 }
 
-void defaultMatrix3N(){
+vector<float> getDefaultVectorBN2(){
+    vector<float> vettoreB(2);
+    vettoreB[0] = 8;
+    vettoreB[1] = 8;
+
+    return vettoreB;
+}
+//----------------------------------------------------------------------------------------------------------------------
+//default N=3
+vector<vector<float>> getDefaultMatrixN3(){
+    int rows=3;
+    int cols=3;
+    vector<vector<float>> matriceA(rows, vector<float>(cols));
     matriceA[0][0]= 7;
     matriceA[0][1] = 8;
     matriceA[0][2] = 1;
@@ -165,19 +184,38 @@ void defaultMatrix3N(){
     matriceA[2][1] = 6;
     matriceA[2][2] = 1;
 
+    return matriceA;
 }
 
-void defaultVettoreB_2N(){
-    vettoreB[0] = 8;
-    vettoreB[1] = 8;
-}
-
-void defaultVettoreB_3N(){
+vector<float> getDefaultVectorBN3(){
+    vector<float> vettoreB(2);
     vettoreB[0] = -3;
     vettoreB[1] = 6;
     vettoreB[2] = 3;
-    // x=4; y=-5; z=9
+
+    return vettoreB;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
