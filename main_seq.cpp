@@ -12,21 +12,6 @@ using std::endl; // program uses endl”
 */
 
 using namespace std;
-//Default values with N_LENGHT = 3 :  x=4; y=-5; z=9;
-//Default values with N_LENGHT = 2 :  x=1; y=2;
-const int N_LENGHT = 2; //lunghezza della matrice e dei
-
-///var globali
-float matriceA [N_LENGHT][N_LENGHT];
-float vettoreB[N_LENGHT];
-//currentIt_vec_X
-vector<float>nextIt_vec_X(N_LENGHT,0); //x_k+1 E' condiviso tra i thread
-
-void defaultMatrix2N();
-void defaultMatrix3N();
-void defaultVettoreB_2N();
-void defaultVettoreB_3N();
-
 
 void printMatrix(int* A[],int n);
 void printSistema(int* A[],int n, int x[], int B[]);
@@ -39,25 +24,42 @@ void riempiMatrice(int** mat, int n);
 void printArray(string msg, int array[], int array_size);
 
 
+vector<vector<float>> generateRandomSquareMatrix(int size, int lowerBound, int upperBound);
 void printVectorMatrix(vector<vector<float>> vector1,int size);
+float randomBetween( int lowerBound, int upperBound );
+vector<float> generateRandomVector(int size,int lowerBound, int upperBound);
 
 
 
 int main() {
     const int K_MAX_ITER = 1;
 
+    int size=3;
+    vector<vector<float>> generata = generateRandomSquareMatrix(size,1,10);
+    printVectorMatrix(generata,size);
+
+    vector<float> randVec = generateRandomVector(size,1,10);
+    printArray("",randVec,size);
+
+    //A x = B
+    //A[][] matrice
+    //x vettore delle variabili incognite di lunghezza 'n'
+    //n lunghezza di 'x'
+    //B vettore di termini conosciuti di lunghezza n
+
     printStr("===== Inizio Jacobi Sequenziale =====\n");
+
     //------------------------------------------------------------
     printStr("Alloco Matrice ed elementi\n");
-    switch (N_LENGHT) {
-        case 2:
-            defaultMatrix2N();
-            defaultVettoreB_2N();
-        case 3:
-            defaultMatrix3N();
-            defaultVettoreB_3N();
-    }
 
+    const int N_LENGHT = 2; //lunghezza della matrice e dei vettori
+    float matriceA [N_LENGHT][N_LENGHT];
+    matriceA[0][0]= 4;
+    matriceA[0][1] = 2;
+    matriceA[1][0]= 1;
+    matriceA[1][1] = 3;
+
+    float vettoreB[N_LENGHT] = {8,8};
 
     // tutto il calcolo del for mi serve a trovare le x
     //const int K_MAX_ITER = 2;
@@ -220,7 +222,18 @@ void printArray(string msg, int array[], int array_size){
 
 
 
+vector<vector<float>> generateRandomSquareMatrix(int size, int lowerBound, int upperBound){
+    int rows = size;
+    int col = size;
+    vector<vector<float>> m(rows,vector<float>(col));
 
+    for(int i=0;i<size;i++){
+        for(int j=0;j<size;j++){
+            m[i][j] = randomBetween(lowerBound,upperBound);
+        }
+    }
+    return m;
+}
 
 void printVectorMatrix(vector<vector<float>> vector1,int size) {
     for(int i =0;i<size;i++){
@@ -232,44 +245,27 @@ void printVectorMatrix(vector<vector<float>> vector1,int size) {
 }
 
 
-
-void defaultMatrix2N(){
-    matriceA[0][0]= 4;
-    matriceA[0][1] = 2;
-    matriceA[1][0]= 1;
-    matriceA[1][1] = 3;
+float randomBetween( int lowerBound, int upperBound ) //FORTISSIMA
+{
+    random_device rd;
+    default_random_engine eng(rd());
+    //uniform_real_distribution<float> dist(lowerBound, upperBound);
+    uniform_int_distribution<int> dist(lowerBound, upperBound);
+    float r = dist(eng);
+    /*int upperbound, lowerbound;
+    //float randomBetween = rand() % (upperbound-lowerbound) + upperbound;
+    return randomBetween;*/
+    return r;
 }
 
-void defaultMatrix3N(){
-    matriceA[0][0]= 7;
-    matriceA[0][1] = 8;
-    matriceA[0][2] = 1;
+vector<float> generateRandomVector(int size,int lowerBound, int upperBound){
+    vector<float> v(size);
 
-    matriceA[1][0]= 8;
-    matriceA[1][1] = 7;
-    matriceA[1][2] = 1;
-
-    matriceA[2][0]= 6;
-    matriceA[2][1] = 6;
-    matriceA[2][2] = 1;
-
+        for(int j=0;j<size;j++){
+            v[j] = randomBetween(1,20);
+    }
+    return v;
 }
-
-void defaultVettoreB_2N(){
-    vettoreB[0] = 8;
-    vettoreB[1] = 8;
-}
-
-void defaultVettoreB_3N(){
-    vettoreB[0] = -3;
-    vettoreB[1] = 6;
-    vettoreB[2] = 3;
-    // x=4; y=-5; z=9
-}
-
-
-
-
 
 
 

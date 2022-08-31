@@ -33,8 +33,4 @@ TODO: HO USATO TUTTO DI DIMENSIONE FISSATA QUINDI POI MODIFICARE SENZA SPECIFICA
 
 TODO: fare funzione che setta matrice e vettori di default
 TODO: fare argv[] che prende il numero di thread da riga
-
-LORO FANNO UN WHILE INVECE DEL FOR NON HO CAPITO IL PERCHE'
-
-TODO: nella matrice random mettere lowebound negativo, es -20,20
 	
