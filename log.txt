@@ -30,4 +30,7 @@ TODO: HO USATO TUTTO DI DIMENSIONE FISSATA QUINDI POI MODIFICARE SENZA SPECIFICA
 	capisci come funziona barrier
 	IMPLEMENTA BENE:
 			-
+
+TODO: fare funzione che setta matrice e vettori di default
+TODO: fare argv[] che prende il numero di thread da riga
 	
