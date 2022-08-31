@@ -18,7 +18,6 @@ void printTID_thread();
 void on_completion();
 void work (std::string name);
 
-        //funzioni quando devi modificare una variabile metti nel prot & e main nulla
 int main() {
     /*Nel seq il MAIN THREAD, PER OGNI ITERAZIONE elabora una riga per volta
     //Coi thread quindi lancio tanti thread A MIA SCELTA che si suddividono il vettore
