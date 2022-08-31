@@ -24,31 +24,15 @@ void riempiMatrice(int** mat, int n);
 void printArray(string msg, int array[], int array_size);
 
 
-vector<vector<float>> generateRandomSquareMatrix(int size, int lowerBound, int upperBound);
 void printVectorMatrix(vector<vector<float>> vector1,int size);
-float randomBetween( int lowerBound, int upperBound );
-vector<float> generateRandomVector(int size,int lowerBound, int upperBound);
+
 
 
 
 int main() {
     const int K_MAX_ITER = 1;
 
-    int size=3;
-    vector<vector<float>> generata = generateRandomSquareMatrix(size,1,10);
-    printVectorMatrix(generata,size);
-
-    vector<float> randVec = generateRandomVector(size,1,10);
-    printArray("",randVec,size);
-
-    //A x = B
-    //A[][] matrice
-    //x vettore delle variabili incognite di lunghezza 'n'
-    //n lunghezza di 'x'
-    //B vettore di termini conosciuti di lunghezza n
-
     printStr("===== Inizio Jacobi Sequenziale =====\n");
-
     //------------------------------------------------------------
     printStr("Alloco Matrice ed elementi\n");
 
@@ -222,19 +206,6 @@ void printArray(string msg, int array[], int array_size){
 
 
 
-vector<vector<float>> generateRandomSquareMatrix(int size, int lowerBound, int upperBound){
-    int rows = size;
-    int col = size;
-    vector<vector<float>> m(rows,vector<float>(col));
-
-    for(int i=0;i<size;i++){
-        for(int j=0;j<size;j++){
-            m[i][j] = randomBetween(lowerBound,upperBound);
-        }
-    }
-    return m;
-}
-
 void printVectorMatrix(vector<vector<float>> vector1,int size) {
     for(int i =0;i<size;i++){
         for(int j=0;j<size;j++){
@@ -245,27 +216,6 @@ void printVectorMatrix(vector<vector<float>> vector1,int size) {
 }
 
 
-float randomBetween( int lowerBound, int upperBound ) //FORTISSIMA
-{
-    random_device rd;
-    default_random_engine eng(rd());
-    //uniform_real_distribution<float> dist(lowerBound, upperBound);
-    uniform_int_distribution<int> dist(lowerBound, upperBound);
-    float r = dist(eng);
-    /*int upperbound, lowerbound;
-    //float randomBetween = rand() % (upperbound-lowerbound) + upperbound;
-    return randomBetween;*/
-    return r;
-}
-
-vector<float> generateRandomVector(int size,int lowerBound, int upperBound){
-    vector<float> v(size);
-
-        for(int j=0;j<size;j++){
-            v[j] = randomBetween(1,20);
-    }
-    return v;
-}
 
 
 
