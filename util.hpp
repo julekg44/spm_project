@@ -19,8 +19,12 @@ void printMicroSec(std::chrono::_V2::system_clock::time_point inizio, std::chron
 float randomBetween( int lowerBound, int upperBound );
 vector<vector<float>> generateRandomSquareVectorMatrix(int size, int lowerBound, int upperBound);
 float **generateRandomSquareMatrix(int size, int lowerBound, int upperBound);
-
 vector<float> generateRandomVector(int size,int lowerBound, int upperBound);
+
+vector<vector<float>> getDefaultMatrixN2();
+vector<float> getDefaultVectorBN2();
+vector<vector<float>> getDefaultMatrixN3();
+vector<float> getDefaultVectorBN3();
 
 
 

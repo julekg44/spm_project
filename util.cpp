@@ -93,3 +93,54 @@ vector<float> generateRandomVector(int size,int lowerBound, int upperBound){
     }
     return v;
 }
+
+
+//-----------------------------------------------------
+vector<vector<float>> getDefaultMatrixN2(){
+    int rows=2;
+    int cols=2;
+    vector<vector<float>> matrix(rows, vector<float>(cols));
+    matrix[0][0]= 4;
+    matrix[0][1] = 2;
+    matrix[1][0]= 1;
+    matrix[1][1] = 3;
+
+    return matrix;
+}
+
+vector<float> getDefaultVectorBN2(){
+    vector<float> vettoreB(2);
+    vettoreB[0] = 8;
+    vettoreB[1] = 8;
+
+    return vettoreB;
+}
+//----------------------------------------------------------------------------------------------------------------------
+//default N=3
+vector<vector<float>> getDefaultMatrixN3(){
+    int rows=3;
+    int cols=3;
+    vector<vector<float>> matriceA(rows, vector<float>(cols));
+    matriceA[0][0]= 7;
+    matriceA[0][1] = 8;
+    matriceA[0][2] = 1;
+
+    matriceA[1][0]= 8;
+    matriceA[1][1] = 7;
+    matriceA[1][2] = 1;
+
+    matriceA[2][0]= 6;
+    matriceA[2][1] = 6;
+    matriceA[2][2] = 1;
+
+    return matriceA;
+}
+
+vector<float> getDefaultVectorBN3(){
+    vector<float> vettoreB(3);
+    vettoreB[0] = -3;
+    vettoreB[1] = 6;
+    vettoreB[2] = 3;
+
+    return vettoreB;
+}
