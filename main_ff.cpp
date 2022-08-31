@@ -9,7 +9,7 @@
 #include <chrono>
 #include <barrier>
 
-#include <ff/ff.hpp>
+#include </usr/local/fastflow/ff/ff.hpp>
 #include <ff/parallel_for.hpp>
 
 #include "util.hpp"
@@ -17,14 +17,15 @@
 using namespace std;
 
 //compila con -std=c++17 ed aggiungi
+///usr/local/fastflow/ff
 
 int main(int argc, char* argv[]) {
 
     printStr("===== Inizio Jacobi FASTFLOW =====\n");
 
     ///dichiarazione variabili
-    const int N_LENGHT = 2; //lunghezza della matrice e dei vettori
-    const int K_MAX_ITER = 2;
+    const int N_LENGHT = 3; //lunghezza della matrice e dei vettori
+    const int K_MAX_ITER = 1;
     cout<<"\n\n\n===ITERAZIONI = "<<K_MAX_ITER<<endl;
     vector<vector<float>> matriceA = getDefaultMatrixN3();
     vector<float> vettoreB = getDefaultVectorBN3();
