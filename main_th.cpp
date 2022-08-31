@@ -9,6 +9,9 @@
 
 using namespace std;
 
+//Ricorda che possono variare ITERAZIONI e THREAD
+//qui compili da g++ -std=c++20 ...
+
 //Default values with N_LENGHT = 3 :  x=4; y=-5; z=9;
 //Default values with N_LENGHT = 2 :  x=1; y=2;
 const int N_LENGHT = 3; //lunghezza della matrice e dei
@@ -26,7 +29,7 @@ int main() {
     //sincronizzato con una barrier[vedi nelle note]*/
 
     ///dichiarazione variabili
-    const int K_MAX_ITER = 1;
+    const int K_MAX_ITER = 2;
     cout<<"\n\n\n===ITERAZIONI = "<<K_MAX_ITER<<endl;
     vector<vector<float>> matriceA = getDefaultMatrixN3();
     vector<float> vettoreB = getDefaultVectorBN3();
@@ -61,8 +64,8 @@ int main() {
         //int end = (tid != num_threads - 1 ? start + chunk : n) - 1;
         //int endOnWork = (threadPartito != n_thread - 1 ? startOnWork + pezzoVettorePerThread : N_LENGHT) - 1;
 
-        //SE N_LEN / I THREAD E' PARI VA BENE, OGNI THREAD SI OCCUPA DI TOT PARTI
-        //SE N_LEN / I HA IL RESTO ALLORA L'ULTIMO THREAD SI FA UN GIRO IN PIU'
+        //SE N_LEN / N_THREAD E' PARI VA BENE, OGNI THREAD SI OCCUPA DI TOT PARTI
+        //SE N_LEN / N_THREAD HA IL RESTO ALLORA L'ULTIMO THREAD SI FA UN GIRO IN PIU'
         if(threadPartito == n_thread-1){ //se e' l'ultimo thread
             if (pezzoVettorePerThread%2 != 0){ //ed il vettore da' elementi dispari
                 endOnWork++;
