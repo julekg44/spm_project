@@ -37,7 +37,7 @@ int main() {
 
     ///dichiarazione variabili
     cout<<"jacobi VERSIONE THREAD"<<endl;
-    const int K_MAX_ITER = 1;
+    const int K_MAX_ITER = 3;
     int n_thread = 2; //thread
 
 
@@ -63,6 +63,7 @@ int main() {
     auto on_completion = [&]() noexcept {
         static auto phase = "Iterazione finita thread hanno raggiunto la barriera e si cambia iterazione\n";
         std::cout << phase;
+        currentIt_vec_X= nextIt_vec_X; //
     };
 
     std::barrier barrieraThread(n_thread, on_completion); //barriera per sincronizzare i thread
@@ -95,7 +96,6 @@ int main() {
             //SINCRONIZZO I THREAD sul vettore e sulla prossima iterazione
             //il vettore e' scambiato nell'on completion
             barrieraThread.arrive_and_wait(); //qui producono tutti ed aspettano
-            currentIt_vec_X= nextIt_vec_X; //
         }//fine for delle iterazioni
     };
 
