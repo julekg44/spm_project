@@ -37,7 +37,7 @@ int main() {
 
     ///dichiarazione variabili
     cout<<"jacobi VERSIONE THREAD"<<endl;
-    const int K_MAX_ITER = 3;
+    const int K_MAX_ITER = 1;
     int n_thread = 2; //thread
 
 
@@ -70,12 +70,13 @@ int main() {
     auto lambdaJacobiThread = [&] (int threadPartito){
         int startOnWork = threadPartito * pezzoVettorePerThread;
         //int end = (tid != num_threads - 1 ? start + chunk : n) - 1;
-        int endOnWork = (threadPartito != n_thread - 1 ? startOnWork + pezzoVettorePerThread : N_LENGHT) - 1;
-        //int endOnWork = (startOnWork+pezzoVettorePerThread);
-        cout<<"lavora dall'elemento "<<startOnWork<<"all'elemento"<<endOnWork<<endl;
+        //int endOnWork = (threadPartito != n_thread - 1 ? startOnWork + pezzoVettorePerThread : N_LENGHT) - 1;
+        int endOnWork = (startOnWork+pezzoVettorePerThread);
+        cout<<"Thread "<<threadPartito<<" lavora dall'elemento: "<<startOnWork<<" all'elemento"<<endOnWork<<endl;
 
         float somma,temp1, temp2;
         for(int k=0;k<K_MAX_ITER;k++) { //Qui l'iterazione comunque resta come for
+            cout<<"Thread"<<threadPartito<<" START ITERAZIONE "<<k<<endl;
             for (int i = startOnWork; i < endOnWork; i++) {//for esterno DELLA FORMULA
                 somma = 0;
                 temp1 = (1 / matriceA[i][i]);
@@ -87,7 +88,7 @@ int main() {
                 }//fine ciclo j
 
                 temp2 = vettoreB[i] - somma;
-                cout<<"valore ="<<(temp1*temp2);
+
                 nextIt_vec_X[i] = temp1 * temp2;
             }// FINE CICLO i*/
 
