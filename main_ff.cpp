@@ -23,10 +23,12 @@ int main(int argc, char* argv[]) {
 
     printStr("===== Inizio Jacobi FASTFLOW =====\n");
 
+
+
     ///dichiarazione variabili
     const int N_LENGHT = 3; //lunghezza della matrice e dei vettori
     const int K_MAX_ITER = 1;
-    cout<<"\n\n\n===ITERAZIONI = "<<K_MAX_ITER<<endl;
+    cout<<"\n===ITERAZIONI = "<<K_MAX_ITER<<endl;
     vector<vector<float>> matriceA = getDefaultMatrixN3();
     vector<float> vettoreB = getDefaultVectorBN3();
     //i vettori x sono inizializzati entrambi a 0

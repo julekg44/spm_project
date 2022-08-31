@@ -285,7 +285,7 @@ CMakeFiles/progetto.dir/main_ff.cpp.o: ../main_ff.cpp \
   /usr/include/semaphore.h \
   /usr/include/aarch64-linux-gnu/bits/semaphore.h \
   /usr/include/c++/11/barrier \
-  /usr/local/fastflow/ff/ff.hpp \
+  /usr/local/include/ff/ff.hpp \
   /usr/local/include/ff/config.hpp \
   /usr/include/c++/11/cstddef \
   /usr/local/include/ff/node.hpp \
@@ -733,7 +733,7 @@ CMakeFiles/progetto.dir/util.cpp.o: ../util.cpp \
 
 /usr/local/include/ff/config.hpp:
 
-/usr/local/fastflow/ff/ff.hpp:
+/usr/local/include/ff/ff.hpp:
 
 /usr/include/c++/11/barrier:
 
