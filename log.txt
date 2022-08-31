@@ -22,3 +22,12 @@ fatto: FARE UNA FUNCTION PRINTMS()
 METTI IL CRONOMETRAGGIO STESSO NEL BODY DEL THREAD 
 
 TODO: HO USATO TUTTO DI DIMENSIONE FISSATA QUINDI POI MODIFICARE SENZA SPECIFICARE N_LENGHT NELLE FUNZIONI
+
+31/08:
+	segna quello che ha detto denny
+	prova ad implementarlo ad cazzum
+	vedi video c++
+	capisci come funziona barrier
+	IMPLEMENTA BENE:
+			-
+	

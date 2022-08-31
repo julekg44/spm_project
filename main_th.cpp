@@ -8,13 +8,14 @@
 
 using namespace std;
 
-const int N_LENGHT = 2; //lunghezza della matrice e dei vettori
+const int N_LENGHT = 2; //lunghezza della matrice e dei
+
 vector<float>nextIt_vec_X(N_LENGHT,0); //x_k+1 E' condiviso tra i thread
 
 void eseguiRigaThread(float matriceA[][N_LENGHT],int n_lenght, vector<float> currentIt_vec_X, float vettoreB[N_LENGHT],int row);
-//void eseguiRigaThread(vector<vector<float>>() matriceA,int n_lenght, vector<float> currentIt_vec_X, int vettoreB[]);
 void eseguiJacobiSenzaK(float matriceA[][N_LENGHT],int n_lenght, vector<float> currentIt_vec_X, float vettoreB[N_LENGHT]);
 
+void funzioneJacobiThread(float matriceA[][N_LENGHT],int n_lenght, vector<float> currentIt_vec_X, float vettoreB[N_LENGHT]);
 
 
 //funzioni quando devi modificare una variabile metti nel prot & e main nulla
@@ -22,12 +23,15 @@ void eseguiJacobiSenzaK(float matriceA[][N_LENGHT],int n_lenght, vector<float> c
 int main() {
     std::thread::id main_tid = std::this_thread::get_id();
     cout<<"TID DEL MAIN="<<main_tid<<endl;
-    //In seq il MAIN THREAD, PER OGNI ITERAZIONE elabora una riga per volta
+    /*VECCHIA SPIEGAZIONE:
+     * //Nel seq il MAIN THREAD, PER OGNI ITERAZIONE elabora una riga per volta
     //Coi thread quindi lancio tanti thread quante sono le righe della matrice,
     //ovvero n, così ogni riga darà il risultato di 'Xi' che appartiene al vettore della prossima iterazione
     //il quale questo sarà aggiornato solo prima del cambio dell'iterazione,
-    // sincronizzato con una barrier
+    //sincronizzato con una barrier*/
 
+
+    ///dichiarazione variabili
     cout<<"jacobi VERSIONE THREAD"<<endl;
     const int K_MAX_ITER = 1;
 
@@ -37,13 +41,13 @@ int main() {
     matriceA[0][1] = 2;
     matriceA[1][0]= 1;
     matriceA[1][1] = 3;
-
     float vettoreB[N_LENGHT] = {8,8};
+    vector<float>currentIt_vec_X(N_LENGHT,0);//x_k con tutti 0 per la prima iterazione
 
     float somma=0;
     float temp1 = 0;
     float temp2 = 0;
-    vector<float>currentIt_vec_X(N_LENGHT,0);//x_k
+
     
     vector<thread> arrayThread(N_LENGHT); //array dei thread tanti quante le righe della mat ovvero n
     auto inizio = chrono::high_resolution_clock::now();
@@ -52,6 +56,11 @@ int main() {
 
     //PER ESEGUIRE THREAD QUI threads[i] = thread(body, i);
 
+    /*Nel seq il MAIN THREAD, PER OGNI ITERAZIONE elabora una riga per volta
+            //Coi thread quindi lancio tanti thread A MIA SCELTA che si suddividono il vettore
+            //ognuno collabora a finalizzare il risultato di 'Xi' che appartiene al vettore della prossima iterazione
+            //il quale questo sarà aggiornato solo prima del cambio dell'iterazione,
+            //sincronizzato con una barrier(?)*/
 
     inizio = chrono::high_resolution_clock::now();
     for(int k=0;k<K_MAX_ITER;k++){ //Qui l'iterazione comunque resta come for
@@ -181,9 +190,26 @@ void eseguiJacobiSenzaK(float matriceA[][N_LENGHT],int n_lenght, vector<float> c
     }// FINE CICLO i*/
 }
 
-void eseguiParteThread(float matriceA[][N_LENGHT],int n_lenght, vector<float> currentIt_vec_X, float vettoreB[N_LENGHT]){
+void funzioneJacobiThread(float matriceA[][N_LENGHT],int n_lenght, vector<float> currentIt_vec_X, float vettoreB[N_LENGHT]){
     //c'è un punto dove il thread inizia e finisce sul vettore delle X
+    //OGNI THREAD LAVORA SU UNA SOLA RIGA, AD OGNI ITERAZIONE POI LAVORA SEMPRE SU QUELLA RIGA MA CAMBIA L'ITERAZIONE
+    std::cout<<endl<<"il thread ha avviato la funzione"<<endl;
+    std::thread::id this_id = std::this_thread::get_id();
+    cout<<"Thread ID = "<<this_id<<endl;
+    float somma;
+    float temp1, temp2;
+    for(int i=0;i<n_lenght;i++) {//for esterno DELLA FORMULA
+        somma = 0;
+        temp1 = (1 / matriceA[i][i]);
 
+        for (int j = 0; j < n_lenght; j++) {
+            if (j != i) {
+                somma = somma + (matriceA[i][j] * currentIt_vec_X[j]);
+            }
+        }
+        temp2 = vettoreB[i] - somma;
+        nextIt_vec_X[i] = temp1 * temp2;
+    }// FINE CICLO i*/
 
 }
 
