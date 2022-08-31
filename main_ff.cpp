@@ -9,7 +9,7 @@
 #include <chrono>
 #include <barrier>
 
-#include </usr/local/fastflow/ff/ff.hpp>
+#include <ff/ff.hpp>
 #include <ff/parallel_for.hpp>
 
 #include "util.hpp"
