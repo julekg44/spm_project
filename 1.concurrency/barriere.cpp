@@ -1,7 +1,7 @@
 //
 // Created by Giuliano Galloppi on 31/08/22.
 //
-
+//FUNZIONANO DA C++20 , in clion modifica il CmakeLists
 #include <barrier>
 #include <iostream>
 #include <string>
@@ -29,8 +29,7 @@ int main() {
     };
 
 
-    //la funzione 'on completion' e' una funzione esgeuita quando un thread arriva alla barriera
-    //e si ferma ?
+    //la funzione 'on completion' e' una funzione esgeuita quando un thread arriva alla barriera e si ferma(?)
     std::barrier sync_point(std::ssize(workers), on_completion);
 
     auto work = [&](std::string name) {

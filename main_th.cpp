@@ -4,6 +4,7 @@
 #include <random>
 #include <thread>
 #include <chrono>
+#include <barrier>
 #include "util.hpp"
 
 using namespace std;
@@ -53,6 +54,8 @@ int main() {
     auto inizio = chrono::high_resolution_clock::now();
     auto fine = chrono::high_resolution_clock::now();
     int n_thread = 3;
+    std::barrier barrieraThread(n_thread, on_completion); //barriera per sincronizzare i thread
+
 
     //PER ESEGUIRE THREAD QUI threads[i] = thread(body, i);
 
