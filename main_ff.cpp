@@ -8,10 +8,15 @@
 #include <thread>
 #include <chrono>
 #include <barrier>
+
+#include <ff/ff.hpp>
+#include <ff/parallel_for.hpp>
+
 #include "util.hpp"
 
 using namespace std;
 
+//compila con -std=c++17 ed aggiungi
 
 int main(int argc, char* argv[]) {
 
