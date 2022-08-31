@@ -19,33 +19,32 @@ using namespace std;
 //compila con -std=c++17 ed aggiungi
 ///usr/local/fastflow/ff
 
+//var globali
+vector<float>nextIt_vec_X(N_LENGHT,0); //x_k+1
+
+//fast flow comunque usa i 'thread' per parallelizzare
 int main(int argc, char* argv[]) {
-
     printStr("===== Inizio Jacobi FASTFLOW =====\n");
-
-
 
     ///dichiarazione variabili
     const int N_LENGHT = 3; //lunghezza della matrice e dei vettori
-    const int K_MAX_ITER = 1;
-    cout<<"\n===ITERAZIONI = "<<K_MAX_ITER<<endl;
+    const int K_MAX_ITER = 1; cout<<"\n===ITERAZIONI = "<<K_MAX_ITER<<endl;
+
     vector<vector<float>> matriceA = getDefaultMatrixN3();
     vector<float> vettoreB = getDefaultVectorBN3();
     //i vettori x sono inizializzati entrambi a 0
     vector<float>currentIt_vec_X(N_LENGHT,0);//x_k
-    vector<float>nextIt_vec_X(N_LENGHT,0); //x_k+1
 
+    int n_thread = 2; //thread-worker
+    int pezzoVettorePerThread = N_LENGHT / n_thread;
 
-    float somma=0;
-    float temp1 = 0;
-    float temp2 = 0;
+//FERMO QUI-----
+    float somma,temp1,temp2;
 
     auto inizio = chrono::high_resolution_clock::now();
     auto fine = chrono::high_resolution_clock::now();
 
-    int val;
 
-    //k e' il numero delle iterazioni
     inizio = chrono::high_resolution_clock::now();
     for(int k=0;k<K_MAX_ITER;k++){
 

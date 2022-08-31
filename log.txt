@@ -36,5 +36,7 @@ TODO: fare argv[] che prende il numero di thread da riga
 
 TODO: sistemare funzioni di default,
 
-Problema sulle iterazioni, con 1 funziona, su 2 si rompe
-	
+[RISOLTO]Problema sulle iterazioni, con 1 funziona, su 2 si rompe 
+--
+FINITO THREAD, INIZIATO FAST FLOW
+TODO: SISTEMARE CON MATRICE RANDOM E SCEGLIERE I CASI
