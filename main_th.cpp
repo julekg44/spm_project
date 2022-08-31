@@ -37,31 +37,32 @@ int main() {
 
     ///dichiarazione variabili
     cout<<"jacobi VERSIONE THREAD"<<endl;
-    const int K_MAX_ITER = 2;
+    const int K_MAX_ITER = 3;
+    int n_thread = 2; //thread
 
-    switch (N_LENGHT) {
-        case 2:
-            defaultMatrix2N();
-            defaultVettoreB_2N();
-        case 3:
-            defaultMatrix3N();
-            defaultVettoreB_3N();
-    }
+
+    matriceA[0][0]= 4;
+    matriceA[0][1] = 2;
+    matriceA[1][0]= 1;
+    matriceA[1][1] = 3;
+
+    vettoreB[0] = 8;
+    vettoreB[1] = 8;
+
 
     vector<float>currentIt_vec_X(N_LENGHT,0);//x_k con tutti 0 per la prima iterazione
 
     auto inizioTempo = chrono::high_resolution_clock::now();
     auto fineTempo = chrono::high_resolution_clock::now();
-    int n_thread = 2; //thread
+
     int pezzoVettorePerThread = N_LENGHT / n_thread;
 
     vector<thread> arrayThread(N_LENGHT); //array dei thread tanti quante le righe della mat ovvero n
 
     //FINITA UN ITERAZIONE SUL VETTORE X DA PARTE DI TUTTI I THREAD SI AGGIORNA IL VETTORE DELLE X DELLA NEXT_ITERATION
     auto on_completion = [&]() noexcept {
-        static auto phase = "I thread hanno raggiunto la barriera e si cambia iterazione\n";
+        static auto phase = "Iterazione finita thread hanno raggiunto la barriera e si cambia iterazione\n";
         std::cout << phase;
-        currentIt_vec_X= nextIt_vec_X; //
     };
 
     std::barrier barrieraThread(n_thread, on_completion); //barriera per sincronizzare i thread
@@ -69,7 +70,8 @@ int main() {
     auto lambdaJacobiThread = [&] (int threadPartito){
         int startOnWork = threadPartito * pezzoVettorePerThread;
         //int end = (tid != num_threads - 1 ? start + chunk : n) - 1;
-        int endOnWork = (startOnWork+pezzoVettorePerThread);
+        int endOnWork = (threadPartito != n_thread - 1 ? startOnWork + pezzoVettorePerThread : N_LENGHT) - 1;
+        //int endOnWork = (startOnWork+pezzoVettorePerThread);
         cout<<"lavora dall'elemento "<<startOnWork<<"all'elemento"<<endOnWork<<endl;
 
         float somma,temp1, temp2;
@@ -85,12 +87,14 @@ int main() {
                 }//fine ciclo j
 
                 temp2 = vettoreB[i] - somma;
+                cout<<"valore ="<<(temp1*temp2);
                 nextIt_vec_X[i] = temp1 * temp2;
             }// FINE CICLO i*/
 
             //SINCRONIZZO I THREAD sul vettore e sulla prossima iterazione
-            barrieraThread.arrive_and_wait(); //qui producono tutti ed aspettano
             //il vettore e' scambiato nell'on completion
+            barrieraThread.arrive_and_wait(); //qui producono tutti ed aspettano
+            currentIt_vec_X= nextIt_vec_X; //
         }//fine for delle iterazioni
     };
 
