@@ -155,7 +155,7 @@ vector<float> getDefaultVectorBN3(){
 //roberto non lo mette nella firma perche' sono solo in lettura
 //
 void startCase(vector<vector<float>>& matriceA, vector<float>& vettoreB,int size, int lb, int up){
-    cout<<"INSERISCI 0 per RANDOM VALUES, 1 per DEFAULT"<<endl;
+    cout<<"Inserisci:\n0 - per generare una matrice RANDOMICA VALUES\n1 - per generare una matrice 3x3 di DEFAULT"<<endl;
     int scelta;
     cin>>scelta;
     switch(scelta) {
