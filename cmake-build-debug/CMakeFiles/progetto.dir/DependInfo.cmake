@@ -8,8 +8,9 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/tmp/spm_project/seq_rand_test.cpp" "CMakeFiles/progetto.dir/seq_rand_test.cpp.o" "gcc" "CMakeFiles/progetto.dir/seq_rand_test.cpp.o.d"
+  "/tmp/spm_project/main_all.cpp" "CMakeFiles/progetto.dir/main_all.cpp.o" "gcc" "CMakeFiles/progetto.dir/main_all.cpp.o.d"
   "/tmp/spm_project/util.cpp" "CMakeFiles/progetto.dir/util.cpp.o" "gcc" "CMakeFiles/progetto.dir/util.cpp.o.d"
+  "/tmp/spm_project/utimer.cpp" "CMakeFiles/progetto.dir/utimer.cpp.o" "gcc" "CMakeFiles/progetto.dir/utimer.cpp.o.d"
   )
 
 # Targets to which this target links.

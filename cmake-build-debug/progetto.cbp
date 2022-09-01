@@ -82,13 +82,16 @@
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/tmp/spm_project/seq_rand_test.cpp">
+		<Unit filename="/tmp/spm_project/main_all.cpp">
 			<Option target="progetto"/>
 		</Unit>
 		<Unit filename="/tmp/spm_project/util.cpp">
 			<Option target="progetto"/>
 		</Unit>
 		<Unit filename="/tmp/spm_project/util.hpp">
+			<Option target="progetto"/>
+		</Unit>
+		<Unit filename="/tmp/spm_project/utimer.cpp">
 			<Option target="progetto"/>
 		</Unit>
 		<Unit filename="/tmp/spm_project/CMakeLists.txt">

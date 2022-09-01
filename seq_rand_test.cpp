@@ -36,14 +36,17 @@ int main(int argc, char* argv[]) {
     long double mediaTempi = 0;
     for(int exec=0;exec<TENTATIVI;exec++){
         nextIt_vec_X = jacobiSeq(matriceA,vettoreB,N_LENGHT,currentIt_vec_X,nextIt_vec_X,K_MAX_ITER,tempo_catturato);
+        cout<<"parziale"<<mediaTempi<<endl;
         mediaTempi = mediaTempi+tempo_catturato;
     }
     mediaTempi = mediaTempi/TENTATIVI;
     cout<<"La media del tempo sequenziale su "<<TENTATIVI<<" tentativi/esecuzioni e': "<<mediaTempi<<endl;
 
-    cout<<"Stampo array finale:\n";
+
+
+
+    cout<<"\nSTAMPO nextIt_vec_X:\n";
     printArray(nextIt_vec_X,N_LENGHT);
-    //printMicroSec(inizio,fine);
 
     cout<<"Fine programma"<<endl;
     return 0;
@@ -53,7 +56,6 @@ int main(int argc, char* argv[]) {
 vector<float> jacobiSeq(vector<vector<float>> matriceA, vector<float> vettoreB, int N_LENGHT, vector<float>& currentIt_vec_X, vector<float>& nextIt_vec_X, int K_MAX_ITER, long& tempo_catturato){
 
     utimer tempo_seq = utimer("Tempo Esecuzione Sequenziale Jacobi", &tempo_catturato); //STAMPA IL TEMPO TOTALE ALLA FINE
-
     float somma,temp1,temp2;
 
     for(int k=0;k<K_MAX_ITER;k++){

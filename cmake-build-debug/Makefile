@@ -129,29 +129,29 @@ progetto/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/progetto.dir/build.make CMakeFiles/progetto.dir/build
 .PHONY : progetto/fast
 
-seq_rand_test.o: seq_rand_test.cpp.o
-.PHONY : seq_rand_test.o
+main_all.o: main_all.cpp.o
+.PHONY : main_all.o
 
 # target to build an object file
-seq_rand_test.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/progetto.dir/build.make CMakeFiles/progetto.dir/seq_rand_test.cpp.o
-.PHONY : seq_rand_test.cpp.o
+main_all.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/progetto.dir/build.make CMakeFiles/progetto.dir/main_all.cpp.o
+.PHONY : main_all.cpp.o
 
-seq_rand_test.i: seq_rand_test.cpp.i
-.PHONY : seq_rand_test.i
+main_all.i: main_all.cpp.i
+.PHONY : main_all.i
 
 # target to preprocess a source file
-seq_rand_test.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/progetto.dir/build.make CMakeFiles/progetto.dir/seq_rand_test.cpp.i
-.PHONY : seq_rand_test.cpp.i
+main_all.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/progetto.dir/build.make CMakeFiles/progetto.dir/main_all.cpp.i
+.PHONY : main_all.cpp.i
 
-seq_rand_test.s: seq_rand_test.cpp.s
-.PHONY : seq_rand_test.s
+main_all.s: main_all.cpp.s
+.PHONY : main_all.s
 
 # target to generate assembly for a file
-seq_rand_test.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/progetto.dir/build.make CMakeFiles/progetto.dir/seq_rand_test.cpp.s
-.PHONY : seq_rand_test.cpp.s
+main_all.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/progetto.dir/build.make CMakeFiles/progetto.dir/main_all.cpp.s
+.PHONY : main_all.cpp.s
 
 util.o: util.cpp.o
 .PHONY : util.o
@@ -177,6 +177,30 @@ util.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/progetto.dir/build.make CMakeFiles/progetto.dir/util.cpp.s
 .PHONY : util.cpp.s
 
+utimer.o: utimer.cpp.o
+.PHONY : utimer.o
+
+# target to build an object file
+utimer.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/progetto.dir/build.make CMakeFiles/progetto.dir/utimer.cpp.o
+.PHONY : utimer.cpp.o
+
+utimer.i: utimer.cpp.i
+.PHONY : utimer.i
+
+# target to preprocess a source file
+utimer.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/progetto.dir/build.make CMakeFiles/progetto.dir/utimer.cpp.i
+.PHONY : utimer.cpp.i
+
+utimer.s: utimer.cpp.s
+.PHONY : utimer.s
+
+# target to generate assembly for a file
+utimer.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/progetto.dir/build.make CMakeFiles/progetto.dir/utimer.cpp.s
+.PHONY : utimer.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -186,12 +210,15 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... progetto"
-	@echo "... seq_rand_test.o"
-	@echo "... seq_rand_test.i"
-	@echo "... seq_rand_test.s"
+	@echo "... main_all.o"
+	@echo "... main_all.i"
+	@echo "... main_all.s"
 	@echo "... util.o"
 	@echo "... util.i"
 	@echo "... util.s"
+	@echo "... utimer.o"
+	@echo "... utimer.i"
+	@echo "... utimer.s"
 .PHONY : help
 
 

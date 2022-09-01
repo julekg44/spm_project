@@ -69,19 +69,19 @@ include CMakeFiles/progetto.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/progetto.dir/flags.make
 
-CMakeFiles/progetto.dir/seq_rand_test.cpp.o: CMakeFiles/progetto.dir/flags.make
-CMakeFiles/progetto.dir/seq_rand_test.cpp.o: ../seq_rand_test.cpp
-CMakeFiles/progetto.dir/seq_rand_test.cpp.o: CMakeFiles/progetto.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/tmp/spm_project/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/progetto.dir/seq_rand_test.cpp.o"
-	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/progetto.dir/seq_rand_test.cpp.o -MF CMakeFiles/progetto.dir/seq_rand_test.cpp.o.d -o CMakeFiles/progetto.dir/seq_rand_test.cpp.o -c /tmp/spm_project/seq_rand_test.cpp
+CMakeFiles/progetto.dir/main_all.cpp.o: CMakeFiles/progetto.dir/flags.make
+CMakeFiles/progetto.dir/main_all.cpp.o: ../main_all.cpp
+CMakeFiles/progetto.dir/main_all.cpp.o: CMakeFiles/progetto.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/tmp/spm_project/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/progetto.dir/main_all.cpp.o"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/progetto.dir/main_all.cpp.o -MF CMakeFiles/progetto.dir/main_all.cpp.o.d -o CMakeFiles/progetto.dir/main_all.cpp.o -c /tmp/spm_project/main_all.cpp
 
-CMakeFiles/progetto.dir/seq_rand_test.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/progetto.dir/seq_rand_test.cpp.i"
-	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /tmp/spm_project/seq_rand_test.cpp > CMakeFiles/progetto.dir/seq_rand_test.cpp.i
+CMakeFiles/progetto.dir/main_all.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/progetto.dir/main_all.cpp.i"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /tmp/spm_project/main_all.cpp > CMakeFiles/progetto.dir/main_all.cpp.i
 
-CMakeFiles/progetto.dir/seq_rand_test.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/progetto.dir/seq_rand_test.cpp.s"
-	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /tmp/spm_project/seq_rand_test.cpp -o CMakeFiles/progetto.dir/seq_rand_test.cpp.s
+CMakeFiles/progetto.dir/main_all.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/progetto.dir/main_all.cpp.s"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /tmp/spm_project/main_all.cpp -o CMakeFiles/progetto.dir/main_all.cpp.s
 
 CMakeFiles/progetto.dir/util.cpp.o: CMakeFiles/progetto.dir/flags.make
 CMakeFiles/progetto.dir/util.cpp.o: ../util.cpp
@@ -97,19 +97,35 @@ CMakeFiles/progetto.dir/util.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/progetto.dir/util.cpp.s"
 	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /tmp/spm_project/util.cpp -o CMakeFiles/progetto.dir/util.cpp.s
 
+CMakeFiles/progetto.dir/utimer.cpp.o: CMakeFiles/progetto.dir/flags.make
+CMakeFiles/progetto.dir/utimer.cpp.o: ../utimer.cpp
+CMakeFiles/progetto.dir/utimer.cpp.o: CMakeFiles/progetto.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/tmp/spm_project/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/progetto.dir/utimer.cpp.o"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/progetto.dir/utimer.cpp.o -MF CMakeFiles/progetto.dir/utimer.cpp.o.d -o CMakeFiles/progetto.dir/utimer.cpp.o -c /tmp/spm_project/utimer.cpp
+
+CMakeFiles/progetto.dir/utimer.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/progetto.dir/utimer.cpp.i"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /tmp/spm_project/utimer.cpp > CMakeFiles/progetto.dir/utimer.cpp.i
+
+CMakeFiles/progetto.dir/utimer.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/progetto.dir/utimer.cpp.s"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /tmp/spm_project/utimer.cpp -o CMakeFiles/progetto.dir/utimer.cpp.s
+
 # Object files for target progetto
 progetto_OBJECTS = \
-"CMakeFiles/progetto.dir/seq_rand_test.cpp.o" \
-"CMakeFiles/progetto.dir/util.cpp.o"
+"CMakeFiles/progetto.dir/main_all.cpp.o" \
+"CMakeFiles/progetto.dir/util.cpp.o" \
+"CMakeFiles/progetto.dir/utimer.cpp.o"
 
 # External object files for target progetto
 progetto_EXTERNAL_OBJECTS =
 
-progetto: CMakeFiles/progetto.dir/seq_rand_test.cpp.o
+progetto: CMakeFiles/progetto.dir/main_all.cpp.o
 progetto: CMakeFiles/progetto.dir/util.cpp.o
+progetto: CMakeFiles/progetto.dir/utimer.cpp.o
 progetto: CMakeFiles/progetto.dir/build.make
 progetto: CMakeFiles/progetto.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/tmp/spm_project/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable progetto"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/tmp/spm_project/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX executable progetto"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/progetto.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

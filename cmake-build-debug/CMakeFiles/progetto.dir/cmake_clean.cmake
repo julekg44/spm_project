@@ -1,8 +1,10 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/progetto.dir/seq_rand_test.cpp.o"
-  "CMakeFiles/progetto.dir/seq_rand_test.cpp.o.d"
+  "CMakeFiles/progetto.dir/main_all.cpp.o"
+  "CMakeFiles/progetto.dir/main_all.cpp.o.d"
   "CMakeFiles/progetto.dir/util.cpp.o"
   "CMakeFiles/progetto.dir/util.cpp.o.d"
+  "CMakeFiles/progetto.dir/utimer.cpp.o"
+  "CMakeFiles/progetto.dir/utimer.cpp.o.d"
   "progetto"
   "progetto.pdb"
 )

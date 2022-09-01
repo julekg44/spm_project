@@ -7,10 +7,11 @@
 
 using namespace std;
 
+//VERSIONE ESECUZIONE UNICA CON ITERAZIONI A 2
 int main(int argc, char* argv[]) {
 
-    const int K_MAX_ITER = stoi(argv[1]);
-    //const int K_MAX_ITER = 2;
+    //const int K_MAX_ITER = stoi(argv[1]);
+    const int K_MAX_ITER = 2;
     const int N_LENGHT = 3; //lunghezza della matrice e dei vettori
 
     cout<<"\nSequenziale: Num_ITER = "<<K_MAX_ITER<<" N_LEN = "<<N_LENGHT<<endl;
