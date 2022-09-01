@@ -24,7 +24,7 @@ vector<double> jacobiThread(vector<vector<float>> matriceA, vector<float> vettor
 vector<double> jacobiFastFlow(vector<vector<float>> matriceA, vector<float> vettoreB, int N_LENGHT, int K_MAX_ITER, long& tempo_catturato, int n_thread);
 
 int main(int argc, char* argv[]) {
-    if(argc<4||argc>4){
+    if(argc>5||argc<5){
         cout<<"Usage: "<< argv[0]<<" \"K_MAX_ITER\" \"N_TEST/ESECUZIONI/ESECUZIONI\" \"N_LENGHT_MATRIX_AND_VECTOR\" \"N_THREAD\" "<<endl;
         exit(2);
     }
