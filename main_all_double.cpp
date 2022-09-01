@@ -25,7 +25,7 @@ vector<double> jacobiFastFlow(vector<vector<float>> matriceA, vector<float> vett
 
 int main(int argc, char* argv[]) {
     if(argc>4||argc<4){
-        cout<<"Usage: "<< argv[0]<<\"K_MAX_ITER\" \"N_TEST/ESECUZIONI/ESECUZIONI\" \"N_LENGHT_MATRIX_AND_VECTOR\" \"N_THREAD\" "<<endl;
+        cout<<"Usage: "<< argv[0]<<" \"K_MAX_ITER\" \"N_TEST/ESECUZIONI/ESECUZIONI\" \"N_LENGHT_MATRIX_AND_VECTOR\" \"N_THREAD\" "<<endl;
         exit(2);
     }
 
