@@ -42,13 +42,15 @@ void printMatrix(vector<vector<float>> matrix){
         }
         cout << endl;
     }
-    cout << "END" << endl;
+    cout<<endl;
 }
 
 void printArray(std::vector<float> array, int array_size){
+    cout<<"Stampo l'array di dim"<<array_size<<endl;
     for(int h=0;h<array_size;h++){
         printf ("x[%d]: %.3f \n",h, array[h]);
     }
+    cout<<endl;
 }
 
 void printVector(vector<float> vector){
@@ -91,12 +93,10 @@ vector<float> generateRandomVector(int size,int lowerBound, int upperBound){
     vector<float> v(size);
 
     for(int j=0;j<size;j++){
-        v[j] = randomBetween(1,20);
+        v[j] = randomBetween(lowerBound,upperBound);
     }
     return v;
 }
-
-
 
 
 
@@ -150,3 +150,27 @@ vector<float> getDefaultVectorBN3(){
     return vettoreB;
 }
 
+//----------------------------------------------------------------------------------------------------------------------
+//* QUI:  FIRMA/PROT: f(&a)     -> MAIN: f(a) per modificare
+//roberto non lo mette perche' sono solo in lettura
+void startCase(vector<vector<float>>& matriceA, vector<float>& vettoreB,int size, int lb, int up){
+    cout<<"INSERISCI 0 per RANDOM VALUES, 1 per DEFAULT"<<endl;
+    int scelta;
+    cin>>scelta;
+    switch(scelta) {
+        case 0: //caso random
+            matriceA = generateRandomSquareVectorMatrix(size,lb,up);
+            vettoreB = generateRandomVector(size,lb,up);
+            cout<<"Generati matrice e vettore randomici di size "<<size<<endl;
+            break;
+        case 1: //default
+            matriceA = getDefaultMatrixN3();
+            vettoreB = getDefaultVectorBN3();
+            cout<<"generato default N_LEN = "<<size<<endl;
+            break;
+        default:
+            matriceA = getDefaultMatrixN3();
+            vettoreB = getDefaultVectorBN3();
+            cout<<"generato default N_LEN = 3\n";
+    }
+}

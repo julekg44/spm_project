@@ -24,8 +24,11 @@ int main(int argc, char* argv[]) {
 
     cout<<"\nSequenziale: Num_ITER = "<<K_MAX_ITER<<" N_LEN = "<<N_LENGHT<<endl;
 
-    vector<vector<float>> matriceA = getDefaultMatrixN3();
-    vector<float> vettoreB = getDefaultVectorBN3();
+    vector<vector<float>> matriceA;
+    vector<float> vettoreB;
+    //startCase(matriceA,vettoreB,N_LENGHT,-10,10);//i vector puoi passarli normalmente -  * QUI:  FIRMA/PROT: f(&a)     -> MAIN: f(a)
+    matriceA = getDefaultMatrixN3();
+    vettoreB = getDefaultVectorBN3();
     vector<float>currentIt_vec_X(N_LENGHT,0);//x_k
     vector<float>nextIt_vec_X(N_LENGHT,0); //x_k+1
 

@@ -4,11 +4,11 @@ project(progetto)
 #set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD 20)
 
-#add_executable(progetto main_seq.cpp util.cpp util.hpp)
+add_executable(progetto main_seq.cpp util.cpp util.hpp)
 #add_executable(progetto main_th.cpp util.cpp util.hpp)
 #add_executable(progetto main_ff.cpp util.cpp util.hpp)
 
-add_executable(progetto seq_rand.cpp util.cpp util.hpp)
+#add_executable(progetto seq_rand.cpp util.cpp util.hpp)
 
 
 
