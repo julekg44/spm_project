@@ -12,21 +12,8 @@
 
 using namespace std;
 
-void printTest(){
-    std::cout<<("Stampa Test")<<std::endl;
-}
 
-void printStr(std::string str){
-    std::cout<<(str);
-}
-
-void printArray(std::vector<float> array, int array_size){
-    for(int h=0;h<array_size;h++){
-        printf ("x[%d]: %.3f \n",h, array[h]);
-    }
-
-}
-
+//OTHER FUNCTIONS------------------------------------------------------------------------------------------------------
 void printMilliSec(std::chrono::_V2::system_clock::time_point inizio, std::chrono::_V2::system_clock::time_point fine){
     auto int_millisec = std::chrono::duration_cast<std::chrono::milliseconds>(fine-inizio).count();
     std::cout<<"Secondi: "<<int_millisec<<std::endl;
@@ -44,14 +31,37 @@ void printTID_thread(){
 }
 
 
+//PRINT FUNCTIONS------------------------------------------------------------------------------------------------------
+void printMatrix(vector<vector<float>> matrix){
+    int n = matrix.size();
+    cout << "Stampo la matrice di dim: "<<n<<"x"<<n<<endl;
+    for(int i=0; i < n; i++){
+        for(int j=0; j < n; j++){
+            printf("[%d][%d] = %.3f ",i,j,matrix[i][j]);
+            //cout << matrix[i][j] << "\t";
+        }
+        cout << endl;
+    }
+    cout << "END" << endl;
+}
+
+void printArray(std::vector<float> array, int array_size){
+    for(int h=0;h<array_size;h++){
+        printf ("x[%d]: %.3f \n",h, array[h]);
+    }
+}
+
+void printVector(vector<float> vector){
+    int n = vector.size();
+    cout << "Printing the vector: " << endl;
+    for(int i = 0; i < n; i++){
+        cout << vector[i] << endl;
+    }
+    cout << "END" << endl;
+}
 
 
-
-
-
-
-
-//RANDOM FUNCTIONS
+//RANDOM FUNCTIONS------------------------------------------------------------------------------------------------------
 float randomBetween( int lowerBound, int upperBound ) //FORTISSIMA
 {
     random_device rd;
@@ -69,7 +79,6 @@ vector<vector<float>> generateRandomSquareVectorMatrix(int size, int lowerBound,
     int rows = size;
     int col = size;
     vector<vector<float>> m(rows,vector<float>(col));
-
     for(int i=0;i<size;i++){
         for(int j=0;j<size;j++){
             m[i][j] = randomBetween(lowerBound,upperBound);
@@ -77,29 +86,6 @@ vector<vector<float>> generateRandomSquareVectorMatrix(int size, int lowerBound,
     }
     return m;
 }
-
-float** generateRandomSquareMatrix(int size, int lowerBound, int upperBound){
-    float** m;
-    m = new float*[size];
-
-    for(int i=0;i<size;i++){
-        m[i] = new float[size];
-        for(int j=0;j<size;j++){
-            m[i][j] = randomBetween(lowerBound,upperBound);
-        }
-    }
-    return m;
-}
-
-
-
-
-
-
-
-
-
-
 
 vector<float> generateRandomVector(int size,int lowerBound, int upperBound){
     vector<float> v(size);
@@ -111,7 +97,10 @@ vector<float> generateRandomVector(int size,int lowerBound, int upperBound){
 }
 
 
-//-----------------------------------------------------
+
+
+
+//DEFAULT FUNCTION------------------------------------------------------------------------------------------------------
 vector<vector<float>> getDefaultMatrixN2(){
     int rows=2;
     int cols=2;
@@ -160,3 +149,4 @@ vector<float> getDefaultVectorBN3(){
 
     return vettoreB;
 }
+

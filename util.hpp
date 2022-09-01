@@ -14,18 +14,22 @@
 
 using namespace std;
 
-void printTest();
-void printStr(std::string str);
-void printArray(std::vector<float> array, int array_size);
+//SUPPORT
 void printMilliSec(std::chrono::_V2::system_clock::time_point inizio, std::chrono::_V2::system_clock::time_point fine);
 void printMicroSec(std::chrono::_V2::system_clock::time_point inizio, std::chrono::_V2::system_clock::time_point fine);
 void printTID_thread();
 
+//FUNZIONI PRINT
+void printMatrix(vector<vector<float>> matrix);
+void printArray(std::vector<float> array, int array_size);
+void printVector(vector<float> vector);
+
+//FUNZIONI RANDOM
 float randomBetween(int lowerBound, int upperBound);
 vector<vector<float>> generateRandomSquareVectorMatrix(int size, int lowerBound, int upperBound);
-float **generateRandomSquareMatrix(int size, int lowerBound, int upperBound);
 vector<float> generateRandomVector(int size,int lowerBound, int upperBound);
 
+//FUNZIONI DEFAULT
 vector<vector<float>> getDefaultMatrixN2();
 vector<float> getDefaultVectorBN2();
 vector<vector<float>> getDefaultMatrixN3();
@@ -33,6 +37,7 @@ vector<float> getDefaultVectorBN3();
 
 
 
+//deprecate
 
 
 

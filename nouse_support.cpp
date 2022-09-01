@@ -63,23 +63,22 @@ void printSistema(int* A[],int n, int x[], int B[]){
 }
 
 
-void riempiMatrice(int** mat, int n){ //ROTTO
-
-    mat = new int*[n];
-    for(int i =0;i<n;i++){
-        mat[i] = new int[n];//allocazione dinamica
-        for(int j=0;j<n;j++){
-            mat[i][j] = j;
-        }
-    }
-}
 
 
-void printVectorMatrix(vector<vector<float>> vector1,int size) {
-    for(int i =0;i<size;i++){
+
+/*Deprecate
+float **generateRandomSquareMatrix(int size, int lowerBound, int upperBound);
+float** generateRandomSquareMatrix(int size, int lowerBound, int upperBound){
+    float** m;
+    m = new float*[size];
+
+    for(int i=0;i<size;i++){
+        m[i] = new float[size];
         for(int j=0;j<size;j++){
-            printf("[%d][%d] = %.2f ",i,j,vector1[i][j]);
+            m[i][j] = randomBetween(lowerBound,upperBound);
         }
-        std::cout<<endl;
     }
+    return m;
 }
+
+*/

@@ -129,29 +129,29 @@ progetto/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/progetto.dir/build.make CMakeFiles/progetto.dir/build
 .PHONY : progetto/fast
 
-main_ff.o: main_ff.cpp.o
-.PHONY : main_ff.o
+seq_rand.o: seq_rand.cpp.o
+.PHONY : seq_rand.o
 
 # target to build an object file
-main_ff.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/progetto.dir/build.make CMakeFiles/progetto.dir/main_ff.cpp.o
-.PHONY : main_ff.cpp.o
+seq_rand.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/progetto.dir/build.make CMakeFiles/progetto.dir/seq_rand.cpp.o
+.PHONY : seq_rand.cpp.o
 
-main_ff.i: main_ff.cpp.i
-.PHONY : main_ff.i
+seq_rand.i: seq_rand.cpp.i
+.PHONY : seq_rand.i
 
 # target to preprocess a source file
-main_ff.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/progetto.dir/build.make CMakeFiles/progetto.dir/main_ff.cpp.i
-.PHONY : main_ff.cpp.i
+seq_rand.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/progetto.dir/build.make CMakeFiles/progetto.dir/seq_rand.cpp.i
+.PHONY : seq_rand.cpp.i
 
-main_ff.s: main_ff.cpp.s
-.PHONY : main_ff.s
+seq_rand.s: seq_rand.cpp.s
+.PHONY : seq_rand.s
 
 # target to generate assembly for a file
-main_ff.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/progetto.dir/build.make CMakeFiles/progetto.dir/main_ff.cpp.s
-.PHONY : main_ff.cpp.s
+seq_rand.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/progetto.dir/build.make CMakeFiles/progetto.dir/seq_rand.cpp.s
+.PHONY : seq_rand.cpp.s
 
 util.o: util.cpp.o
 .PHONY : util.o
@@ -186,9 +186,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... progetto"
-	@echo "... main_ff.o"
-	@echo "... main_ff.i"
-	@echo "... main_ff.s"
+	@echo "... seq_rand.o"
+	@echo "... seq_rand.i"
+	@echo "... seq_rand.s"
 	@echo "... util.o"
 	@echo "... util.i"
 	@echo "... util.s"
