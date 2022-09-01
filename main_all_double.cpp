@@ -14,9 +14,9 @@
 //compila g++ -o main_seq.out main_seq.cpp util.cpp util.hpp utimer.cpp
 //qui compili da g++ -std=c++20 -O3 -o main_th.out main_th.cpp util.hpp util.cpp utimer.cpp
 
-////qui compili da g++ -std=c++20 -O3 -o main_all.out main_all.cpp util.hpp util.cpp utimer.cpp
+////qui compili da g++ -std=c++20 -O3 -o main_all.out main_all.cpp util.hpp util.cpp utimer.cpp -pthread
 
-//esegui ./main_all.out "K_MAX_ITER"  "N_TEST/ESECUZIONI/ESECUZIONI" "N_LENGHT_MATRIX_AND_VECTOR"
+//esegui ./main_all.out "K_MAX_ITER"  "N_TEST/ESECUZIONI/ESECUZIONI" "N_LENGHT_MATRIX_AND_VECTOR" "N_THREAD"
 using namespace std;
 
 vector<double> jacobiSeq(vector<vector<float>> matriceA, vector<float> vettoreB, int N_LENGHT, int K_MAX_ITER, long& tempo_catturato);
@@ -30,9 +30,15 @@ int main(int argc, char* argv[]) {
     int ESECUZIONI = stoi(argv[2]); //numero di volte in cui lanci l'esecuzione dello stesso programma per stimare una media dei tempi
     //const int N_LENGHT = 3; //lunghezza della matrice e dei vettori
     const int N_LENGHT = stoi(argv[3]); //lunghezza della matrice e dei vettori
+    const int n_thread = stoi(argv[4]); //numero dei thread
+
+    if(n_thread>N_LENGHT){
+        cout<<"Error: Threads-Worker must be > N_LEN"<<endl;
+        exit(1);
+    }
 
 
-    cout<<"\nAVVIO PROGRAMMA ALL: Num_ITER = "<<K_MAX_ITER<<" N_LEN = "<<N_LENGHT<<", LANCI/ESECUZIONI =  "<<ESECUZIONI<<"\nn_thread=2 FISSO.\n"<<endl;
+    cout<<"\nAVVIO PROGRAMMA ALL: Num_ITER = "<<K_MAX_ITER<<" N_LEN = "<<N_LENGHT<<", LANCI/ESECUZIONI =  "<<ESECUZIONI<<"\nn_thread= \n"<<n_thread<<endl;
 
     vector<vector<float>> matriceA;
     vector<float> vettoreB;
@@ -50,7 +56,7 @@ int main(int argc, char* argv[]) {
     long tempo_catturato; //Perchè l'oggetto utimer e' creato e distrutto ogni volta che si crea la funzione e quindi si resetta
     long double mediaTempi = 0;
 
-    int n_thread = 2; //thread
+    //int n_thread = 2; //thread
 
     
     int exit=0;
@@ -68,9 +74,10 @@ int main(int argc, char* argv[]) {
                 mediaTempi = mediaTempi+tempo_catturato;
             }
             mediaTempi = mediaTempi/ESECUZIONI;
-            cout<<"\nSTAMPO nextIt_vec_X:\n";
-            printArray(res_nextIt_vec_X,N_LENGHT);
+            //cout<<"\nSTAMPO nextIt_vec_X:\n";
+            //printArray(res_nextIt_vec_X,N_LENGHT);
             cout<<"La media del tempo sequenziale su "<<ESECUZIONI<<" lanci/esecuzioni e': "<<mediaTempi<<endl;
+            mediaTempi = 0;
             break;
 
         case 2:
@@ -80,9 +87,10 @@ int main(int argc, char* argv[]) {
                 mediaTempi = mediaTempi+tempo_catturato;
             }
             mediaTempi = mediaTempi/ESECUZIONI;
-            cout<<"\nSTAMPO nextIt_vec_X:\n";
-            printArray(res_nextIt_vec_X,N_LENGHT);
+            //cout<<"\nSTAMPO nextIt_vec_X:\n";
+            //printArray(res_nextIt_vec_X,N_LENGHT);
             cout<<"La media del tempo THREAD su "<<ESECUZIONI<<" lanci/esecuzioni e': "<<mediaTempi<<endl;
+            mediaTempi = 0;
             break;
 
         case 3:
@@ -92,9 +100,10 @@ int main(int argc, char* argv[]) {
                 mediaTempi = mediaTempi+tempo_catturato;
             }
             mediaTempi = mediaTempi/ESECUZIONI;
-            cout<<"\nSTAMPO nextIt_vec_X:\n";
-            printArray(res_nextIt_vec_X,N_LENGHT);
+            //cout<<"\nSTAMPO nextIt_vec_X:\n";
+            //printArray(res_nextIt_vec_X,N_LENGHT);
             cout<<"La media del tempo  FAST FLOW su "<<ESECUZIONI<<" lanci/esecuzioni e': "<<mediaTempi<<endl;
+            mediaTempi = 0;
             break;
 
         case 9:
