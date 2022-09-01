@@ -16,59 +16,79 @@
 
 using namespace std;
 
-//compila con -std=c++17 ed aggiungi
-///usr/local/fastflow/ff
+//compila con -std=c++17 ed aggiungi  --  /usr/local/fastflow/ff
 
 //var globali
-vector<float>nextIt_vec_X(N_LENGHT,0); //x_k+1
 
 //fast flow comunque usa i 'thread' per parallelizzare
 int main(int argc, char* argv[]) {
-    printStr("===== Inizio Jacobi FASTFLOW =====\n");
 
-    ///dichiarazione variabili
+                printStr("\nJacobi FASTFLOW =====\n");
+                ///dichiarazione variabili
     const int N_LENGHT = 3; //lunghezza della matrice e dei vettori
-    const int K_MAX_ITER = 1; cout<<"\n===ITERAZIONI = "<<K_MAX_ITER<<endl;
+    const int K_MAX_ITER = 2; cout<<"\n===ITERAZIONI = "<<K_MAX_ITER<<endl;
 
     vector<vector<float>> matriceA = getDefaultMatrixN3();
     vector<float> vettoreB = getDefaultVectorBN3();
-    //i vettori x sono inizializzati entrambi a 0
-    vector<float>currentIt_vec_X(N_LENGHT,0);//x_k
+    vector<float>nextIt_vec_X(N_LENGHT,0); //x_k+1
+    vector<float>currentIt_vec_X(N_LENGHT,0);//x_k - //i vettori x sono inizializzati entrambi a 0
 
     int n_thread = 2; //thread-worker
     int pezzoVettorePerThread = N_LENGHT / n_thread;
+    ff::ParallelFor par_for_obj(n_thread); //utilizza tot thread/worker , come la versione thread ma con ff
 
-//FERMO QUI-----
     float somma,temp1,temp2;
-
     auto inizio = chrono::high_resolution_clock::now();
     auto fine = chrono::high_resolution_clock::now();
 
+    inizio = chrono::high_resolution_clock::now();//inizia a prendere tempo
 
-    inizio = chrono::high_resolution_clock::now();
     for(int k=0;k<K_MAX_ITER;k++){
 
-        for(int i=0; i<N_LENGHT; i++) { //for esterno DELLA FORMULA
-            somma = 0;
-            temp1 = (1 / matriceA[i][i]);
+        //for(int i=0; i<N_LENGHT; i++) { //for esterno DELLA FORMULA
+        par_for_obj.parallel_for(0, N_LENGHT, 1, pezzoVettorePerThread, [&](ulong i){
+            float somma = 0;
+            float temp1 = (1 / matriceA[i][i]);
 
             for(int j=0;j<N_LENGHT;j++){
-                if (j != i ){
+                if (j != i ){                        
                     somma = somma + ( matriceA[i][j] * currentIt_vec_X[j] ) ;
-                }
+                    }
             }//fine for delle j
 
-            temp2 = vettoreB[i] - somma;
+            float temp2 = vettoreB[i] - somma;
             nextIt_vec_X[i] = temp1 * temp2;
-        } // FINE CICLO i
+        },n_thread); //FINE CICLO i
 
         currentIt_vec_X= nextIt_vec_X;
     }//fine for delle iterazioni
 
-
     fine = chrono::high_resolution_clock::now();
+
     printArray("\nvettore x\n",nextIt_vec_X,N_LENGHT);
     printMicroSec(inizio,fine);
     cout<<"Fine programma"<<endl;
     return 0;
 }
+
+/*5 ARG: pf.parallel_for(0, n, 1, chunk, [&](ulong i){ GLI PASSA COME LAMBDA FUNCTION CHE PRENDE IN INGRESSO LA VARIABILE ESTERNA 'i' come long
+template<typename Function >
+void ff::ParallelFor::parallel_for	(	long 	first,
+                                        long 	last,
+                                        long 	step,
+                                        long 	grain,
+                                        const Function & 	f,
+                                        const long 	nw = FF_AUTO 
+)	        
+
+Parallel for region (step, grain) - dynamic.
+Dynamic scheduling onto nw worker threads. Iterations are scheduled in blocks of minimal size grain. Iteration space is walked with stride step.
+
+Parameters
+first	first value of the iteration variable
+last	last value of the iteration variable
+step	step increment for the iteration variable
+grain	(> 0) minimum computation grain (n. of iterations scheduled together to a single worker)
+f	    f(const long idx) Lambda function, body of the parallel loop. idx: iteration param nw number of worker threads
+
+*/
