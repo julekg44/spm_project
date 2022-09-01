@@ -13,20 +13,19 @@
 #include <ff/parallel_for.hpp>
 
 #include "util.hpp"
+#include "utimer.cpp"
 
 using namespace std;
 
-//compila con -std=c++17 ed aggiungi  --  /usr/local/fastflow/ff
-
-//var globali
+//compila con g++ -std=c++17 -O3 -o main_ff.out main_ff.cpp util.hpp util.cpp utimer.cpp
+// ed aggiungi  --  /usr/local/fastflow/ff
 
 //fast flow comunque usa i 'thread' per parallelizzare
 int main(int argc, char* argv[]) {
-
-                printStr("\nJacobi FASTFLOW =====\n");
-                ///dichiarazione variabili
+    
+    ///dichiarazione variabili
     const int N_LENGHT = 3; //lunghezza della matrice e dei vettori
-    const int K_MAX_ITER = 2; cout<<"\n===ITERAZIONI = "<<K_MAX_ITER<<endl;
+    const int K_MAX_ITER = 2;
 
     vector<vector<float>> matriceA = getDefaultMatrixN3();
     vector<float> vettoreB = getDefaultVectorBN3();
@@ -37,12 +36,12 @@ int main(int argc, char* argv[]) {
     int pezzoVettorePerThread = N_LENGHT / n_thread;
     ff::ParallelFor par_for_obj(n_thread); //utilizza tot thread/worker , come la versione thread ma con ff
 
+    std::cout<<"\nVERSIONE FAST_FLOW: Num_ITER = "<<K_MAX_ITER<<", N_LEN = "<<N_LENGHT<<", WORKER_THREAD = "<<n_thread<<endl;
+
     float somma,temp1,temp2;
-    auto inizio = chrono::high_resolution_clock::now();
-    auto fine = chrono::high_resolution_clock::now();
-
-    inizio = chrono::high_resolution_clock::now();//inizia a prendere tempo
-
+    
+    long tempo_catturato;
+    utimer tempo_seq = utimer("Tempo Esecuzione VERSIONE FAST_FLOW Jacobi", &tempo_catturato); //STAMPA IL TEMPO TOTALE ALLA FINE
     for(int k=0;k<K_MAX_ITER;k++){
 
         //for(int i=0; i<N_LENGHT; i++) { //for esterno DELLA FORMULA
@@ -63,10 +62,7 @@ int main(int argc, char* argv[]) {
         currentIt_vec_X= nextIt_vec_X;
     }//fine for delle iterazioni
 
-    fine = chrono::high_resolution_clock::now();
-
-    printArray("\nvettore x\n",nextIt_vec_X,N_LENGHT);
-    printMicroSec(inizio,fine);
+    printArray(nextIt_vec_X,N_LENGHT);
     cout<<"Fine programma"<<endl;
     return 0;
 }
