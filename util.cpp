@@ -53,7 +53,24 @@ void printArray(std::vector<float> array, int array_size){
     cout<<endl;
 }
 
+void printArray(std::vector<double> array, int array_size){
+    cout<<"Stampo l'array di dim"<<array_size<<endl;
+    for(int h=0;h<array_size;h++){
+        printf ("x[%d]: %.3f \n",h, array[h]);
+    }
+    cout<<endl;
+}
+
 void printVector(vector<float> vector){
+    int n = vector.size();
+    cout << "Printing the vector: " << endl;
+    for(int i = 0; i < n; i++){
+        cout << vector[i] << endl;
+    }
+    cout << "END" << endl;
+}
+
+void printVector(vector<double> vector){
     int n = vector.size();
     cout << "Printing the vector: " << endl;
     for(int i = 0; i < n; i++){
@@ -68,14 +85,15 @@ float randomBetween( int lowerBound, int upperBound ) //FORTISSIMA
 {
     random_device rd;
     default_random_engine eng(rd());
-    //uniform_real_distribution<float> dist(lowerBound, upperBound);
-    uniform_int_distribution<int> dist(lowerBound, upperBound);
+    uniform_real_distribution<float> dist(lowerBound, upperBound);
+    //uniform_int_distribution<int> dist(lowerBound, upperBound);
     float r = dist(eng);
     /*int upperbound, lowerbound;
     //float randomBetween = rand() % (upperbound-lowerbound) + upperbound;
     return randomBetween;*/
     return r;
 }
+
 
 vector<vector<float>> generateRandomSquareVectorMatrix(int size, int lowerBound, int upperBound){
     int rows = size;
@@ -89,8 +107,9 @@ vector<vector<float>> generateRandomSquareVectorMatrix(int size, int lowerBound,
     return m;
 }
 
+
 vector<float> generateRandomVector(int size,int lowerBound, int upperBound){
-    vector<float> v(size);
+    vector<float> v(size,0);
 
     for(int j=0;j<size;j++){
         v[j] = randomBetween(lowerBound,upperBound);
@@ -155,7 +174,7 @@ vector<float> getDefaultVectorBN3(){
 //roberto non lo mette nella firma perche' sono solo in lettura
 //
 void startCase(vector<vector<float>>& matriceA, vector<float>& vettoreB,int size, int lb, int up){
-    cout<<"Inserisci:\n0 - per generare una matrice RANDOMICA VALUES\n1 - per generare una matrice 3x3 di DEFAULT"<<endl;
+    cout<<"Inserisci:\n0 - per generare una matrice RANDOMICA\n1 - per generare una matrice 3x3 di DEFAULT"<<endl;
     int scelta;
     cin>>scelta;
     switch(scelta) {

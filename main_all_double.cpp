@@ -19,9 +19,9 @@
 //esegui ./main_all.out "K_MAX_ITER"  "N_TEST/ESECUZIONI/ESECUZIONI" "N_LENGHT_MATRIX_AND_VECTOR"
 using namespace std;
 
-vector<float> jacobiSeq(vector<vector<float>> matriceA, vector<float> vettoreB, int N_LENGHT, int K_MAX_ITER, long& tempo_catturato);
-vector<float> jacobiThread(vector<vector<float>> matriceA, vector<float> vettoreB, int N_LENGHT, int K_MAX_ITER, long& tempo_catturato, int n_thread);
-vector<float> jacobiFastFlow(vector<vector<float>> matriceA, vector<float> vettoreB, int N_LENGHT, int K_MAX_ITER, long& tempo_catturato, int n_thread);
+vector<double> jacobiSeq(vector<vector<float>> matriceA, vector<float> vettoreB, int N_LENGHT, int K_MAX_ITER, long& tempo_catturato);
+vector<double> jacobiThread(vector<vector<float>> matriceA, vector<float> vettoreB, int N_LENGHT, int K_MAX_ITER, long& tempo_catturato, int n_thread);
+vector<double> jacobiFastFlow(vector<vector<float>> matriceA, vector<float> vettoreB, int N_LENGHT, int K_MAX_ITER, long& tempo_catturato, int n_thread);
 
 int main(int argc, char* argv[]) {
 
@@ -46,7 +46,7 @@ int main(int argc, char* argv[]) {
     //vector<float>currentIt_vec_X(N_LENGHT,0);//x_k
     //vector<float>nextIt_vec_X(N_LENGHT,0); //x_k+1
 
-    vector<float>res_nextIt_vec_X(N_LENGHT,0);//vettore finale di uscita trovato dalle funzioni jacobi
+    vector<double>res_nextIt_vec_X(N_LENGHT,0);//vettore finale di uscita trovato dalle funzioni jacobi
     long tempo_catturato; //Perchè l'oggetto utimer e' creato e distrutto ogni volta che si crea la funzione e quindi si resetta
     long double mediaTempi = 0;
 
@@ -167,11 +167,11 @@ int main(int argc, char* argv[]) {
 
 
 
-vector<float> jacobiSeq(vector<vector<float>> matriceA, vector<float> vettoreB, int N_LENGHT, int K_MAX_ITER, long& tempo_catturato){
+vector<double> jacobiSeq(vector<vector<float>> matriceA, vector<float> vettoreB, int N_LENGHT, int K_MAX_ITER, long& tempo_catturato){
 
-    vector<float>currentIt_vec_X(N_LENGHT,0);//x_k
-    vector<float>nextIt_vec_X(N_LENGHT,0); //x_k+1
-    float somma,temp1,temp2;
+    vector<double>currentIt_vec_X(N_LENGHT,0);//x_k
+    vector<double>nextIt_vec_X(N_LENGHT,0); //x_k+1
+    double somma,temp1,temp2;
 
     utimer tempo_seq = utimer("Tempo Esecuzione Sequenziale Jacobi", &tempo_catturato); //STAMPA IL TEMPO TOTALE ALLA FINE
     for(int k=0;k<K_MAX_ITER;k++){
@@ -210,11 +210,11 @@ vector<float> jacobiSeq(vector<vector<float>> matriceA, vector<float> vettoreB, 
 //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
-vector<float> jacobiThread(vector<vector<float>> matriceA, vector<float> vettoreB, int N_LENGHT, int K_MAX_ITER, long& tempo_catturato, int n_thread) {
+vector<double> jacobiThread(vector<vector<float>> matriceA, vector<float> vettoreB, int N_LENGHT, int K_MAX_ITER, long& tempo_catturato, int n_thread) {
     //----------------------------------------------------------------------------------------------------------------------
     //FINITA UN ITERAZIONE SUL VETTORE X DA PARTE DI TUTTI I THREAD SI AGGIORNA IL VETTORE DELLE X DELLA NEXT_ITERATION
-    vector<float>currentIt_vec_X(N_LENGHT,0);//x_k
-    vector<float>nextIt_vec_X(N_LENGHT,0); //x_k+1
+    vector<double>currentIt_vec_X(N_LENGHT,0);//x_k
+    vector<double>nextIt_vec_X(N_LENGHT,0); //x_k+1
 
     vector<thread> arrayThread(n_thread); //array dei thread tanti quante le righe della mat ovvero n
     int pezzoWorkOnPerThread = N_LENGHT / n_thread; //num di elementi 'splittati' su cui lavora ogni thread
@@ -241,7 +241,7 @@ vector<float> jacobiThread(vector<vector<float>> matriceA, vector<float> vettore
         }
         //cout<<"Thread "<<threadPartito<<" lavora dall'elemento: "<<startOnWork<<" all'elemento"<<endOnWork<<endl;
 
-        float somma,temp1, temp2;
+        double somma,temp1, temp2;
         for(int k=0;k<K_MAX_ITER;k++) { //Qui l'iterazione comunque resta come for
             //cout<<"Thread"<<threadPartito<<" START ITERAZIONE "<<k<<endl;
             int i=startOnWork;
@@ -282,14 +282,14 @@ vector<float> jacobiThread(vector<vector<float>> matriceA, vector<float> vettore
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-vector<float> jacobiFastFlow(vector<vector<float>> matriceA, vector<float> vettoreB, int N_LENGHT, int K_MAX_ITER, long& tempo_catturato, int n_thread){
-    vector<float>nextIt_vec_X(N_LENGHT,0); //x_k+1
-    vector<float>currentIt_vec_X(N_LENGHT,0);//x_k - //i vettori x sono inizializzati entrambi a 0
+vector<double> jacobiFastFlow(vector<vector<float>> matriceA, vector<float> vettoreB, int N_LENGHT, int K_MAX_ITER, long& tempo_catturato, int n_thread){
+    vector<double>nextIt_vec_X(N_LENGHT,0); //x_k+1
+    vector<double>currentIt_vec_X(N_LENGHT,0);//x_k - //i vettori x sono inizializzati entrambi a 0
 
     int pezzoVettorePerThread = N_LENGHT / n_thread;
     ff::ParallelFor par_for_obj(n_thread); //utilizza tot thread/worker , come la versione thread ma con ff
 
-    float somma,temp1,temp2;
+    double somma,temp1,temp2;
     
     utimer tempo_seq = utimer("Tempo Esecuzione VERSIONE FAST_FLOW Jacobi", &tempo_catturato); //STAMPA IL TEMPO TOTALE ALLA FINE
     for(int k=0;k<K_MAX_ITER;k++){

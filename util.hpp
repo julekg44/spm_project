@@ -22,12 +22,18 @@ void printTID_thread();
 //FUNZIONI PRINT
 void printMatrix(vector<vector<float>> matrix);
 void printArray(std::vector<float> array, int array_size);
+void printArray(std::vector<double> array, int array_size);
 void printVector(vector<float> vector);
+void printVector(vector<double> vector);
+
 
 //FUNZIONI RANDOM
 float randomBetween(int lowerBound, int upperBound);
+
 vector<vector<float>> generateRandomSquareVectorMatrix(int size, int lowerBound, int upperBound);
+
 vector<float> generateRandomVector(int size,int lowerBound, int upperBound);
+
 
 //FUNZIONI DEFAULT
 vector<vector<float>> getDefaultMatrixN2();
