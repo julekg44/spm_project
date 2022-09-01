@@ -2,10 +2,12 @@
 // Created by Giuliano Galloppi on 23/08/22.
 //
 #include <iostream>
+#include <string>
 #include <vector>
+#include <random>
+#include <thread>
 #include <chrono>
 #include <barrier>
-#include <random>
 #include "util.hpp"
 
 using namespace std;
@@ -35,6 +37,21 @@ void printMicroSec(std::chrono::_V2::system_clock::time_point inizio, std::chron
     std::cout<<"Tempo in Microsecondi: "<<microsec<<std::endl;
 }
 
+void printTID_thread(){
+    std::cout<<endl<<"il thread ha avviato la funzione ";
+    std::thread::id this_id = std::this_thread::get_id();
+    cout<<"Thread ID = "<<this_id<<endl;
+}
+
+
+
+
+
+
+
+
+
+//RANDOM FUNCTIONS
 float randomBetween( int lowerBound, int upperBound ) //FORTISSIMA
 {
     random_device rd;

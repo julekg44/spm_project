@@ -17,7 +17,7 @@ int main(){
     //ogni thread ha bisogno di una funzione iniziale/in ingresso
     //MODO DI DICHIARARE 1 + AVVIO: thread t(hello);
     //MODO DI DICHIARARE 2: thread t; t = thread(FUNCTION);
-    
+    //IN UN ARRAY: threads[i] = thread(body, i);
     thread t(hello); //QUI IL THREAD SI AVVIA AUTOMATICAMENTE APPENA COSTRUISCI L'OGGETTO (LO DICHIARI)
     std::thread my_thread([]() { cout<<"Stampa da my_thread\n"; } ); //Nelle lambda ci vogliono anche le graffe proprio come fosse una function
 
