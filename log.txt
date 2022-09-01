@@ -40,3 +40,7 @@ TODO: sistemare funzioni di default,
 --
 FINITO THREAD, INIZIATO FAST FLOW
 TODO: SISTEMARE CON MATRICE RANDOM E SCEGLIERE I CASI
+
+01/09:
+
+Finito fast flow , inizio prendo i tempi , test con timer del prof

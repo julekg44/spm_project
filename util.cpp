@@ -18,8 +18,7 @@ void printStr(std::string str){
     std::cout<<(str);
 }
 
-void printArray(std::string msg, std::vector<float> array, int array_size){
-    std::cout<<msg;
+void printArray(std::vector<float> array, int array_size){
     for(int h=0;h<array_size;h++){
         printf ("x[%d]: %.3f \n",h, array[h]);
     }
