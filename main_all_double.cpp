@@ -74,8 +74,8 @@ int main(int argc, char* argv[]) {
                 mediaTempi = mediaTempi+tempo_catturato;
             }
             mediaTempi = mediaTempi/ESECUZIONI;
-            //cout<<"\nSTAMPO nextIt_vec_X:\n";
-            //printArray(res_nextIt_vec_X,N_LENGHT);
+            cout<<"\nSTAMPO nextIt_vec_X:\n";
+            printArray(res_nextIt_vec_X,N_LENGHT);
             cout<<"La media del tempo sequenziale su "<<ESECUZIONI<<" lanci/esecuzioni e': "<<mediaTempi<<endl;
             mediaTempi = 0;
             break;
@@ -100,8 +100,8 @@ int main(int argc, char* argv[]) {
                 mediaTempi = mediaTempi+tempo_catturato;
             }
             mediaTempi = mediaTempi/ESECUZIONI;
-            //cout<<"\nSTAMPO nextIt_vec_X:\n";
-            //printArray(res_nextIt_vec_X,N_LENGHT);
+            cout<<"\nSTAMPO nextIt_vec_X:\n";
+            printArray(res_nextIt_vec_X,N_LENGHT);
             cout<<"La media del tempo  FAST FLOW su "<<ESECUZIONI<<" lanci/esecuzioni e': "<<mediaTempi<<endl;
             mediaTempi = 0;
             break;
@@ -238,16 +238,17 @@ vector<double> jacobiThread(vector<vector<float>> matriceA, vector<float> vettor
 
     auto lambdaJacobiThread = [&] (int threadPartito){
         int startOnWork = threadPartito * pezzoWorkOnPerThread; //POSIZIONE DI START SU CUI LAVORA IL VETTORE
-        int endOnWork = startOnWork+pezzoWorkOnPerThread;       //POSIZIONE FINALE SU CUI TERMINA IL VETTORE
-        //int endOnWork = (threadPartito != n_thread - 1 ? startOnWork + pezzoWorkOnPerThread : N_LENGHT) - 1;
+        //int endOnWork = startOnWork+pezzoWorkOnPerThread;       //POSIZIONE FINALE SU CUI TERMINA IL VETTORE
+        int endOnWork = (threadPartito != n_thread - 1 ? startOnWork + pezzoWorkOnPerThread : N_LENGHT) - 1;
 
+        /*
         //SE N_LEN / N_THREAD E' PARI VA BENE, OGNI THREAD SI OCCUPA DI TOT PARTI
         //SE N_LEN / N_THREAD HA IL RESTO ALLORA L'ULTIMO THREAD SI FA UN GIRO IN PIU'
         if(threadPartito == n_thread-1){ //se e' l'ultimo thread
             if (pezzoWorkOnPerThread%2 != 0){ //ed il vettore da' elementi dispari
                 endOnWork++;
             }
-        }
+        }*/
         //cout<<"Thread "<<threadPartito<<" lavora dall'elemento: "<<startOnWork<<" all'elemento"<<endOnWork<<endl;
 
         double somma,temp1, temp2;
@@ -255,7 +256,7 @@ vector<double> jacobiThread(vector<vector<float>> matriceA, vector<float> vettor
             //cout<<"Thread"<<threadPartito<<" START ITERAZIONE "<<k<<endl;
             int i=startOnWork;
             while(i<endOnWork){
-                //for (int i = startOnWork; i < endOnWork; i++) {//for esterno DELLA FORMULA
+                
                 somma = 0;
                 temp1 = (1 / matriceA[i][i]);
 
