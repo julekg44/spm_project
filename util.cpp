@@ -152,7 +152,8 @@ vector<float> getDefaultVectorBN3(){
 
 //----------------------------------------------------------------------------------------------------------------------
 //* QUI:  FIRMA/PROT: f(&a)     -> MAIN: f(a) per modificare
-//roberto non lo mette perche' sono solo in lettura
+//roberto non lo mette nella firma perche' sono solo in lettura
+//
 void startCase(vector<vector<float>>& matriceA, vector<float>& vettoreB,int size, int lb, int up){
     cout<<"INSERISCI 0 per RANDOM VALUES, 1 per DEFAULT"<<endl;
     int scelta;

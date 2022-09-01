@@ -5,53 +5,58 @@
 #include "util.hpp"
 #include "utimer.cpp"
 
-//std::cout == using namespace; cout<<
-/* SOLO LO USING DEFINISCE CHE QUELLE FUNZIONI NON HANNO BISOGNO DI 'STD::'
-using std::cout; // program uses cout
-using std::cin; // program uses cin
-using std::endl; // program uses endl”
-*/
-
+//compila g++ -o main_seq.out main_seq.cpp util.cpp util.hpp utimer.cpp
+//esegui ./main_seq.out K_MAX_ITER N_TEST/TENTATIVI/ESECUZIONI
 using namespace std;
 
-
+vector<float> jacobiSeq(vector<vector<float>> matriceA, vector<float> vettoreB, int N_LENGHT, vector<float>& currentIt_vec_X, vector<float>& nextIt_vec_X, int K_MAX_ITER, long& tempo_catturato);
 
 int main(int argc, char* argv[]) {
 
-    //int K_MAX_ITER = atoi(argv[1]);
-    const int K_MAX_ITER = 1;
+    //const int K_MAX_ITER = 1;
+    const int K_MAX_ITER = stoi(argv[1]);
+    int TENTATIVI = stoi(argv[2]);
     const int N_LENGHT = 3; //lunghezza della matrice e dei vettori
 
-    cout<<"\nSequenziale: Num_ITER = "<<K_MAX_ITER<<" N_LEN = "<<N_LENGHT<<endl;
+    cout<<"\nSequenziale: Num_ITER = "<<K_MAX_ITER<<" N_LEN = "<<N_LENGHT<<", LANCI/ESECUZIONI =  "<<TENTATIVI<<endl;
 
     vector<vector<float>> matriceA;
     vector<float> vettoreB;
-    startCase(matriceA,vettoreB,N_LENGHT,-10,10);//i vector puoi passarli normalmente -  * QUI:  FIRMA/PROT: f(&a)     -> MAIN: f(a)
+    matriceA=getDefaultMatrixN3();
+    vettoreB=getDefaultVectorBN3();
 
-    printMatrix(matriceA);
-    printArray(vettoreB,N_LENGHT);
+    //startCase(matriceA,vettoreB,N_LENGHT,-10,10);//i vector puoi passarli normalmente -  * QUI:  FIRMA/PROT: f(&a)     -> MAIN: f(a)
+    //printMatrix(matriceA);
+    //printArray(vettoreB,N_LENGHT);
 
     vector<float>currentIt_vec_X(N_LENGHT,0);//x_k
     vector<float>nextIt_vec_X(N_LENGHT,0); //x_k+1
 
-    float somma=0;
-    float temp1 = 0;
-    float temp2 = 0;
+    long tempo_catturato; //Perchè l'oggetto utimer e' creato e distrutto ogni volta che si crea la funzione e quindi si resetta
+    long double mediaTempi = 0;
+    for(int exec=0;exec<TENTATIVI;exec++){
+        nextIt_vec_X = jacobiSeq(matriceA,vettoreB,N_LENGHT,currentIt_vec_X,nextIt_vec_X,K_MAX_ITER,tempo_catturato);
+        mediaTempi = mediaTempi+tempo_catturato;
+    }
+    mediaTempi = mediaTempi/TENTATIVI;
+    cout<<"La media del tempo sequenziale su "<<TENTATIVI<<" tentativi/esecuzioni e': "<<mediaTempi<<endl;
 
-    //prende il tempo
-    /*auto inizio = chrono::high_resolution_clock::now();//MIO
-    auto fine = chrono::high_resolution_clock::now();//MIO
-    inizio = chrono::high_resolution_clock::now(); //MIO - funziona solo prima di utimer
-    */
+    cout<<"Stampo array finale:\n";
+    printArray(nextIt_vec_X,N_LENGHT);
+    //printMicroSec(inizio,fine);
 
-    long tempo_catturato;
+    cout<<"Fine programma"<<endl;
+    return 0;
+}
+
+
+vector<float> jacobiSeq(vector<vector<float>> matriceA, vector<float> vettoreB, int N_LENGHT, vector<float>& currentIt_vec_X, vector<float>& nextIt_vec_X, int K_MAX_ITER, long& tempo_catturato){
+
     utimer tempo_seq = utimer("Tempo Esecuzione Sequenziale Jacobi", &tempo_catturato); //STAMPA IL TEMPO TOTALE ALLA FINE
 
-    
+    float somma,temp1,temp2;
+
     for(int k=0;k<K_MAX_ITER;k++){
-        //cout<<"\nITERAZIONE k ="<<k<<"\n";
-        //cout<<"Array delle x iterazione"<<k<<":"<<endl;
-        //printArray(currentIt_vec_X,N_LENGHT);
 
         for(int i=0; i<N_LENGHT; i++) { //for esterno DELLA FORMULA
             //cout<<"\nENTRA CICLO i = "<<i<<endl;
@@ -81,11 +86,5 @@ int main(int argc, char* argv[]) {
         currentIt_vec_X= nextIt_vec_X;
     }//fine for delle iterazioni
     //fine = chrono::high_resolution_clock::now();
-
-    cout<<"Stampo array finale:\n";
-    printArray(nextIt_vec_X,N_LENGHT);
-    //printMicroSec(inizio,fine);
-
-    cout<<"Fine programma"<<endl;
-    return 0;
+    return nextIt_vec_X;
 }

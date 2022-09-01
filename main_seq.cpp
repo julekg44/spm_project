@@ -9,7 +9,7 @@ using namespace std;
 
 int main(int argc, char* argv[]) {
 
-    int K_MAX_ITER = stoi(argv[1]);
+    const int K_MAX_ITER = stoi(argv[1]);
     //const int K_MAX_ITER = 2;
     const int N_LENGHT = 3; //lunghezza della matrice e dei vettori
 
@@ -77,3 +77,7 @@ int main(int argc, char* argv[]) {
 auto fine = chrono::high_resolution_clock::now();//MIO
 inizio = chrono::high_resolution_clock::now(); //MIO - funziona solo prima di utimer
 */
+vector<float> jacobiSeq(vector<vector<float>> matriceA, vector<float> vettoreB, int N_LENGHT, vector<float>& currentIt_vec_X, vector<float>& nextIt_vec_X){
+
+ return nextIt_vec_X;
+}
