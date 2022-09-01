@@ -16,7 +16,7 @@
 
 ////qui compili da g++ -std=c++20 -O3 -o main_all.out main_all.cpp util.hpp util.cpp utimer.cpp -pthread
 
-//esegui ./main_all.out "K_MAX_ITER"  "N_TEST/ESECUZIONI/ESECUZIONI" "N_LENGHT_MATRIX_AND_VECTOR" "N_THREAD"
+//esegui ./main_all.out "K_MAX_ITER" "N_TEST/ESECUZIONI/ESECUZIONI" "N_LENGHT_MATRIX_AND_VECTOR" "N_THREAD"
 using namespace std;
 
 vector<double> jacobiSeq(vector<vector<float>> matriceA, vector<float> vettoreB, int N_LENGHT, int K_MAX_ITER, long& tempo_catturato);
@@ -24,6 +24,10 @@ vector<double> jacobiThread(vector<vector<float>> matriceA, vector<float> vettor
 vector<double> jacobiFastFlow(vector<vector<float>> matriceA, vector<float> vettoreB, int N_LENGHT, int K_MAX_ITER, long& tempo_catturato, int n_thread);
 
 int main(int argc, char* argv[]) {
+    if(argc>4||argc<4){
+        cout<<"Usage: "<< argv[0]<<\"K_MAX_ITER\" \"N_TEST/ESECUZIONI/ESECUZIONI\" \"N_LENGHT_MATRIX_AND_VECTOR\" \"N_THREAD\" "<<endl;
+        exit(2);
+    }
 
     //const int K_MAX_ITER = 1;
     const int K_MAX_ITER = stoi(argv[1]);
@@ -87,8 +91,8 @@ int main(int argc, char* argv[]) {
                 mediaTempi = mediaTempi+tempo_catturato;
             }
             mediaTempi = mediaTempi/ESECUZIONI;
-            //cout<<"\nSTAMPO nextIt_vec_X:\n";
-            //printArray(res_nextIt_vec_X,N_LENGHT);
+            cout<<"\nSTAMPO nextIt_vec_X:\n";
+            printArray(res_nextIt_vec_X,N_LENGHT);
             cout<<"La media del tempo THREAD su "<<ESECUZIONI<<" lanci/esecuzioni e': "<<mediaTempi<<endl;
             mediaTempi = 0;
             break;
@@ -238,8 +242,8 @@ vector<double> jacobiThread(vector<vector<float>> matriceA, vector<float> vettor
 
     auto lambdaJacobiThread = [&] (int threadPartito){
         int startOnWork = threadPartito * pezzoWorkOnPerThread; //POSIZIONE DI START SU CUI LAVORA IL VETTORE
-        //int endOnWork = startOnWork+pezzoWorkOnPerThread;       //POSIZIONE FINALE SU CUI TERMINA IL VETTORE
-        int endOnWork = (threadPartito != n_thread - 1 ? startOnWork + pezzoWorkOnPerThread : N_LENGHT) - 1;
+        int endOnWork = startOnWork+pezzoWorkOnPerThread;       //POSIZIONE FINALE SU CUI TERMINA IL VETTORE
+        //int endOnWork = (threadPartito != n_thread - 1 ? startOnWork + pezzoWorkOnPerThread : N_LENGHT) - 1;
 
         /*
         //SE N_LEN / N_THREAD E' PARI VA BENE, OGNI THREAD SI OCCUPA DI TOT PARTI
