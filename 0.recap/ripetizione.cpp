@@ -198,6 +198,12 @@ printf("Hello world :) \n");
  using std::cout; // program uses cout
  using std::cin; // program uses cin
  using std::endl; // program uses endl”
+
+
+
+ un metodo così in una classe indica la funzione del distruttore, ovvero che si attiva quando
+ l'oggetto è distrutto/eliminato , o quando termina il programma se non e' eliminato prima
+   ~utimer() {...}
  */
 
 

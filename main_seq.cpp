@@ -9,8 +9,8 @@ using namespace std;
 
 int main(int argc, char* argv[]) {
 
-    //int K_MAX_ITER = atoi(argv[1]);
-    const int K_MAX_ITER = 2;
+    int K_MAX_ITER = stoi(argv[1]);
+    //const int K_MAX_ITER = 2;
     const int N_LENGHT = 3; //lunghezza della matrice e dei vettori
 
     cout<<"\nSequenziale: Num_ITER = "<<K_MAX_ITER<<" N_LEN = "<<N_LENGHT<<endl;

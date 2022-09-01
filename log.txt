@@ -46,3 +46,6 @@ TODO: SISTEMARE CON MATRICE RANDOM E SCEGLIERE I CASI
 Finito fast flow , inizio prendo i tempi , test con timer del prof
 TODO: aggiungere il N_ITER ed la lunghezza N di matrice e vettori/uso default da riga di comando
 Pulito sequenziale, funziona con le funzioni default, tutti i main usano i vector
+
+
+g++ -o main_seq.out main_seq.cpp util.cpp util.hpp utimer.cpp
