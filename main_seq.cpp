@@ -5,16 +5,7 @@
 #include "util.hpp"
 #include "utimer.cpp"
 
-//std::cout == using namespace; cout<<
-/* SOLO LO USING DEFINISCE CHE QUELLE FUNZIONI NON HANNO BISOGNO DI 'STD::'
-using std::cout; // program uses cout
-using std::cin; // program uses cin
-using std::endl; // program uses endl”
-*/
-
 using namespace std;
-
-
 
 int main(int argc, char* argv[]) {
 
@@ -36,16 +27,9 @@ int main(int argc, char* argv[]) {
     float temp1 = 0;
     float temp2 = 0;
 
-    //prende il tempo
-    /*auto inizio = chrono::high_resolution_clock::now();//MIO
-    auto fine = chrono::high_resolution_clock::now();//MIO
-    inizio = chrono::high_resolution_clock::now(); //MIO - funziona solo prima di utimer
-    */
-
     long tempo_catturato;
     utimer tempo_seq = utimer("Tempo Esecuzione Sequenziale Jacobi", &tempo_catturato); //STAMPA IL TEMPO TOTALE ALLA FINE
 
-    
     for(int k=0;k<K_MAX_ITER;k++){
         //cout<<"\nITERAZIONE k ="<<k<<"\n";
         //cout<<"Array delle x iterazione"<<k<<":"<<endl;
@@ -87,3 +71,9 @@ int main(int argc, char* argv[]) {
     cout<<"Fine programma"<<endl;
     return 0;
 }
+
+//prende il tempo
+/*auto inizio = chrono::high_resolution_clock::now();//MIO
+auto fine = chrono::high_resolution_clock::now();//MIO
+inizio = chrono::high_resolution_clock::now(); //MIO - funziona solo prima di utimer
+*/

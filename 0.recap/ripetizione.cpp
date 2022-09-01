@@ -189,9 +189,16 @@ printf("Hello world :) \n");
  *
  *	int mese() {return mm}; //metodo inline(tutto su una riga) utile da tenere nella classe 
  *  (che è messa in file .h come le struct)
- * 
  *
- * */
+ *
+ *
+ *
+ * //std::cout == using namespace; cout<<
+ SOLO LO USING DEFINISCE CHE QUELLE FUNZIONI NON HANNO BISOGNO DI 'STD::'
+ using std::cout; // program uses cout
+ using std::cin; // program uses cin
+ using std::endl; // program uses endl”
+ */
 
 
 #include<iostream>
