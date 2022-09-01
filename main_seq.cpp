@@ -19,7 +19,7 @@ using namespace std;
 int main(int argc, char* argv[]) {
 
     //int K_MAX_ITER = atoi(argv[1]);
-    const int K_MAX_ITER = 1;
+    const int K_MAX_ITER = 2;
     const int N_LENGHT = 3; //lunghezza della matrice e dei vettori
 
     cout<<"\nSequenziale: Num_ITER = "<<K_MAX_ITER<<" N_LEN = "<<N_LENGHT<<endl;
@@ -33,10 +33,16 @@ int main(int argc, char* argv[]) {
     float temp1 = 0;
     float temp2 = 0;
 
-    auto inizio = chrono::high_resolution_clock::now();
-    auto fine = chrono::high_resolution_clock::now();
+    //prende il tempo
+    /*auto inizio = chrono::high_resolution_clock::now();//MIO
+    auto fine = chrono::high_resolution_clock::now();//MIO
+    inizio = chrono::high_resolution_clock::now(); //MIO - funziona solo prima di utimer
+    */
 
-    inizio = chrono::high_resolution_clock::now();
+    long tempo_catturato;
+    utimer tempo_seq = utimer("Tempo Esecuzione Sequenziale Jacobi", &tempo_catturato); //STAMPA IL TEMPO TOTALE ALLA FINE
+
+    
     for(int k=0;k<K_MAX_ITER;k++){
         //cout<<"\nITERAZIONE k ="<<k<<"\n";
         //cout<<"Array delle x iterazione"<<k<<":"<<endl;
@@ -69,11 +75,11 @@ int main(int argc, char* argv[]) {
         //cout<<"Aggiorno il nuovo vettore prima dell'iteraz k+1 current=next"<<endl;;
         currentIt_vec_X= nextIt_vec_X;
     }//fine for delle iterazioni
-    fine = chrono::high_resolution_clock::now();
+    //fine = chrono::high_resolution_clock::now();
 
     cout<<"Stampo array finale:\n";
     printArray(nextIt_vec_X,N_LENGHT);
-    printMicroSec(inizio,fine);
+    //printMicroSec(inizio,fine);
 
     cout<<"Fine programma"<<endl;
     return 0;
