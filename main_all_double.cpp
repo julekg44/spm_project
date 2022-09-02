@@ -69,7 +69,7 @@ int main(int argc, char* argv[]) {
         case 1:
             for(int e=0;e<ESECUZIONI;e++){
                 res_nextIt_vec_X = jacobiSeq(matriceA,vettoreB,N_LENGHT,K_MAX_ITER,tempo_catturato);
-                cout<<"parziale"<<mediaTempi<<endl;
+                //cout<<"Tempo parziale esecuzione "<<e<<" = "<<mediaTempi<<endl;
                 mediaTempi = mediaTempi+tempo_catturato;
             }
             mediaTempi = mediaTempi/ESECUZIONI;
@@ -82,7 +82,7 @@ int main(int argc, char* argv[]) {
         case 2:
             for(int e=0;e<ESECUZIONI;e++){
                 res_nextIt_vec_X = jacobiThread(matriceA,vettoreB,N_LENGHT,K_MAX_ITER,tempo_catturato,n_thread);
-                cout<<"Tempo parziale esecuzione "<<e<<" = "<<mediaTempi<<endl;
+                //cout<<"Tempo parziale esecuzione "<<e<<" = "<<mediaTempi<<endl;
                 mediaTempi = mediaTempi+tempo_catturato;
             }
             mediaTempi = mediaTempi/ESECUZIONI;
@@ -95,7 +95,7 @@ int main(int argc, char* argv[]) {
         case 3:
             for(int e=0;e<ESECUZIONI;e++){
                 res_nextIt_vec_X = jacobiFastFlow(matriceA,vettoreB,N_LENGHT,K_MAX_ITER,tempo_catturato,n_thread);
-                cout<<"Tempo parziale esecuzione "<<e<<" = "<<mediaTempi<<endl;
+                //cout<<"Tempo parziale esecuzione "<<e<<" = "<<mediaTempi<<endl;
                 mediaTempi = mediaTempi+tempo_catturato;
             }
             mediaTempi = mediaTempi/ESECUZIONI;
