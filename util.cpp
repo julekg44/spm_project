@@ -38,7 +38,7 @@ void printMatrix(vector<vector<float>> matrix){
     for(int i=0; i < n; i++){
         for(int j=0; j < n; j++){
             printf("[%d][%d] = %.3f ",i,j,matrix[i][j]);
-            //cout << matrix[i][j] << "\t";
+            cout << matrix[i][j] << "\t";
         }
         cout << endl;
     }
@@ -105,6 +105,26 @@ vector<vector<float>> generateRandomSquareVectorMatrix(int size, int lowerBound,
         }
     }
     return m;
+}
+
+vector<vector<float>> generateMatrixSeed(int n, float min_matrix, float max_matrix, int seed){
+    int columns = n;
+    int rows = n;
+
+    vector<vector<float>> matrix(rows, vector<float>(columns));
+
+    srand(seed);
+    float sum;
+    for(int i=0; i < n; i++){
+        sum=0;
+        for(int j=0; j < n; j++){
+            matrix[i][j] = min_matrix + static_cast <float> (rand()) /( static_cast <float> (RAND_MAX/(max_matrix-min_matrix)));
+            sum += matrix[i][j];
+        }
+        matrix[i][i] = sum * 2;
+    }
+
+    return matrix;
 }
 
 

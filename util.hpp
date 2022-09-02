@@ -31,6 +31,7 @@ void printVector(vector<double> vector);
 float randomBetween(int lowerBound, int upperBound);
 
 vector<vector<float>> generateRandomSquareVectorMatrix(int size, int lowerBound, int upperBound);
+vector<vector<float>> generateMatrixSeed(int n, float min_matrix, float max_matrix, int seed);
 
 vector<float> generateRandomVector(int size,int lowerBound, int upperBound);
 
