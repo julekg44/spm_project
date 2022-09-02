@@ -38,7 +38,7 @@ int main(int argc, char* argv[]) {
 
     std::cout<<"\nVERSIONE FAST_FLOW: Num_ITER = "<<K_MAX_ITER<<", N_LEN = "<<N_LENGHT<<", WORKER_THREAD = "<<n_thread<<endl;
 
-    float somma,temp1,temp2;
+
     
     long tempo_catturato;
     utimer tempo_seq = utimer("Tempo Esecuzione VERSIONE FAST_FLOW Jacobi", &tempo_catturato); //STAMPA IL TEMPO TOTALE ALLA FINE

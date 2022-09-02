@@ -49,8 +49,8 @@ int main(int argc, char* argv[]) {
     //matriceA=getDefaultMatrixN3();
     //vettoreB=getDefaultVectorBN3();
     startCase(matriceA,vettoreB,N_LENGHT,-2,2);//i vector puoi passarli normalmente -  * QUI:  FIRMA/PROT: f(&a)     -> MAIN: f(a)
-    printMatrix(matriceA);
-    printArray(vettoreB,N_LENGHT);
+        //printMatrix(matriceA);
+        //printArray(vettoreB,N_LENGHT);
 
     //LE X me le faccio locali perche' vanno a 0 ad ogni nuovo lancio di jacobi
     //vector<float>currentIt_vec_X(N_LENGHT,0);//x_k
@@ -300,15 +300,14 @@ vector<double> jacobiFastFlow(vector<vector<float>> matriceA, vector<float> vett
     int pezzoVettorePerThread = N_LENGHT / n_thread;
     ff::ParallelFor par_for_obj(n_thread); //utilizza tot thread/worker , come la versione thread ma con ff
 
-    double somma,temp1,temp2;
-    
+
     utimer tempo_seq = utimer("Tempo Esecuzione VERSIONE FAST_FLOW Jacobi", &tempo_catturato); //STAMPA IL TEMPO TOTALE ALLA FINE
     for(int k=0;k<K_MAX_ITER;k++){
 
         //for(int i=0; i<N_LENGHT; i++) { //for esterno DELLA FORMULA
         par_for_obj.parallel_for(0, N_LENGHT, 1, pezzoVettorePerThread, [&](ulong i){
-            float somma = 0;
-            float temp1 = (1 / matriceA[i][i]);
+            double somma = 0;
+            double temp1 = (1 / matriceA[i][i]);
 
             for(int j=0;j<N_LENGHT;j++){
                 if (j != i ){                        
@@ -316,7 +315,7 @@ vector<double> jacobiFastFlow(vector<vector<float>> matriceA, vector<float> vett
                     }
             }//fine for delle j
 
-            float temp2 = vettoreB[i] - somma;
+            double temp2 = vettoreB[i] - somma;
             nextIt_vec_X[i] = temp1 * temp2;
         },n_thread); //FINE CICLO i
 
