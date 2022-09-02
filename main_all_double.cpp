@@ -56,7 +56,7 @@ int main(int argc, char* argv[]) {
     //vector<float>currentIt_vec_X(N_LENGHT,0);//x_k
     //vector<float>nextIt_vec_X(N_LENGHT,0); //x_k+1
 
-    vector<double>res_nextIt_vec_X(N_LENGHT,0);//vettore finale di uscita trovato dalle funzioni jacobi
+    //vector<double>res_nextIt_vec_X(N_LENGHT,0);//vettore finale di uscita trovato dalle funzioni jacobi
     long tempo_catturato; //Perchè l'oggetto utimer e' creato e distrutto ogni volta che si crea la funzione e quindi si resetta
     long double mediaTempi = 0;
 
@@ -66,6 +66,7 @@ int main(int argc, char* argv[]) {
     int exit=0;
     while (exit!=-1)
     {
+        vector<double>res_nextIt_vec_X(N_LENGHT,0);//vettore finale di uscita trovato dalle funzioni jacobi
         cout<<endl<<endl;
         cout<<"INSERISCI 1:SEQUENZIALE - 2:THREAD - 3:FAST FLOW - 9: USCITA PROGRAMMA"<<endl;
         int versione;
@@ -99,13 +100,12 @@ int main(int argc, char* argv[]) {
 
         case 3:
             for(int e=0;e<ESECUZIONI;e++){
-                vector<double> vec1 = jacobiFastFlow(matriceA,vettoreB,N_LENGHT,K_MAX_ITER,tempo_catturato,n_thread);
+                res_nextIt_vec_X = jacobiFastFlow(matriceA,vettoreB,N_LENGHT,K_MAX_ITER,tempo_catturato,n_thread);
                 cout<<"Tempo parziale esecuzione "<<e<<" = "<<mediaTempi<<endl;
                 mediaTempi = mediaTempi+tempo_catturato;
             }
             mediaTempi = mediaTempi/ESECUZIONI;
             cout<<"\nSTAMPO nextIt_vec_X:\n";
-            res_nextIt_vec_X = vec1;
             printArray(res_nextIt_vec_X,N_LENGHT);
             cout<<"La media del tempo  FAST FLOW su "<<ESECUZIONI<<" lanci/esecuzioni e': "<<mediaTempi<<endl;
             mediaTempi = 0;
@@ -246,15 +246,11 @@ vector<double> jacobiThread(vector<vector<float>> matriceA, vector<float> vettor
         int endOnWork = startOnWork+pezzoWorkOnPerThread;       //POSIZIONE FINALE SU CUI TERMINA IL VETTORE
         //int endOnWork = (threadPartito != n_thread - 1 ? startOnWork + pezzoWorkOnPerThread : N_LENGHT) - 1;
 
-        /*
         //SE N_LEN / N_THREAD E' PARI VA BENE, OGNI THREAD SI OCCUPA DI TOT PARTI
         //SE N_LEN / N_THREAD HA IL RESTO ALLORA L'ULTIMO THREAD SI FA UN GIRO IN PIU'
         if(threadPartito == n_thread-1){ //se e' l'ultimo thread
-            if (pezzoWorkOnPerThread%2 != 0){ //ed il vettore da' elementi dispari
-                endOnWork++;
-            }
-        }*/
-        //cout<<"Thread "<<threadPartito<<" lavora dall'elemento: "<<startOnWork<<" all'elemento"<<endOnWork<<endl;
+                endOnWork = N_LENGHT;
+        }//cout<<"Thread "<<threadPartito<<" lavora dall'elemento: "<<startOnWork<<" all'elemento"<<endOnWork<<endl;
 
         double somma,temp1, temp2;
         for(int k=0;k<K_MAX_ITER;k++) { //Qui l'iterazione comunque resta come for

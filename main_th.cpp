@@ -51,9 +51,9 @@ int main() {
         //SE N_LEN / N_THREAD E' PARI VA BENE, OGNI THREAD SI OCCUPA DI TOT PARTI
         //SE N_LEN / N_THREAD HA IL RESTO ALLORA L'ULTIMO THREAD SI FA UN GIRO IN PIU'
         if(threadPartito == n_thread-1){ //se e' l'ultimo thread
-            if (pezzoWorkOnPerThread%2 != 0){ //ed il vettore da' elementi dispari
-                endOnWork++;
-            }
+            //if (pezzoWorkOnPerThread%2 != 0){ //ed il vettore da' elementi dispari
+                endOnWork = N_LENGHT;
+            //}
         }
         //cout<<"Thread "<<threadPartito<<" lavora dall'elemento: "<<startOnWork<<" all'elemento"<<endOnWork<<endl;
 
