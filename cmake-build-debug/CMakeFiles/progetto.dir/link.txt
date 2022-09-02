@@ -1,1 +1,1 @@
-/usr/bin/g++ -g CMakeFiles/progetto.dir/main_all.cpp.o CMakeFiles/progetto.dir/util.cpp.o CMakeFiles/progetto.dir/utimer.cpp.o -o progetto 
+/usr/bin/g++ -g CMakeFiles/progetto.dir/main_all_double.cpp.o CMakeFiles/progetto.dir/util.cpp.o CMakeFiles/progetto.dir/utimer.cpp.o -o progetto 

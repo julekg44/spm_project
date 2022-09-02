@@ -129,29 +129,29 @@ progetto/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/progetto.dir/build.make CMakeFiles/progetto.dir/build
 .PHONY : progetto/fast
 
-main_all.o: main_all.cpp.o
-.PHONY : main_all.o
+main_all_double.o: main_all_double.cpp.o
+.PHONY : main_all_double.o
 
 # target to build an object file
-main_all.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/progetto.dir/build.make CMakeFiles/progetto.dir/main_all.cpp.o
-.PHONY : main_all.cpp.o
+main_all_double.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/progetto.dir/build.make CMakeFiles/progetto.dir/main_all_double.cpp.o
+.PHONY : main_all_double.cpp.o
 
-main_all.i: main_all.cpp.i
-.PHONY : main_all.i
+main_all_double.i: main_all_double.cpp.i
+.PHONY : main_all_double.i
 
 # target to preprocess a source file
-main_all.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/progetto.dir/build.make CMakeFiles/progetto.dir/main_all.cpp.i
-.PHONY : main_all.cpp.i
+main_all_double.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/progetto.dir/build.make CMakeFiles/progetto.dir/main_all_double.cpp.i
+.PHONY : main_all_double.cpp.i
 
-main_all.s: main_all.cpp.s
-.PHONY : main_all.s
+main_all_double.s: main_all_double.cpp.s
+.PHONY : main_all_double.s
 
 # target to generate assembly for a file
-main_all.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/progetto.dir/build.make CMakeFiles/progetto.dir/main_all.cpp.s
-.PHONY : main_all.cpp.s
+main_all_double.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/progetto.dir/build.make CMakeFiles/progetto.dir/main_all_double.cpp.s
+.PHONY : main_all_double.cpp.s
 
 util.o: util.cpp.o
 .PHONY : util.o
@@ -210,9 +210,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... progetto"
-	@echo "... main_all.o"
-	@echo "... main_all.i"
-	@echo "... main_all.s"
+	@echo "... main_all_double.o"
+	@echo "... main_all_double.i"
+	@echo "... main_all_double.s"
 	@echo "... util.o"
 	@echo "... util.i"
 	@echo "... util.s"
