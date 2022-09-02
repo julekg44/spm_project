@@ -245,11 +245,32 @@ bool isConvergente(vector<vector<float>> matrix){
             j++;
         }
 
-        if(abs(matrix[i][i])<sum){
+        if(abs(matrix[i][i]) < sum){
             i=size;
             trovato= false;
         }
         i++;
     }
     return trovato;
+}
+
+bool isDDM(vector<vector<float>> matrix, int n){
+    // for each row
+    for (int i = 0; i < n; i++)
+    {
+
+        // for each column, finding sum of each row.
+        int sum = 0;
+        for (int j = 0; j < n; j++)
+            sum += abs(matrix[i][j]);
+
+        // removing the diagonal element.
+        sum -= abs(matrix[i][i]);
+
+        // checking if diagonal element is less
+        // than sum of non-diagonal element.
+        if (abs(matrix[i][i]) < sum)
+            return false;
+    }
+    return true;
 }

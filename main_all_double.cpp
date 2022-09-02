@@ -11,8 +11,8 @@
 #include "util.hpp"
 #include "utimer.cpp"
 
-#define LOWER_BOUND +1
-#define UPPER_BOUND +4
+#define LOWER_BOUND 0 //1
+#define UPPER_BOUND 20 //4
 #define SEED 3
 
 //option command L fai il reformatting del codice
@@ -70,6 +70,7 @@ int main(int argc, char *argv[]) {
     while (exit != -1) {
         vector<double> res_nextIt_vec_X(N_LENGHT, 0);//vettore finale di uscita trovato dalle funzioni jacobi
         cout << endl << endl;
+        cout << "K_MAX_ITER = " << K_MAX_ITER << " N_LEN = " << N_LENGHT << ", LANCI/ESECUZIONI =  "<< ESECUZIONI << ", n_thread = " << n_thread << endl;
         cout << "INSERISCI\n1:SEQUENZIALE - 2:THREAD - 3:FAST FLOW\n7:Stampa Matrice A - 8:Verifica se la matrice converge - 9:USCITA PROGRAMMA" << endl;
         bool converge;
         int versione;
@@ -123,7 +124,7 @@ int main(int argc, char *argv[]) {
                 printMatrix(matriceA);
                 break;
             case 8:
-                converge = isConvergente(matriceA);
+                converge = isDDM(matriceA,N_LENGHT);
                 cout << "La matrice converge: " << converge << endl;
                 break;
             case 9:
@@ -176,8 +177,7 @@ int main(int argc, char *argv[]) {
 
 
 //ALGORITMO JACOBI VERSIONE SEQUENZIALE-----------------------------------
-vector<double>
-jacobiSeq(vector<vector<float>> matriceA, vector<float> vettoreB, int N_LENGHT, int K_MAX_ITER, long &tempo_catturato) {
+vector<double> jacobiSeq(vector<vector<float>> matriceA, vector<float> vettoreB, int N_LENGHT, int K_MAX_ITER, long &tempo_catturato) {
 
     vector<double> currentIt_vec_X(N_LENGHT, 0);//x_k
     vector<double> nextIt_vec_X(N_LENGHT, 0); //x_k+1
@@ -231,7 +231,7 @@ vector<double> jacobiThread(vector<vector<float>> matriceA, vector<float> vettor
 
     auto on_completion = [&]() noexcept {
         static auto phase = "Iterazione finita thread hanno raggiunto la barriera e si cambia iterazione\n";
-        std::cout << phase;
+        //std::cout << phase;
         currentIt_vec_X = nextIt_vec_X; //
     };
 
