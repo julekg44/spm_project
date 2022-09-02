@@ -11,7 +11,7 @@
 #include "util.hpp"
 #include "utimer.cpp"
 
-#define LOWER_BOUND -2
+#define LOWER_BOUND -4
 #define UPPER_BOUND +2
 #define SEED 3
 
@@ -85,7 +85,7 @@ int main(int argc, char* argv[]) {
             mediaTempi = mediaTempi/ESECUZIONI;
             cout<<"\nSTAMPO nextIt_vec_X:\n";
             printArray(res_nextIt_vec_X,N_LENGHT);
-            cout<<"La media del tempo sequenziale su "<<ESECUZIONI<<" lanci/esecuzioni e': "<<mediaTempi<<endl;
+            cout<<"La media del tempo sequenziale su "<<ESECUZIONI<<" lanci/esecuzioni e': "<<mediaTempi<<"\\u03BCsec"<<endl;
             mediaTempi = 0;
             break;
 
@@ -98,7 +98,7 @@ int main(int argc, char* argv[]) {
             mediaTempi = mediaTempi/ESECUZIONI;
             cout<<"\nSTAMPO nextIt_vec_X:\n";
             printArray(res_nextIt_vec_X,N_LENGHT);
-            cout<<"La media del tempo THREAD su "<<ESECUZIONI<<" lanci/esecuzioni e': "<<mediaTempi<<endl;
+            cout<<"La media del tempo THREAD su "<<ESECUZIONI<<" lanci/esecuzioni e': "<<mediaTempi<<"\\u03BCsec"<<endl;
             mediaTempi = 0;
             break;
 
@@ -111,7 +111,7 @@ int main(int argc, char* argv[]) {
             mediaTempi = mediaTempi/ESECUZIONI;
             cout<<"\nSTAMPO nextIt_vec_X:\n";
             printArray(res_nextIt_vec_X,N_LENGHT);
-            cout<<"La media del tempo  FAST FLOW su "<<ESECUZIONI<<" lanci/esecuzioni e': "<<mediaTempi<<endl;
+            cout<<"La media del tempo  FAST FLOW su "<<ESECUZIONI<<" lanci/esecuzioni e': "<<mediaTempi<<"\\u03BCsec"<<endl;
             mediaTempi = 0;
             break;
 
