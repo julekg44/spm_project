@@ -99,12 +99,13 @@ int main(int argc, char* argv[]) {
 
         case 3:
             for(int e=0;e<ESECUZIONI;e++){
-                res_nextIt_vec_X = jacobiFastFlow(matriceA,vettoreB,N_LENGHT,K_MAX_ITER,tempo_catturato,n_thread);
+                vector<double> vec1 = jacobiFastFlow(matriceA,vettoreB,N_LENGHT,K_MAX_ITER,tempo_catturato,n_thread);
                 cout<<"Tempo parziale esecuzione "<<e<<" = "<<mediaTempi<<endl;
                 mediaTempi = mediaTempi+tempo_catturato;
             }
             mediaTempi = mediaTempi/ESECUZIONI;
             cout<<"\nSTAMPO nextIt_vec_X:\n";
+            res_nextIt_vec_X = vec1;
             printArray(res_nextIt_vec_X,N_LENGHT);
             cout<<"La media del tempo  FAST FLOW su "<<ESECUZIONI<<" lanci/esecuzioni e': "<<mediaTempi<<endl;
             mediaTempi = 0;
