@@ -28,51 +28,41 @@ vector<double> jacobiThread(vector<vector<float>> matriceA, vector<float> vettor
 vector<double> jacobiFastFlow(vector<vector<float>> matriceA, vector<float> vettoreB, int N_LENGHT, int K_MAX_ITER, long& tempo_catturato, int n_thread);
 
 int main(int argc, char* argv[]) {
-    if(argc>5||argc<5){
+
+    if(argc>5||argc<5){ //Check arguments by command line
         cout<<"Usage: "<< argv[0]<<" \"K_MAX_ITER\" \"N_TEST/ESECUZIONI/ESECUZIONI\" \"N_LENGHT_MATRIX_AND_VECTOR\" \"N_THREAD\" "<<endl;
-        exit(2);
+        exit(1);
     }
 
-    //const int K_MAX_ITER = 1;
     const int K_MAX_ITER = stoi(argv[1]);
-    int ESECUZIONI = stoi(argv[2]); //numero di volte in cui lanci l'esecuzione dello stesso programma per stimare una media dei tempi
-    //const int N_LENGHT = 3; //lunghezza della matrice e dei vettori
+    const int ESECUZIONI = stoi(argv[2]); //numero di volte in cui lanci l'esecuzione dello stesso programma per stimare una media dei tempi
     const int N_LENGHT = stoi(argv[3]); //lunghezza della matrice e dei vettori
     const int n_thread = stoi(argv[4]); //numero dei thread
 
     if(n_thread>N_LENGHT){
         cout<<"Error: Threads-Worker must be > N_LEN"<<endl;
-        exit(1);
+        exit(2);
     }
 
-
-    cout<<"\nAVVIO PROGRAMMA ALL: Num_ITER = "<<K_MAX_ITER<<" N_LEN = "<<N_LENGHT<<", LANCI/ESECUZIONI =  "<<ESECUZIONI<<"\nn_thread= \n"<<n_thread<<endl;
+    cout<<"\nAVVIO PROGRAMMA ALL: Num_ITER = "<<K_MAX_ITER<<" N_LEN = "<<N_LENGHT<<", LANCI/ESECUZIONI =  "<<ESECUZIONI<<", n_thread= \n"<<n_thread<<endl;
 
     vector<vector<float>> matriceA;
     vector<float> vettoreB;
-    //matriceA=getDefaultMatrixN3();
-    //vettoreB=getDefaultVectorBN3();
-    startCase(matriceA,vettoreB,N_LENGHT,LOWER_BOUND,UPPER_BOUND,SEED);//i vector puoi passarli normalmente -  * QUI:  FIRMA/PROT: f(&a)     -> MAIN: f(a)
-        //printMatrix(matriceA);
-        //printArray(vettoreB,N_LENGHT);
+    startCase(matriceA,vettoreB,N_LENGHT,LOWER_BOUND,UPPER_BOUND,SEED);//i vector puoi passarli normalmente -  * QUI:  FIRMA/PROT: f(&a)  -> MAIN: f(a)
 
-    //LE X me le faccio locali perche' vanno a 0 ad ogni nuovo lancio di jacobi
-    //vector<float>currentIt_vec_X(N_LENGHT,0);//x_k
-    //vector<float>nextIt_vec_X(N_LENGHT,0); //x_k+1
+    //printArray(vettoreB,N_LENGHT);
+    //LE X me le faccio locali perche' vanno a 0 ad ogni nuovo lancio di jacobi     //vector<float>currentIt_vec_X(N_LENGHT,0);//x_k     //vector<float>nextIt_vec_X(N_LENGHT,0); //x_k+1
 
     //vector<double>res_nextIt_vec_X(N_LENGHT,0);//vettore finale di uscita trovato dalle funzioni jacobi
     long tempo_catturato; //Perchè l'oggetto utimer e' creato e distrutto ogni volta che si crea la funzione e quindi si resetta
     long double mediaTempi = 0;
 
-    //int n_thread = 2; //thread
-
-    
     int exit=0;
     while (exit!=-1)
     {
         vector<double>res_nextIt_vec_X(N_LENGHT,0);//vettore finale di uscita trovato dalle funzioni jacobi
         cout<<endl<<endl;
-        cout<<"INSERISCI 1:SEQUENZIALE - 2:THREAD - 3:FAST FLOW - 9: USCITA PROGRAMMA"<<endl;
+        cout<<"INSERISCI\n1:SEQUENZIALE - 2:THREAD - 3:FAST FLOW\n8 - Stampa Matrice A - 9: USCITA PROGRAMMA"<<endl;
         int versione;
         cin>>versione;
         switch (versione){
@@ -115,6 +105,10 @@ int main(int argc, char* argv[]) {
             mediaTempi = 0;
             break;
 
+        case 8:
+            printMatrix(matriceA);
+            break;
+
         case 9:
             exit=-1;
             break;
@@ -126,8 +120,6 @@ int main(int argc, char* argv[]) {
         }
     }
     
-    
-
 
     /*
     //SEQUENZIALE-----------------
@@ -162,13 +154,6 @@ int main(int argc, char* argv[]) {
     cout<<"La media del tempo  su "<<ESECUZIONI<<" ESECUZIONI/esecuzioni e': "<<mediaTempi<<endl;
     */
 
-
-
-
-    
-    
-    //cout<<"\nSTAMPO nextIt_vec_X:\n";
-    //printArray(res_nextIt_vec_X,N_LENGHT);
     cout<<"Fine programma"<<endl;
     return 0;
 }
@@ -177,14 +162,7 @@ int main(int argc, char* argv[]) {
 
 
 
-
-
-
-
-
-
-
-
+//ALGORITMO JACOBI VERSIONE SEQUENZIALE-----------------------------------
 vector<double> jacobiSeq(vector<vector<float>> matriceA, vector<float> vettoreB, int N_LENGHT, int K_MAX_ITER, long& tempo_catturato){
 
     vector<double>currentIt_vec_X(N_LENGHT,0);//x_k
@@ -225,11 +203,12 @@ vector<double> jacobiSeq(vector<vector<float>> matriceA, vector<float> vettoreB,
     return nextIt_vec_X;
 }
 
-//----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
+
+
+//ALGORITMO JACOBI VERSIONE THREAD---------------------------------------------------------------------------------------------------------------------------------------------------------------
 vector<double> jacobiThread(vector<vector<float>> matriceA, vector<float> vettoreB, int N_LENGHT, int K_MAX_ITER, long& tempo_catturato, int n_thread) {
-    //----------------------------------------------------------------------------------------------------------------------
     //FINITA UN ITERAZIONE SUL VETTORE X DA PARTE DI TUTTI I THREAD SI AGGIORNA IL VETTORE DELLE X DELLA NEXT_ITERATION
     vector<double>currentIt_vec_X(N_LENGHT,0);//x_k
     vector<double>nextIt_vec_X(N_LENGHT,0); //x_k+1
@@ -295,8 +274,11 @@ vector<double> jacobiThread(vector<vector<float>> matriceA, vector<float> vettor
     return nextIt_vec_X;
 }
 
-//----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+
+
+
+//ALGORITMO JACOBI VERSIONE FAST FLOW----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 vector<double> jacobiFastFlow(vector<vector<float>> matriceA, vector<float> vettoreB, int N_LENGHT, int K_MAX_ITER, long& tempo_catturato, int n_thread){
     vector<double>nextIt_vec_X(N_LENGHT,0); //x_k+1
     vector<double>currentIt_vec_X(N_LENGHT,0);//x_k - //i vettori x sono inizializzati entrambi a 0

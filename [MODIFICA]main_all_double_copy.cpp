@@ -11,51 +11,66 @@
 #include "util.hpp"
 #include "utimer.cpp"
 
+#define LOWER_BOUND -4
+#define UPPER_BOUND +2
+#define SEED 3
+
 //compila g++ -o main_seq.out main_seq.cpp util.cpp util.hpp utimer.cpp
 //qui compili da g++ -std=c++20 -O3 -o main_th.out main_th.cpp util.hpp util.cpp utimer.cpp
 
-////qui compili da g++ -std=c++20 -O3 -o main_all.out main_all.cpp util.hpp util.cpp utimer.cpp
+////qui compili da g++ -std=c++20 -O3 -o main_all.out main_all.cpp util.hpp util.cpp utimer.cpp -pthread
 
-//esegui ./main_all.out "K_MAX_ITER"  "N_TEST/ESECUZIONI/ESECUZIONI" "N_LENGHT_MATRIX_AND_VECTOR"
+//esegui ./main_all.out "K_MAX_ITER" "N_TEST/ESECUZIONI/ESECUZIONI" "N_LENGHT_MATRIX_AND_VECTOR" "N_THREAD"
 using namespace std;
 
-vector<float> jacobiSeq(vector<vector<float>> matriceA, vector<float> vettoreB, int N_LENGHT, int K_MAX_ITER, long& tempo_catturato);
-vector<float> jacobiThread(vector<vector<float>> matriceA, vector<float> vettoreB, int N_LENGHT, int K_MAX_ITER, long& tempo_catturato, int n_thread);
-vector<float> jacobiFastFlow(vector<vector<float>> matriceA, vector<float> vettoreB, int N_LENGHT, int K_MAX_ITER, long& tempo_catturato, int n_thread);
+vector<double> jacobiSeq(vector<vector<float>> matriceA, vector<float> vettoreB, int N_LENGHT, int K_MAX_ITER, long& tempo_catturato);
+vector<double> jacobiThread(vector<vector<float>> matriceA, vector<float> vettoreB, int N_LENGHT, int K_MAX_ITER, long& tempo_catturato, int n_thread);
+vector<double> jacobiFastFlow(vector<vector<float>> matriceA, vector<float> vettoreB, int N_LENGHT, int K_MAX_ITER, long& tempo_catturato, int n_thread);
 
 int main(int argc, char* argv[]) {
+    if(argc>5||argc<5){
+        cout<<"Usage: "<< argv[0]<<" \"K_MAX_ITER\" \"N_TEST/ESECUZIONI/ESECUZIONI\" \"N_LENGHT_MATRIX_AND_VECTOR\" \"N_THREAD\" "<<endl;
+        exit(2);
+    }
 
     //const int K_MAX_ITER = 1;
     const int K_MAX_ITER = stoi(argv[1]);
     int ESECUZIONI = stoi(argv[2]); //numero di volte in cui lanci l'esecuzione dello stesso programma per stimare una media dei tempi
     //const int N_LENGHT = 3; //lunghezza della matrice e dei vettori
     const int N_LENGHT = stoi(argv[3]); //lunghezza della matrice e dei vettori
+    const int n_thread = stoi(argv[4]); //numero dei thread
+
+    if(n_thread>N_LENGHT){
+        cout<<"Error: Threads-Worker must be > N_LEN"<<endl;
+        exit(1);
+    }
 
 
-    cout<<"\nAVVIO PROGRAMMA ALL: Num_ITER = "<<K_MAX_ITER<<" N_LEN = "<<N_LENGHT<<", LANCI/ESECUZIONI =  "<<ESECUZIONI<<"\nn_thread=2 FISSO.\n"<<endl;
+    cout<<"\nAVVIO PROGRAMMA ALL: Num_ITER = "<<K_MAX_ITER<<" N_LEN = "<<N_LENGHT<<", LANCI/ESECUZIONI =  "<<ESECUZIONI<<"\nn_thread= \n"<<n_thread<<endl;
 
     vector<vector<float>> matriceA;
     vector<float> vettoreB;
     //matriceA=getDefaultMatrixN3();
     //vettoreB=getDefaultVectorBN3();
-    startCase(matriceA,vettoreB,N_LENGHT,-2,2);//i vector puoi passarli normalmente -  * QUI:  FIRMA/PROT: f(&a)     -> MAIN: f(a)
-    printMatrix(matriceA);
-    printArray(vettoreB,N_LENGHT);
+    startCase(matriceA,vettoreB,N_LENGHT,LOWER_BOUND,UPPER_BOUND,SEED);//i vector puoi passarli normalmente -  * QUI:  FIRMA/PROT: f(&a)     -> MAIN: f(a)
+        //printMatrix(matriceA);
+        //printArray(vettoreB,N_LENGHT);
 
     //LE X me le faccio locali perche' vanno a 0 ad ogni nuovo lancio di jacobi
     //vector<float>currentIt_vec_X(N_LENGHT,0);//x_k
     //vector<float>nextIt_vec_X(N_LENGHT,0); //x_k+1
 
-    vector<float>res_nextIt_vec_X(N_LENGHT,0);//vettore finale di uscita trovato dalle funzioni jacobi
+    //vector<double>res_nextIt_vec_X(N_LENGHT,0);//vettore finale di uscita trovato dalle funzioni jacobi
     long tempo_catturato; //Perchè l'oggetto utimer e' creato e distrutto ogni volta che si crea la funzione e quindi si resetta
     long double mediaTempi = 0;
 
-    int n_thread = 2; //thread
+    //int n_thread = 2; //thread
 
     
     int exit=0;
     while (exit!=-1)
     {
+        vector<double>res_nextIt_vec_X(N_LENGHT,0);//vettore finale di uscita trovato dalle funzioni jacobi
         cout<<endl<<endl;
         cout<<"INSERISCI 1:SEQUENZIALE - 2:THREAD - 3:FAST FLOW - 9: USCITA PROGRAMMA"<<endl;
         int versione;
@@ -70,7 +85,8 @@ int main(int argc, char* argv[]) {
             mediaTempi = mediaTempi/ESECUZIONI;
             cout<<"\nSTAMPO nextIt_vec_X:\n";
             printArray(res_nextIt_vec_X,N_LENGHT);
-            cout<<"La media del tempo sequenziale su "<<ESECUZIONI<<" lanci/esecuzioni e': "<<mediaTempi<<endl;
+            cout<<"La media del tempo sequenziale su "<<ESECUZIONI<<" lanci/esecuzioni e': "<<mediaTempi<<"\\u03BCsec"<<endl;
+            mediaTempi = 0;
             break;
 
         case 2:
@@ -82,7 +98,8 @@ int main(int argc, char* argv[]) {
             mediaTempi = mediaTempi/ESECUZIONI;
             cout<<"\nSTAMPO nextIt_vec_X:\n";
             printArray(res_nextIt_vec_X,N_LENGHT);
-            cout<<"La media del tempo THREAD su "<<ESECUZIONI<<" lanci/esecuzioni e': "<<mediaTempi<<endl;
+            cout<<"La media del tempo THREAD su "<<ESECUZIONI<<" lanci/esecuzioni e': "<<mediaTempi<<"\\u03BCsec"<<endl;
+            mediaTempi = 0;
             break;
 
         case 3:
@@ -94,7 +111,8 @@ int main(int argc, char* argv[]) {
             mediaTempi = mediaTempi/ESECUZIONI;
             cout<<"\nSTAMPO nextIt_vec_X:\n";
             printArray(res_nextIt_vec_X,N_LENGHT);
-            cout<<"La media del tempo  FAST FLOW su "<<ESECUZIONI<<" lanci/esecuzioni e': "<<mediaTempi<<endl;
+            cout<<"La media del tempo  FAST FLOW su "<<ESECUZIONI<<" lanci/esecuzioni e': "<<mediaTempi<<"\\u03BCsec"<<endl;
+            mediaTempi = 0;
             break;
 
         case 9:
@@ -167,11 +185,11 @@ int main(int argc, char* argv[]) {
 
 
 
-vector<float> jacobiSeq(vector<vector<float>> matriceA, vector<float> vettoreB, int N_LENGHT, int K_MAX_ITER, long& tempo_catturato){
+vector<double> jacobiSeq(vector<vector<float>> matriceA, vector<float> vettoreB, int N_LENGHT, int K_MAX_ITER, long& tempo_catturato){
 
-    vector<float>currentIt_vec_X(N_LENGHT,0);//x_k
-    vector<float>nextIt_vec_X(N_LENGHT,0); //x_k+1
-    float somma,temp1,temp2;
+    vector<double>currentIt_vec_X(N_LENGHT,0);//x_k
+    vector<double>nextIt_vec_X(N_LENGHT,0); //x_k+1
+    double somma,temp1,temp2;
 
     utimer tempo_seq = utimer("Tempo Esecuzione Sequenziale Jacobi", &tempo_catturato); //STAMPA IL TEMPO TOTALE ALLA FINE
     for(int k=0;k<K_MAX_ITER;k++){
@@ -210,11 +228,11 @@ vector<float> jacobiSeq(vector<vector<float>> matriceA, vector<float> vettoreB, 
 //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
-vector<float> jacobiThread(vector<vector<float>> matriceA, vector<float> vettoreB, int N_LENGHT, int K_MAX_ITER, long& tempo_catturato, int n_thread) {
+vector<double> jacobiThread(vector<vector<float>> matriceA, vector<float> vettoreB, int N_LENGHT, int K_MAX_ITER, long& tempo_catturato, int n_thread) {
     //----------------------------------------------------------------------------------------------------------------------
     //FINITA UN ITERAZIONE SUL VETTORE X DA PARTE DI TUTTI I THREAD SI AGGIORNA IL VETTORE DELLE X DELLA NEXT_ITERATION
-    vector<float>currentIt_vec_X(N_LENGHT,0);//x_k
-    vector<float>nextIt_vec_X(N_LENGHT,0); //x_k+1
+    vector<double>currentIt_vec_X(N_LENGHT,0);//x_k
+    vector<double>nextIt_vec_X(N_LENGHT,0); //x_k+1
 
     vector<thread> arrayThread(n_thread); //array dei thread tanti quante le righe della mat ovvero n
     int pezzoWorkOnPerThread = N_LENGHT / n_thread; //num di elementi 'splittati' su cui lavora ogni thread
@@ -235,18 +253,15 @@ vector<float> jacobiThread(vector<vector<float>> matriceA, vector<float> vettore
         //SE N_LEN / N_THREAD E' PARI VA BENE, OGNI THREAD SI OCCUPA DI TOT PARTI
         //SE N_LEN / N_THREAD HA IL RESTO ALLORA L'ULTIMO THREAD SI FA UN GIRO IN PIU'
         if(threadPartito == n_thread-1){ //se e' l'ultimo thread
-            if (pezzoWorkOnPerThread%2 != 0){ //ed il vettore da' elementi dispari
-                endOnWork++;
-            }
-        }
-        //cout<<"Thread "<<threadPartito<<" lavora dall'elemento: "<<startOnWork<<" all'elemento"<<endOnWork<<endl;
+                endOnWork = N_LENGHT;
+        }//cout<<"Thread "<<threadPartito<<" lavora dall'elemento: "<<startOnWork<<" all'elemento"<<endOnWork<<endl;
 
-        float somma,temp1, temp2;
+        double somma,temp1, temp2;
         for(int k=0;k<K_MAX_ITER;k++) { //Qui l'iterazione comunque resta come for
             //cout<<"Thread"<<threadPartito<<" START ITERAZIONE "<<k<<endl;
             int i=startOnWork;
             while(i<endOnWork){
-                //for (int i = startOnWork; i < endOnWork; i++) {//for esterno DELLA FORMULA
+                
                 somma = 0;
                 temp1 = (1 / matriceA[i][i]);
 
@@ -282,22 +297,21 @@ vector<float> jacobiThread(vector<vector<float>> matriceA, vector<float> vettore
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-vector<float> jacobiFastFlow(vector<vector<float>> matriceA, vector<float> vettoreB, int N_LENGHT, int K_MAX_ITER, long& tempo_catturato, int n_thread){
-    vector<float>nextIt_vec_X(N_LENGHT,0); //x_k+1
-    vector<float>currentIt_vec_X(N_LENGHT,0);//x_k - //i vettori x sono inizializzati entrambi a 0
+vector<double> jacobiFastFlow(vector<vector<float>> matriceA, vector<float> vettoreB, int N_LENGHT, int K_MAX_ITER, long& tempo_catturato, int n_thread){
+    vector<double>nextIt_vec_X(N_LENGHT,0); //x_k+1
+    vector<double>currentIt_vec_X(N_LENGHT,0);//x_k - //i vettori x sono inizializzati entrambi a 0
 
     int pezzoVettorePerThread = N_LENGHT / n_thread;
     ff::ParallelFor par_for_obj(n_thread); //utilizza tot thread/worker , come la versione thread ma con ff
 
-    float somma,temp1,temp2;
-    
+
     utimer tempo_seq = utimer("Tempo Esecuzione VERSIONE FAST_FLOW Jacobi", &tempo_catturato); //STAMPA IL TEMPO TOTALE ALLA FINE
     for(int k=0;k<K_MAX_ITER;k++){
 
         //for(int i=0; i<N_LENGHT; i++) { //for esterno DELLA FORMULA
         par_for_obj.parallel_for(0, N_LENGHT, 1, pezzoVettorePerThread, [&](ulong i){
-            float somma = 0;
-            float temp1 = (1 / matriceA[i][i]);
+            double somma = 0;
+            double temp1 = (1 / matriceA[i][i]);
 
             for(int j=0;j<N_LENGHT;j++){
                 if (j != i ){                        
@@ -305,7 +319,7 @@ vector<float> jacobiFastFlow(vector<vector<float>> matriceA, vector<float> vetto
                     }
             }//fine for delle j
 
-            float temp2 = vettoreB[i] - somma;
+            double temp2 = vettoreB[i] - somma;
             nextIt_vec_X[i] = temp1 * temp2;
         },n_thread); //FINE CICLO i
 

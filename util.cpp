@@ -37,8 +37,8 @@ void printMatrix(vector<vector<float>> matrix){
     cout << "Stampo la matrice di dim: "<<n<<"x"<<n<<endl;
     for(int i=0; i < n; i++){
         for(int j=0; j < n; j++){
-            printf("[%d][%d] = %.3f ",i,j,matrix[i][j]);
-            cout << matrix[i][j] << "\t";
+            printf("[%d][%d] = %.3f\t",i,j,matrix[i][j]);
+            //cout << matrix[i][j] << "\t";
         }
         cout << endl;
     }
@@ -203,24 +203,25 @@ vector<float> getDefaultVectorBN3(){
 //roberto non lo mette nella firma perche' sono solo in lettura
 //
 void startCase(vector<vector<float>>& matriceA, vector<float>& vettoreB,int size, int lb, int up, int seed){
-    cout<<"Inserisci:\n0 - per generare una matrice RANDOMICA\n1 - per generare una matrice 3x3 di DEFAULT\n2 - genera matrix rand con seed=3 con N_LEN da riga"<<endl;
+    //cout<<"Inserisci:\n0 - per generare una matrice RANDOMICA\n1 - per generare una matrice 3x3 di DEFAULT\n2 - genera matrix rand con seed=3 con N_LEN da riga"<<endl;
+    cout<<"Inserisci:\n1 - per generare una matrice 3x3 di DEFAULT\n2 - genera matrix rand con seed="<<seed<<" ed N_LEN = "<<size<<endl;
     int scelta;
     cin>>scelta;
     switch(scelta) {
-        case 0: //caso random
+        case 0: //caso random [DEPRECATO]
             matriceA = generateRandomSquareVectorMatrix(size,lb,up);
             vettoreB = generateRandomVector(size,lb,up);
             cout<<"Generati matrice e vettore randomici di size "<<size<<endl;
             break;
-        case 1: //default
+        case 1: //default di DIM = 3
             matriceA = getDefaultMatrixN3();
             vettoreB = getDefaultVectorBN3();
             cout<<"generato default N_LEN = "<<size<<endl;
             break;
-        case 2: //default
+        case 2: //random matrix coi seed
             matriceA = generateMatrixSeed(size,(float)lb,(float)up,seed);
             vettoreB = generateVectorSeed(size,(float)lb,(float)up,seed);
-            std::cout<<"Generata matrice e vector con seed = 3"<<endl;
+            std::cout<<"Generata matrice di n_len = "<<size<<" e vector con seed = "<<seed<<endl;
             break;
         default:
             matriceA = getDefaultMatrixN3();
