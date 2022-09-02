@@ -124,7 +124,8 @@ int main(int argc, char *argv[]) {
                 printMatrix(matriceA);
                 break;
             case 8:
-                converge = isDDM(matriceA,N_LENGHT);
+                converge = isConvergente(matriceA);
+                //converge = isDDM(matriceA,N_LENGHT);
                 cout << "La matrice converge: " << converge << endl;
                 break;
             case 9:
