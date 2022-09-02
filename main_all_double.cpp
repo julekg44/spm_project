@@ -49,7 +49,7 @@ int main(int argc, char* argv[]) {
     //matriceA=getDefaultMatrixN3();
     //vettoreB=getDefaultVectorBN3();
     startCase(matriceA,vettoreB,N_LENGHT,-2,2);//i vector puoi passarli normalmente -  * QUI:  FIRMA/PROT: f(&a)     -> MAIN: f(a)
-        //printMatrix(matriceA);
+        printMatrix(matriceA);
         //printArray(vettoreB,N_LENGHT);
 
     //LE X me le faccio locali perche' vanno a 0 ad ogni nuovo lancio di jacobi
