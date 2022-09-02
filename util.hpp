@@ -45,6 +45,8 @@ vector<float> getDefaultVectorBN3();
 //----
 void startCase(vector<vector<float>>& matriceA, vector<float>& vettoreB,int size, int lb, int up, int seed);
 
+bool isConvergente(vector<vector<float>> matrix);
+
 //deprecate
 
 

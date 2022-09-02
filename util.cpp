@@ -8,6 +8,7 @@
 #include <thread>
 #include <chrono>
 #include <barrier>
+#include <cmath>
 #include "util.hpp"
 
 using namespace std;
@@ -228,4 +229,27 @@ void startCase(vector<vector<float>>& matriceA, vector<float>& vettoreB,int size
             vettoreB = getDefaultVectorBN3();
             cout<<"generato default N_LEN = 3\n";
     }
+}
+
+bool isConvergente(vector<vector<float>> matrix){
+    bool trovato = true;
+    int size = matrix.size();
+    int i=0;
+    int j=0;
+    while(i<size){
+        float sum = 0;
+        while(j<size){
+            if(j!=i){
+                sum = sum + abs(matrix[i][j]);
+            }
+            j++;
+        }
+
+        if(abs(matrix[i][i])<sum){
+            i=size;
+            trovato= false;
+        }
+        i++;
+    }
+    return trovato;
 }
