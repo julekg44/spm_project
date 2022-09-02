@@ -202,7 +202,7 @@ vector<float> getDefaultVectorBN3(){
 //* QUI:  FIRMA/PROT: f(&a)     -> MAIN: f(a) per modificare
 //roberto non lo mette nella firma perche' sono solo in lettura
 //
-void startCase(vector<vector<float>>& matriceA, vector<float>& vettoreB,int size, int lb, int up){
+void startCase(vector<vector<float>>& matriceA, vector<float>& vettoreB,int size, int lb, int up, int seed){
     cout<<"Inserisci:\n0 - per generare una matrice RANDOMICA\n1 - per generare una matrice 3x3 di DEFAULT\n2 - genera matrix rand con seed=3 con N_LEN da riga"<<endl;
     int scelta;
     cin>>scelta;
@@ -218,8 +218,8 @@ void startCase(vector<vector<float>>& matriceA, vector<float>& vettoreB,int size
             cout<<"generato default N_LEN = "<<size<<endl;
             break;
         case 2: //default
-            matriceA = generateMatrixSeed(size,(float)lb,(float)up,3);
-            vettoreB = generateVectorSeed(size,(float)lb,(float)up,3);
+            matriceA = generateMatrixSeed(size,(float)lb,(float)up,seed);
+            vettoreB = generateVectorSeed(size,(float)lb,(float)up,seed);
             std::cout<<"Generata matrice e vector con seed = 3"<<endl;
             break;
         default:

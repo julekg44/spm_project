@@ -11,6 +11,10 @@
 #include "util.hpp"
 #include "utimer.cpp"
 
+#define LOWER_BOUND -2
+#define UPPER_BOUND +2
+#define SEED 3
+
 //compila g++ -o main_seq.out main_seq.cpp util.cpp util.hpp utimer.cpp
 //qui compili da g++ -std=c++20 -O3 -o main_th.out main_th.cpp util.hpp util.cpp utimer.cpp
 
@@ -48,7 +52,7 @@ int main(int argc, char* argv[]) {
     vector<float> vettoreB;
     //matriceA=getDefaultMatrixN3();
     //vettoreB=getDefaultVectorBN3();
-    startCase(matriceA,vettoreB,N_LENGHT,-2,2);//i vector puoi passarli normalmente -  * QUI:  FIRMA/PROT: f(&a)     -> MAIN: f(a)
+    startCase(matriceA,vettoreB,N_LENGHT,LOWER_BOUND,UPPER_BOUND,SEED);//i vector puoi passarli normalmente -  * QUI:  FIRMA/PROT: f(&a)     -> MAIN: f(a)
         printMatrix(matriceA);
         //printArray(vettoreB,N_LENGHT);
 

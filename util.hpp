@@ -43,8 +43,7 @@ vector<float> getDefaultVectorBN2();
 vector<vector<float>> getDefaultMatrixN3();
 vector<float> getDefaultVectorBN3();
 //----
-void startCase(vector<vector<float>>& matriceA, vector<float>& vettoreB,int size, int lb, int up);
-
+void startCase(vector<vector<float>>& matriceA, vector<float>& vettoreB,int size, int lb, int up, int seed);
 
 //deprecate
 
