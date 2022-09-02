@@ -44,7 +44,7 @@ int main(int argc, char* argv[]) {
         exit(2);
     }
 
-    cout<<"\nAVVIO PROGRAMMA ALL: Num_ITER = "<<K_MAX_ITER<<" N_LEN = "<<N_LENGHT<<", LANCI/ESECUZIONI =  "<<ESECUZIONI<<", n_thread= \n"<<n_thread<<endl;
+    cout<<"\nAVVIO PROGRAMMA ALL: Num_ITER = "<<K_MAX_ITER<<" N_LEN = "<<N_LENGHT<<", LANCI/ESECUZIONI =  "<<ESECUZIONI<<", n_thread = "<<n_thread<<endl;
 
     vector<vector<float>> matriceA;
     vector<float> vettoreB;
@@ -62,7 +62,7 @@ int main(int argc, char* argv[]) {
     {
         vector<double>res_nextIt_vec_X(N_LENGHT,0);//vettore finale di uscita trovato dalle funzioni jacobi
         cout<<endl<<endl;
-        cout<<"INSERISCI\n1:SEQUENZIALE - 2:THREAD - 3:FAST FLOW\n8 - Stampa Matrice A - 9: USCITA PROGRAMMA"<<endl;
+        cout<<"INSERISCI\n1:SEQUENZIALE - 2:THREAD - 3:FAST FLOW\n8:Stampa Matrice A - 9:USCITA PROGRAMMA"<<endl;
         int versione;
         cin>>versione;
         switch (versione){
@@ -75,7 +75,7 @@ int main(int argc, char* argv[]) {
             mediaTempi = mediaTempi/ESECUZIONI;
             cout<<"\nSTAMPO nextIt_vec_X:\n";
             printArray(res_nextIt_vec_X,N_LENGHT);
-            cout<<"La media del tempo sequenziale su "<<ESECUZIONI<<" lanci/esecuzioni e': "<<mediaTempi<<"\\u03BCsec"<<endl;
+            cout<<"La media del tempo sequenziale su "<<ESECUZIONI<<" lanci/esecuzioni e': "<<mediaTempi<<" μsec"<<endl;
             mediaTempi = 0;
             break;
 
@@ -88,7 +88,7 @@ int main(int argc, char* argv[]) {
             mediaTempi = mediaTempi/ESECUZIONI;
             cout<<"\nSTAMPO nextIt_vec_X:\n";
             printArray(res_nextIt_vec_X,N_LENGHT);
-            cout<<"La media del tempo THREAD su "<<ESECUZIONI<<" lanci/esecuzioni e': "<<mediaTempi<<"\\u03BCsec"<<endl;
+            cout<<"La media del tempo THREAD su "<<ESECUZIONI<<" lanci/esecuzioni e': "<<mediaTempi<<" μsec"<<endl;
             mediaTempi = 0;
             break;
 
@@ -101,7 +101,7 @@ int main(int argc, char* argv[]) {
             mediaTempi = mediaTempi/ESECUZIONI;
             cout<<"\nSTAMPO nextIt_vec_X:\n";
             printArray(res_nextIt_vec_X,N_LENGHT);
-            cout<<"La media del tempo  FAST FLOW su "<<ESECUZIONI<<" lanci/esecuzioni e': "<<mediaTempi<<"\\u03BCsec"<<endl;
+            cout<<"La media del tempo  FAST FLOW su "<<ESECUZIONI<<" lanci/esecuzioni e': "<<mediaTempi<<" μsec"<<endl;
             mediaTempi = 0;
             break;
 
