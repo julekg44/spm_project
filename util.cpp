@@ -137,6 +137,15 @@ vector<float> generateRandomVector(int size,int lowerBound, int upperBound){
     return v;
 }
 
+vector<float> generateVectorSeed(int n, float min_vector, float max_vector, int seed){
+
+    vector<float> vector(n);
+    srand(seed);
+    for(int i=0; i < n; i++){
+        vector[i] = min_vector + static_cast <float> (rand()) /( static_cast <float> (RAND_MAX/(max_vector-min_vector)));
+    }
+    return vector;
+}
 
 
 //DEFAULT FUNCTION------------------------------------------------------------------------------------------------------
@@ -194,7 +203,7 @@ vector<float> getDefaultVectorBN3(){
 //roberto non lo mette nella firma perche' sono solo in lettura
 //
 void startCase(vector<vector<float>>& matriceA, vector<float>& vettoreB,int size, int lb, int up){
-    cout<<"Inserisci:\n0 - per generare una matrice RANDOMICA\n1 - per generare una matrice 3x3 di DEFAULT"<<endl;
+    cout<<"Inserisci:\n0 - per generare una matrice RANDOMICA\n1 - per generare una matrice 3x3 di DEFAULT\n2 - genera matrix rand con seed=3 con N_LEN da riga"<<endl;
     int scelta;
     cin>>scelta;
     switch(scelta) {
@@ -207,6 +216,11 @@ void startCase(vector<vector<float>>& matriceA, vector<float>& vettoreB,int size
             matriceA = getDefaultMatrixN3();
             vettoreB = getDefaultVectorBN3();
             cout<<"generato default N_LEN = "<<size<<endl;
+            break;
+        case 2: //default
+            matriceA = generateMatrixSeed(size,(float)lb,(float)up,3);
+            vettoreB = generateVectorSeed(size,(float)lb,(float)up,3);
+            std::cout<<"Generata matrice e vector con seed = 3"<<<<endl;
             break;
         default:
             matriceA = getDefaultMatrixN3();

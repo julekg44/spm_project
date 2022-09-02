@@ -34,6 +34,7 @@ vector<vector<float>> generateRandomSquareVectorMatrix(int size, int lowerBound,
 vector<vector<float>> generateMatrixSeed(int n, float min_matrix, float max_matrix, int seed);
 
 vector<float> generateRandomVector(int size,int lowerBound, int upperBound);
+vector<float> generateVectorSeed(int n, float min_vector, float max_vector, int seed);
 
 
 //FUNZIONI DEFAULT
