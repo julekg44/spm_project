@@ -220,7 +220,7 @@ void startCase(vector<vector<float>>& matriceA, vector<float>& vettoreB,int size
         case 2: //default
             matriceA = generateMatrixSeed(size,(float)lb,(float)up,3);
             vettoreB = generateVectorSeed(size,(float)lb,(float)up,3);
-            std::cout<<"Generata matrice e vector con seed = 3"<<<<endl;
+            std::cout<<"Generata matrice e vector con seed = 3"<<endl;
             break;
         default:
             matriceA = getDefaultMatrixN3();
