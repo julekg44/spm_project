@@ -25,12 +25,8 @@
 using namespace std;
 
 vector<double> jacobiSeq(vector<vector<float>> matriceA, vector<float> vettoreB, int N_LENGHT, int K_MAX_ITER, long &tempo_catturato);
-
-vector<double> jacobiThread(vector<vector<float>> matriceA, vector<float> vettoreB, int N_LENGHT, int K_MAX_ITER,
-                            long &tempo_catturato, int n_thread);
-
-vector<double> jacobiFastFlow(vector<vector<float>> matriceA, vector<float> vettoreB, int N_LENGHT, int K_MAX_ITER,
-                              long &tempo_catturato, int n_thread);
+vector<double> jacobiThread(vector<vector<float>> matriceA, vector<float> vettoreB, int N_LENGHT, int K_MAX_ITER, long &tempo_catturato, int n_thread);
+vector<double> jacobiFastFlow(vector<vector<float>> matriceA, vector<float> vettoreB, int N_LENGHT, int K_MAX_ITER, long &tempo_catturato, int n_thread);
 
 int main(int argc, char *argv[]) {
 
@@ -41,8 +37,7 @@ int main(int argc, char *argv[]) {
     }
 
     const int K_MAX_ITER = stoi(argv[1]);
-    const int ESECUZIONI = stoi(
-            argv[2]); //numero di volte in cui lanci l'esecuzione dello stesso programma per stimare una media dei tempi
+    const int ESECUZIONI = stoi(argv[2]); //numero di volte in cui lanci l'esecuzione dello stesso programma per stimare una media dei tempi
     const int N_LENGHT = stoi(argv[3]); //lunghezza della matrice e dei vettori
     const int n_thread = stoi(argv[4]); //numero dei thread
 
@@ -56,8 +51,7 @@ int main(int argc, char *argv[]) {
 
     vector<vector<float>> matriceA;
     vector<float> vettoreB;
-    startCase(matriceA, vettoreB, N_LENGHT, LOWER_BOUND, UPPER_BOUND,
-              SEED);//i vector puoi passarli normalmente -  * QUI:  FIRMA/PROT: f(&a)  -> MAIN: f(a)
+    startCase(matriceA, vettoreB, N_LENGHT, LOWER_BOUND, UPPER_BOUND,SEED);//i vector puoi passarli normalmente -  * QUI:  FIRMA/PROT: f(&a)  -> MAIN: f(a)
 
     //printArray(vettoreB,N_LENGHT);
     //LE X me le faccio locali perche' vanno a 0 ad ogni nuovo lancio di jacobi     //vector<float>currentIt_vec_X(N_LENGHT,0);//x_k     //vector<float>nextIt_vec_X(N_LENGHT,0); //x_k+1
