@@ -1,6 +1,4 @@
-//
-// Created by Giuliano Galloppi on 23/08/22.
-//
+/*Giuliano Galloppi 646443 - Progetto di SPM A.A. 2021/22 - UTILITY*/
 #ifndef PROGETTO_UTIL_HPP
 #define PROGETTO_UTIL_HPP
 
@@ -42,14 +40,9 @@ vector<vector<float>> getDefaultMatrixN2();
 vector<float> getDefaultVectorBN2();
 vector<vector<float>> getDefaultMatrixN3();
 vector<float> getDefaultVectorBN3();
-//----
+
 void startCase(vector<vector<float>>& matriceA, vector<float>& vettoreB,int size, int lb, int up, int seed);
 
 bool isConvergente(vector<vector<float>> matrix);
-bool isDDM(vector<vector<float>> matrix, int n);
-
-//deprecate
-
-
 
 #endif //PROGETTO_UTIL_HPP

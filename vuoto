@@ -1,1 +1,8 @@
 #per fare spazio
+    //fine = chrono::high_resolution_clock::now();
+
+    //prende il tempo
+    /*auto inizio = chrono::high_resolution_clock::now();//MIO
+    auto fine = chrono::high_resolution_clock::now();//MIO
+    inizio = chrono::high_resolution_clock::now(); //MIO - funziona solo prima di utimer
+    */

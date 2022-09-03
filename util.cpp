@@ -1,6 +1,4 @@
-//
-// Created by Giuliano Galloppi on 23/08/22.
-//
+/*Giuliano Galloppi 646443 - Progetto di SPM A.A. 2021/22 - UTILITY*/
 #include <iostream>
 #include <string>
 #include <vector>
@@ -199,10 +197,6 @@ vector<float> getDefaultVectorBN3(){
     return vettoreB;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
-//* QUI:  FIRMA/PROT: f(&a)     -> MAIN: f(a) per modificare
-//roberto non lo mette nella firma perche' sono solo in lettura
-//
 void startCase(vector<vector<float>>& matriceA, vector<float>& vettoreB,int size, int lb, int up, int seed){
     //cout<<"Inserisci:\n0 - per generare una matrice RANDOMICA\n1 - per generare una matrice 3x3 di DEFAULT\n2 - genera matrix rand con seed=3 con N_LEN da riga"<<endl;
     cout<<"Inserisci:\n1 - per generare una matrice 3x3 di DEFAULT\n2 - genera matrix rand con seed="<<seed<<" ed N_LEN = "<<size<<endl;
@@ -254,25 +248,4 @@ bool isConvergente(vector<vector<float>> matrix){
         i++;
     }
     return trovato;
-}
-
-bool isDDM(vector<vector<float>> matrix, int n){
-    // for each row
-    for (int i = 0; i < n; i++)
-    {
-        // for each column, finding sum of each row.
-        int sum = 0;
-        for (int j = 0; j < n; j++){
-            sum += abs(matrix[i][j]);
-        }
-
-        // removing the diagonal element.
-        sum -= abs(matrix[i][i]);
-
-        // checking if diagonal element is less
-        // than sum of non-diagonal element.
-        if (abs(matrix[i][i]) < sum)
-            return false;
-    }
-    return true;
 }

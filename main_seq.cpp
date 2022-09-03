@@ -1,3 +1,4 @@
+/*Giuliano Galloppi 646443 - Progetto di SPM A.A. 2021/22 - Jacobi iterative method implementation*/
 #include <iostream>
 #include <string>
 #include <vector>
@@ -5,80 +6,59 @@
 #include "util.hpp"
 #include "utimer.cpp"
 
+#define LOWER_BOUND 0 //1
+#define UPPER_BOUND 20 //4
+#define SEED 3
+
 using namespace std;
 
-//VERSIONE ESECUZIONE UNICA CON ITERAZIONI A 2
+//compile: g++ -std=c++17 -O3 -o main_seq.out main_seq.cpp util.hpp util.cpp utimer.cpp
+//exec: ./main_seq.out [K_ITERATION] [N_LENGHT]
 int main(int argc, char* argv[]) {
 
-    //const int K_MAX_ITER = stoi(argv[1]);
-    const int K_MAX_ITER = 50;
-    const int N_LENGHT = 3; //lunghezza della matrice e dei vettori
+    if (argc > 2 || argc < 2) { //Check arguments by command line
+        cout << "Usage: " << argv[0]<< " \"K_MAX_ITER\" \"N_LENGHT_MATRIX_AND_VECTOR\" " << endl;
+        exit(1);
+    }
+    std::cout<<"GIULIANO GALLOPPI 646443 - SPM Project A.Y.2021/22 - SEQUENTIAL Jacobi iterative method implementation"<<endl;
+
+    const int K_MAX_ITER = stoi(argv[1]);
+    const int N_LENGHT = stoi(argv[2]); //lunghezza della matrice e dei vettori
 
     cout<<"\nSequenziale: Num_ITER = "<<K_MAX_ITER<<" N_LEN = "<<N_LENGHT<<endl;
 
     vector<vector<float>> matriceA;
     vector<float> vettoreB;
-    //startCase(matriceA,vettoreB,N_LENGHT,-2,2);//i vector puoi passarli normalmente -  * QUI:  FIRMA/PROT: f(&a)     -> MAIN: f(a)
-    matriceA = getDefaultMatrixN3();
-    vettoreB = getDefaultVectorBN3();
+    startCase(matriceA,vettoreB,N_LENGHT,LOWER_BOUND,UPPER_BOUND,SEED);
     vector<float>currentIt_vec_X(N_LENGHT,0);//x_k
     vector<float>nextIt_vec_X(N_LENGHT,0); //x_k+1
 
     float somma=0;
     float temp1 = 0;
     float temp2 = 0;
-
     long tempo_catturato;
-    utimer tempo_seq = utimer("Tempo Esecuzione Sequenziale Jacobi", &tempo_catturato); //STAMPA IL TEMPO TOTALE ALLA FINE
 
-    for(int k=0;k<K_MAX_ITER;k++){
-        //cout<<"\nITERAZIONE k ="<<k<<"\n";
-        //cout<<"Array delle x iterazione"<<k<<":"<<endl;
-        //printArray(currentIt_vec_X,N_LENGHT);
+    utimer tempo_seq = utimer("Tempo Esecuzione Sequenziale Jacobi",&tempo_catturato); //STAMPA IL TEMPO TOTALE ALLA FINE
+    for (int k = 0; k < K_MAX_ITER; k++) {
 
-        for(int i=0; i<N_LENGHT; i++) { //for esterno DELLA FORMULA
-            //cout<<"\nENTRA CICLO i = "<<i<<endl;
+        for (int i = 0; i < N_LENGHT; i++) { //for 'i' external
             somma = 0;
-            //cout<<"valore Mat["<<i<<"]"<<"["<<i<<"]"<<" = "<<matriceA[i][i]<<endl;
-            //cout<<"temp1 = 1 / mat[i][i]:"<<matriceA[i][i]<<endl;
             temp1 = (1 / matriceA[i][i]);
-            //cout<<"valore temp1 = "<<temp1<<", valore somma = "<<somma<<endl;
 
-            for(int j=0;j<N_LENGHT;j++){
-                //cout<<"\nENTRA CICLO J = "<<j<<endl;
-                //cout<<"valore Mat["<<i<<"]"<<"["<<j<<"]"<<" = "<<matriceA[i][j]<<endl;
-                //cout<<"valore somma:"<<somma<<" PRIMA del ciclo con I="<<i<<" e J = "<<j<<endl;
-                if (j != i ){
-                    somma = somma + ( matriceA[i][j] * currentIt_vec_X[j] ) ;
+            for (int j = 0; j < N_LENGHT; j++) {
+                if (j != i) {
+                    somma = somma + (matriceA[i][j] * currentIt_vec_X[j]);
                 }
-            }//fine for delle j
+            }
 
-            //cout<<"VALORE somma DOPO ciclo ="<<somma<<endl;
             temp2 = vettoreB[i] - somma;
-            //cout<<"RISULTATO temp1="<<temp1<<" temp 2 = "<<temp2<<endl;
-            nextIt_vec_X[i] = temp1*temp2;
-            //cout<<"valore di x[i] nella nuova iterazione nextX["<<i<<"]= "<<nextIt_vec_X[i]<<endl<<endl;
-
-        } // FINE CICLO i
-        //cout<<"Aggiorno il nuovo vettore prima dell'iteraz k+1 current=next"<<endl;;
-        currentIt_vec_X= nextIt_vec_X;
-    }//fine for delle iterazioni
-    //fine = chrono::high_resolution_clock::now();
+            nextIt_vec_X[i] = temp1 * temp2;
+        }
+        currentIt_vec_X = nextIt_vec_X; //Update next iteration vector
+    }
 
     cout<<"Stampo array finale:\n";
     printArray(nextIt_vec_X,N_LENGHT);
-    //printMicroSec(inizio,fine);
-
     cout<<"Fine programma"<<endl;
     return 0;
-}
-
-//prende il tempo
-/*auto inizio = chrono::high_resolution_clock::now();//MIO
-auto fine = chrono::high_resolution_clock::now();//MIO
-inizio = chrono::high_resolution_clock::now(); //MIO - funziona solo prima di utimer
-*/
-vector<float> jacobiSeq(vector<vector<float>> matriceA, vector<float> vettoreB, int N_LENGHT, vector<float>& currentIt_vec_X, vector<float>& nextIt_vec_X){
-
- return nextIt_vec_X;
 }
