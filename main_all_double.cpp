@@ -52,10 +52,10 @@ int main(int argc, char *argv[]) {
 
     long tempo_catturato; //Perchè l'oggetto utimer e' creato e distrutto ogni volta che si crea la funzione e quindi si resetta
     long double mediaTempi = 0;
+    vector<double> res_nextIt_vec_X(N_LENGHT, 0); //Final vector that contains the solution founded by jacobi method
 
     int exit = 0;
     while (exit != -1) {
-        vector<double> res_nextIt_vec_X(N_LENGHT, 0); //Final vector that contains the solution founded by jacobi method
         cout <<endl<<"K_MAX_ITERATIONS = "<<K_MAX_ITER<<", N = "<<N_LENGHT<<", LANCI/ESECUZIONI =  "<<ESECUZIONI<< ", n_Thread/Worker = " << n_thread <<endl;
         cout << "INSERISCI\n1: SEQUENZIALE - 2: THREAD - 3: FAST FLOW\n5: Stampa Matrice A - 6: Stampa Vettore B\n7: Stampa Vettore X Risultato Finale\n8: Verifica se la matrice converge\n9: USCITA PROGRAMMA"<< endl;
         bool converge;
