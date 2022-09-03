@@ -17,7 +17,7 @@
 #define SEED 3
 
 //option command L fai il reformatting del codice
-//compile: g++ -std=c++20 -O3 -o main_all.out main_all.cpp util.hpp util.cpp utimer.cpp -pthread
+//compile: g++ -std=c++20 -O3 -o main_all_double.out main_all_double.cpp util.hpp util.cpp utimer.cpp -pthread
 //exec: ./main_all.out [K_MAX_ITER] [N_EXECUTIONS/RUNS] [N_LENGHT_MATRIX_AND_VECTOR] [N_THREAD]
 using namespace std;
 
@@ -57,10 +57,11 @@ int main(int argc, char *argv[]) {
     while (exit != -1) {
         vector<double> res_nextIt_vec_X(N_LENGHT, 0); //Final vector that contains the solution founded by jacobi method
         cout <<endl<<"K_MAX_ITERATIONS = "<<K_MAX_ITER<<", N = "<<N_LENGHT<<", LANCI/ESECUZIONI =  "<<ESECUZIONI<< ", n_Thread/Worker = " << n_thread <<endl;
-        cout << "INSERISCI\n1:SEQUENZIALE - 2:THREAD - 3:FAST FLOW\n5:Stampa Matrice A - 6:Stampa Vettore B\n7:Stampa Vettore X Risultato Finale\n8:Verifica se la matrice converge\n9:USCITA PROGRAMMA"<< endl;
+        cout << "INSERISCI\n1: SEQUENZIALE - 2: THREAD - 3: FAST FLOW\n5: Stampa Matrice A - 6: Stampa Vettore B\n7: Stampa Vettore X Risultato Finale\n8: Verifica se la matrice converge\n9: USCITA PROGRAMMA"<< endl;
         bool converge;
         int versione;
         cin >> versione;
+        cout<<endl;
         switch (versione) {
             case 1:
                 for (int e = 0; e < ESECUZIONI; e++) {
@@ -105,7 +106,7 @@ int main(int argc, char *argv[]) {
                 printVector(vettoreB);
                 break;
             case 7:
-                printVector(res_nextIt_vec_X);
+                printArray(res_nextIt_vec_X,N_LENGHT);
                 break;
             case 8:
                 converge = isConvergente(matriceA);
