@@ -211,7 +211,7 @@ vector<double> jacobiThread(vector<vector<float>> matriceA, vector<float> vettor
 }
 
 
-//ALGORITMO JACOBI VERSIONE FAST FLOW---------------------------------------------------------------------------------------------------------------------
+//-ALGORITMO JACOBI VERSIONE FAST FLOW---------------------------------------------------------------------------------------------------------------------
 vector<double> jacobiFastFlow(vector<vector<float>> matriceA, vector<float> vettoreB, int N_LENGHT, int K_MAX_ITER, long &tempo_catturato, int n_thread) {
     vector<double> nextIt_vec_X(N_LENGHT, 0); //x_k+1
     vector<double> currentIt_vec_X(N_LENGHT, 0);//x_k
