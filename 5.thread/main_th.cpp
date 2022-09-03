@@ -19,7 +19,7 @@ using namespace std;
 //exec: ./main_th.out [K_ITERATION] [N_LENGHT] [N_THREAD]
 int main(int argc, char* argv[]) {
 
-    if (argc > 3 || argc < 3) { //Check arguments by command line
+    if (argc > 4 || argc < 4) { //Check arguments by command line
         cout << "Usage: " << argv[0]<< " \"K_MAX_ITER\" \"N_LENGHT_MATRIX_AND_VECTOR\" \"N_THREAD\" " << endl;
         exit(1);
     }

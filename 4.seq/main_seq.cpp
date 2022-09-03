@@ -16,7 +16,7 @@ using namespace std;
 //exec: ./main_seq.out [K_ITERATION] [N_LENGHT]
 int main(int argc, char* argv[]) {
 
-    if (argc > 2 || argc < 2) { //Check arguments by command line
+    if (argc > 3 || argc < 3) { //Check arguments by command line
         cout << "Usage: " << argv[0]<< " \"K_MAX_ITER\" \"N_LENGHT_MATRIX_AND_VECTOR\" " << endl;
         exit(1);
     }
