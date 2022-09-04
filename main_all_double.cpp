@@ -5,6 +5,7 @@
 #include <random>
 #include <thread>
 #include <barrier>
+#include <fstream>
 
 #include <ff/ff.hpp>
 #include <ff/parallel_for.hpp>
@@ -17,7 +18,7 @@
 #define SEED 3
 
 //compile: g++ -std=c++20 -O3 -o main_all_double.out main_all_double.cpp util.hpp util.cpp utimer.cpp -pthread
-//exec: ./main_all.out [K_MAX_ITER] [N_EXECUTIONS/RUNS] [N_LENGHT_MATRIX_AND_VECTOR] [N_THREAD]
+//exec: ./main_all.out [K_MAX_ITER] [N_EXECUTIONS/RUNS] [N_LENGHT_MATRIX_AND_VECTOR] [N_THREAD] [MODE]
 using namespace std;
 
 vector<double> jacobiSeq(vector<vector<float>> matriceA, vector<float> vettoreB, int N_LENGHT, int K_MAX_ITER, long &tempo_catturato);
@@ -36,15 +37,17 @@ int main(int argc, char *argv[]) {
     const int ESECUZIONI = stoi(argv[2]); //numero di volte in cui lanci l'esecuzione dello stesso programma per stimare una media dei tempi
     const int N_LENGHT = stoi(argv[3]); //lunghezza della matrice e dei vettori
     const int n_thread = stoi(argv[4]); //numero dei thread
+    const int mode = stoi(argv[5]); //numero dei thread
+
 
     if (n_thread > N_LENGHT) {
         cout << "Error: Threads-Worker must be > N_LEN" << endl;
         exit(2);
     }
 
-    vector<vector<float>> matriceA;
-    vector<float> vettoreB;
-    startCase(matriceA, vettoreB, N_LENGHT, LOWER_BOUND, UPPER_BOUND,SEED);//i vector puoi passarli normalmente -  * QUI:  FIRMA/PROT: f(&a)  -> MAIN: f(a)
+    vector<vector<float>> matriceA = generateMatrixSeed(N_LENGHT,LOWER_BOUND,UPPER_BOUND,SEED);
+    vector<float> vettoreB = generateVectorSeed(N_LENGHT,LOWER_BOUND,UPPER_BOUND,SEED);
+    //startCase(matriceA, vettoreB, N_LENGHT, LOWER_BOUND, UPPER_BOUND,SEED);//i vector puoi passarli normalmente -  * QUI:  FIRMA/PROT: f(&a)  -> MAIN: f(a)
 
     long tempo_catturato; //Perchè l'oggetto utimer e' creato e distrutto ogni volta che si crea la funzione e quindi si resetta
     long double mediaTempi = 0;
@@ -55,8 +58,8 @@ int main(int argc, char *argv[]) {
         cout <<endl<<"K_MAX_ITERATIONS = "<<K_MAX_ITER<<", N = "<<N_LENGHT<<", LANCI/ESECUZIONI =  "<<ESECUZIONI<< ", n_Thread/Worker = " << n_thread <<endl;
         cout << "INSERISCI\n1: SEQUENZIALE\n2: THREAD\n3: FAST FLOW\n5: Stampa Matrice A\n6: Stampa Vettore B\n7: Stampa Vettore X Risultato Finale\n8: Verifica se la matrice converge\n9: USCITA PROGRAMMA"<< endl;
         bool converge;
-        int versione;
-        cin >> versione;
+        int versione = mode;
+        //cin >> versione;
         cout<<endl;
         switch (versione) {
             case 1:
@@ -65,8 +68,15 @@ int main(int argc, char *argv[]) {
                     mediaTempi = mediaTempi + tempo_catturato;
                 }
                 mediaTempi = mediaTempi / ESECUZIONI;
-                //cout << "\nSTAMPO nextIt_vec_X:\n";
-                //printArray(res_nextIt_vec_X, N_LENGHT);
+
+                {
+                    ofstream myfile;
+                    myfile.open ("./results/tempi_seq.csv", std::ios_base::app);
+                    myfile << N_LENGHT <<","<< n_thread <<"," << mediaTempi <<","<<"seq"<< endl;
+                    myfile.close();
+
+                }
+
                 cout << "La media del tempo sequenziale su " << ESECUZIONI << " lanci/esecuzioni e': " << mediaTempi << " μsec (usec)" << endl;
                 cout<<"------------------------------------------------------------------------------------"<<endl;
                 tempo_catturato=0;
@@ -79,8 +89,14 @@ int main(int argc, char *argv[]) {
                     mediaTempi = mediaTempi + tempo_catturato;
                 }
                 mediaTempi = mediaTempi / ESECUZIONI;
-                //cout << "\nSTAMPO nextIt_vec_X:\n";
-                //printArray(res_nextIt_vec_X, N_LENGHT);
+
+                {
+                    ofstream myfile;
+                    myfile.open ("./results/tempi_thread.csv", std::ios_base::app);
+                    myfile << N_LENGHT <<","<< n_thread <<"," << mediaTempi <<","<<"th"<< endl;
+                    myfile.close();
+                }
+
                 cout << "La media del tempo THREAD su " << ESECUZIONI << " lanci/esecuzioni e': " << mediaTempi << " μsec (usec)" << endl;
                 cout<<"------------------------------------------------------------------------------------"<<endl;
                 tempo_catturato=0;
@@ -94,8 +110,14 @@ int main(int argc, char *argv[]) {
                     mediaTempi = mediaTempi + tempo_catturato;
                 }
                 mediaTempi = mediaTempi / ESECUZIONI;
-                //cout << "\nSTAMPO nextIt_vec_X:\n";
-                //printArray(res_nextIt_vec_X, N_LENGHT);
+
+                {
+                    ofstream myfile;
+                    myfile.open ("./results/tempi_ff.csv", std::ios_base::app);
+                    myfile << N_LENGHT <<","<< n_thread <<"," << mediaTempi <<","<<"ff"<< endl;
+                    myfile.close();
+                }
+
                 cout << "La media del tempo  FAST FLOW su " << ESECUZIONI << " lanci/esecuzioni e': " << mediaTempi << " μsec (usec)" << endl;
                 cout<<"------------------------------------------------------------------------------------"<<endl;
                 tempo_catturato=0;
@@ -152,6 +174,10 @@ vector<double> jacobiSeq(vector<vector<float>> matriceA, vector<float> vettoreB,
         }
         currentIt_vec_X = nextIt_vec_X; //Update next iteration vector
     }
+
+
+
+
     return nextIt_vec_X;
 }
 
