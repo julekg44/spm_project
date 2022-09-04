@@ -198,10 +198,10 @@ vector<double> jacobiThread(vector<vector<float>> matriceA, vector<float> vettor
                 nextIt_vec_X[i] = temp1 * temp2;
                 i++;
             }
-            auto inizio = chrono::high_resolution_clock::now(); //MIO - funziona solo prima di utimer
+            //auto inizio = chrono::high_resolution_clock::now(); //MIO - funziona solo prima di utimer
             barrieraThread.arrive_and_wait(); //Thread are synchronized before the next iteration
-            auto fine = chrono::high_resolution_clock::now();//MIO
-
+            //auto fine = chrono::high_resolution_clock::now();//MIO
+            //sommatempi= sommatempi + std::chrono::duration_cast<std::chrono::microseconds>(fine-inizio).count();
         }
     };
 
@@ -213,9 +213,7 @@ vector<double> jacobiThread(vector<vector<float>> matriceA, vector<float> vettor
     for (int i = 0; i < n_thread; i++) {
         arrayThread[i].join();
     }
-
-    cout<<"OVERHEAD MEDIO DELLA BARRIERA TID = "<<sommatempi<<endl;
-
+    //cout<<"OVERHEAD MEDIO DELLA BARRIERA TID = "<<sommatempi<<endl;
     return nextIt_vec_X;
 }
 
