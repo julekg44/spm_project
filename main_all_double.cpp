@@ -213,6 +213,8 @@ vector<double> jacobiThread(vector<vector<float>> matriceA, vector<float> vettor
         arrayThread[i].join();
     }
 
+    cout<<"media OVERHEAD DELLA BARRIERA TID = "<<sommatempi/(K_MAX_ITER*n_thread)<<endl;
+
     return nextIt_vec_X;
 }
 
