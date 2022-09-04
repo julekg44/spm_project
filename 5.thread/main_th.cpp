@@ -15,7 +15,7 @@
 
 using namespace std;
 
-long int sommatempi=0;
+atomic_long sommatempi=0;
 
 //compile: g++ -std=c++20 -O3 -o main_th.out main_th.cpp util.hpp util.cpp utimer.cpp -pthread
 //exec: ./main_th.out [K_ITERATION] [N_LENGHT] [N_THREAD]
@@ -76,8 +76,6 @@ int main(int argc, char* argv[]) {
             auto inizio = chrono::high_resolution_clock::now(); //MIO - funziona solo prima di utimer
             barrieraThread.arrive_and_wait(); //Thread are synchronized before the next iteration
             auto fine = chrono::high_resolution_clock::now();//MIO
-            //cout<<"OVERHEAD DELLA BARRIERA TID "<<threadPartito<<" = ";
-            //printMicroSec(inizio,fine);
             sommatempi= sommatempi + std::chrono::duration_cast<std::chrono::microseconds>(fine-inizio).count();
         }
     };

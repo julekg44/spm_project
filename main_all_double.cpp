@@ -25,6 +25,8 @@ vector<double> jacobiSeq(vector<vector<float>> matriceA, vector<float> vettoreB,
 vector<double> jacobiThread(vector<vector<float>> matriceA, vector<float> vettoreB, int N_LENGHT, int K_MAX_ITER, long &tempo_catturato, int n_thread);
 vector<double> jacobiFastFlow(vector<vector<float>> matriceA, vector<float> vettoreB, int N_LENGHT, int K_MAX_ITER, long &tempo_catturato, int n_thread);
 
+atomic_long sommatempi=0;
+
 int main(int argc, char *argv[]) {
 
     if (argc > 5 || argc < 5) { //Check arguments by command line
@@ -172,7 +174,7 @@ vector<double> jacobiThread(vector<vector<float>> matriceA, vector<float> vettor
     };
 
     std::barrier barrieraThread(n_thread, on_completion); //barriera per sincronizzare i thread
-    long int sommatempi=0;
+
     auto lambdaJacobiThread = [&](int threadPartito) {
         int startOnWork = threadPartito * pieceWorkOnPerThread; //Starting position
         int endOnWork = startOnWork + pieceWorkOnPerThread;//Ending position
@@ -213,7 +215,7 @@ vector<double> jacobiThread(vector<vector<float>> matriceA, vector<float> vettor
         arrayThread[i].join();
     }
 
-    cout<<"media OVERHEAD DELLA BARRIERA TID = "<<sommatempi/(K_MAX_ITER*n_thread)<<endl;
+    cout<<"OVERHEAD DELLA BARRIERA TID = "<<sommatempi/(K_MAX_ITER*n_thread)<<endl;
 
     return nextIt_vec_X;
 }
