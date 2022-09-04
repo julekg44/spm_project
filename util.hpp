@@ -45,4 +45,11 @@ void startCase(vector<vector<float>>& matriceA, vector<float>& vettoreB,int size
 
 bool isConvergente(vector<vector<float>> matrix);
 
+//--------------
+vector<vector<float>> GenerateRandomMatrix(int n, int seed);
+vector<float> GenerateRandomVector(int size,int min, int max, int seed);
+
+
+
+
 #endif //PROGETTO_UTIL_HPP

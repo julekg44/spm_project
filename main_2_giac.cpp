@@ -47,8 +47,8 @@ int main(int argc, char *argv[]) {
 
     cout << "\nAVVIO PROGRAMMA:\nK_MAX_ITERATIONS = "<<K_MAX_ITER<<", N = "<<N_LENGHT<<", LANCI/ESECUZIONI =  "<<ESECUZIONI<< ", n_Thread/Worker = " << n_thread <<endl;
 
-    vector<vector<float>> matriceA = generateRandomSquareVectorMatrix(N_LENGHT,LOWER_BOUND,UPPER_BOUND);
-    vector<float> vettoreB = generateRandomVector(N_LENGHT,LOWER_BOUND,UPPER_BOUND)
+    vector<vector<float>> matriceA = GenerateRandomMatrix(N_LENGHT,SEED);
+    vector<float> vettoreB = GenerateRandomVector(N_LENGHT,LOWER_BOUND,UPPER_BOUND,SEED);
     //startCase(matriceA, vettoreB, N_LENGHT, LOWER_BOUND, UPPER_BOUND,SEED);//i vector puoi passarli normalmente -  * QUI:  FIRMA/PROT: f(&a)  -> MAIN: f(a)
 
     long tempo_catturato; //Perchè l'oggetto utimer e' creato e distrutto ogni volta che si crea la funzione e quindi si resetta
