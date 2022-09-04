@@ -90,7 +90,7 @@ int main(int argc, char* argv[]) {
         arrayThread[i].join();
     }
 
-    cout<<"media OVERHEAD DELLA BARRIERA TID = "<<sommatempi/(K_MAX_ITER*n_thread)<<endl;
+    cout<<"AVG OVERHEAD DELLA BARRIERA = "<<sommatempi/(K_MAX_ITER*n_thread)<<endl;
 
     //printArray(nextIt_vec_X,N_LENGHT);
     cout<<"Fine programma"<<endl;

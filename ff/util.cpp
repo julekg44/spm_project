@@ -80,13 +80,13 @@ void printVector(vector<double> vector){
 
 
 //RANDOM FUNCTIONS------------------------------------------------------------------------------------------------------
-float randomBetween( int lowerBound, int upperBound ) //FORTISSIMA
+float randomBetween( int lowerBound, int upperBound )
 {
     random_device rd;
     default_random_engine eng(rd());
-    uniform_real_distribution<float> dist(lowerBound, upperBound);
-    //uniform_int_distribution<int> dist(lowerBound, upperBound);
-    float r = dist(eng);
+    //uniform_real_distribution<float> dist(lowerBound, upperBound);
+    uniform_int_distribution<int> dist(lowerBound, upperBound);
+    auto r = (float) dist(eng);
     /*int upperbound, lowerbound;
     //float randomBetween = rand() % (upperbound-lowerbound) + upperbound;
     return randomBetween;*/
@@ -120,6 +120,7 @@ vector<vector<float>> generateMatrixSeed(int n, float min_matrix, float max_matr
             matrix[i][j] = min_matrix + static_cast <float> (rand()) /( static_cast <float> (RAND_MAX/(max_matrix-min_matrix)));
             sum += matrix[i][j];
         }
+        //matrix[i][i] = sum * n;
         matrix[i][i] = sum * 2;
     }
 
