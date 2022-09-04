@@ -15,9 +15,7 @@
 #define LOWER_BOUND 0 //1
 #define UPPER_BOUND 20 //4
 #define SEED 3
-atomic_long sommatempi=0;
 
-//option command L fai il reformatting del codice
 //compile: g++ -std=c++20 -O3 -o main_all_double.out main_all_double.cpp util.hpp util.cpp utimer.cpp -pthread
 //exec: ./main_all.out [K_MAX_ITER] [N_EXECUTIONS/RUNS] [N_LENGHT_MATRIX_AND_VECTOR] [N_THREAD]
 using namespace std;
@@ -29,8 +27,7 @@ vector<double> jacobiFastFlow(vector<vector<float>> matriceA, vector<float> vett
 int main(int argc, char *argv[]) {
 
     if (argc > 5 || argc < 5) { //Check arguments by command line
-        cout << "Usage: " << argv[0]
-             << " \"K_MAX_ITER\" \"N_TEST/ESECUZIONI/ESECUZIONI\" \"N_LENGHT_MATRIX_AND_VECTOR\" \"N_THREAD\" " << endl;
+        cout << "Usage: " << argv[0]<< " \"K_MAX_ITER\" \"N_TEST/ESECUZIONI/ESECUZIONI\" \"N_LENGHT_MATRIX_AND_VECTOR\" \"N_THREAD\" " << endl;
         exit(1);
     }
     std::cout<<"GIULIANO GALLOPPI 646443 - SPM Project A.Y.2021/22 - Jacobi iterative method implementation"<<endl;
@@ -45,8 +42,6 @@ int main(int argc, char *argv[]) {
         exit(2);
     }
 
-    cout << "\nAVVIO PROGRAMMA:\nK_MAX_ITERATIONS = "<<K_MAX_ITER<<", N = "<<N_LENGHT<<", LANCI/ESECUZIONI =  "<<ESECUZIONI<< ", n_Thread/Worker = " << n_thread <<endl;
-
     vector<vector<float>> matriceA;
     vector<float> vettoreB;
     startCase(matriceA, vettoreB, N_LENGHT, LOWER_BOUND, UPPER_BOUND,SEED);//i vector puoi passarli normalmente -  * QUI:  FIRMA/PROT: f(&a)  -> MAIN: f(a)
@@ -58,7 +53,7 @@ int main(int argc, char *argv[]) {
     int exit = 0;
     while (exit != -1) {
         cout <<endl<<"K_MAX_ITERATIONS = "<<K_MAX_ITER<<", N = "<<N_LENGHT<<", LANCI/ESECUZIONI =  "<<ESECUZIONI<< ", n_Thread/Worker = " << n_thread <<endl;
-        cout << "INSERISCI\n1: SEQUENZIALE - 2: THREAD - 3: FAST FLOW\n5: Stampa Matrice A - 6: Stampa Vettore B\n7: Stampa Vettore X Risultato Finale\n8: Verifica se la matrice converge\n9: USCITA PROGRAMMA"<< endl;
+        cout << "INSERISCI\n1: SEQUENZIALE\n2: THREAD\n3: FAST FLOW\n5: Stampa Matrice A\n6: Stampa Vettore B\n7: Stampa Vettore X Risultato Finale\n8: Verifica se la matrice converge\n9: USCITA PROGRAMMA"<< endl;
         bool converge;
         int versione;
         cin >> versione;
@@ -90,7 +85,6 @@ int main(int argc, char *argv[]) {
                 cout<<"------------------------------------------------------------------------------------"<<endl;
                 tempo_catturato=0;
                 mediaTempi = 0;
-                //sommatempi = 0;
                 break;
 
             case 3:
@@ -143,7 +137,7 @@ vector<double> jacobiSeq(vector<vector<float>> matriceA, vector<float> vettoreB,
     utimer tempo_seq = utimer("Tempo Esecuzione Sequenziale Jacobi",&tempo_catturato); //STAMPA IL TEMPO TOTALE ALLA FINE
     for (int k = 0; k < K_MAX_ITER; k++) {
 
-        for (int i = 0; i < N_LENGHT; i++) { //for 'i' external
+        for (int i = 0; i < N_LENGHT; i++) {
             somma = 0;
             temp1 = (1 / matriceA[i][i]);
 
@@ -155,7 +149,7 @@ vector<double> jacobiSeq(vector<vector<float>> matriceA, vector<float> vettoreB,
 
             temp2 = vettoreB[i] - somma;
             nextIt_vec_X[i] = temp1 * temp2;
-        } //End external for
+        }
         currentIt_vec_X = nextIt_vec_X; //Update next iteration vector
     }
     return nextIt_vec_X;
@@ -164,7 +158,6 @@ vector<double> jacobiSeq(vector<vector<float>> matriceA, vector<float> vettoreB,
 
 //ALGORITMO JACOBI VERSIONE THREAD---------------------------------------------------------------------------------------------------------------------
 vector<double> jacobiThread(vector<vector<float>> matriceA, vector<float> vettoreB, int N_LENGHT, int K_MAX_ITER,long &tempo_catturato, int n_thread) {
-    //FINITA UN ITERAZIONE SUL VETTORE X DA PARTE DI TUTTI I THREAD SI AGGIORNA IL VETTORE DELLE X DELLA NEXT_ITERATION
     vector<double> currentIt_vec_X(N_LENGHT, 0);
     vector<double> nextIt_vec_X(N_LENGHT, 0);
 
@@ -201,10 +194,7 @@ vector<double> jacobiThread(vector<vector<float>> matriceA, vector<float> vettor
                 nextIt_vec_X[i] = temp1 * temp2;
                 i++;
             }
-            //auto inizio = chrono::high_resolution_clock::now(); //MIO - funziona solo prima di utimer
             barrieraThread.arrive_and_wait(); //Thread are synchronized before the next iteration
-            //auto fine = chrono::high_resolution_clock::now();//MIO
-            //sommatempi= sommatempi + std::chrono::duration_cast<std::chrono::microseconds>(fine-inizio).count();
         }
     };
 
@@ -216,7 +206,6 @@ vector<double> jacobiThread(vector<vector<float>> matriceA, vector<float> vettor
     for (int i = 0; i < n_thread; i++) {
         arrayThread[i].join();
     }
-    //cout<<"OVERHEAD MEDIO DELLA BARRIERA TID = "<<sommatempi<<endl;
     return nextIt_vec_X;
 }
 
@@ -244,7 +233,7 @@ vector<double> jacobiFastFlow(vector<vector<float>> matriceA, vector<float> vett
 
             double temp2 = vettoreB[i] - somma;
             nextIt_vec_X[i] = temp1 * temp2;
-        }, n_thread); //FINE CICLO i
+        }, n_thread);
 
         currentIt_vec_X = nextIt_vec_X;
     }

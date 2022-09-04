@@ -6,7 +6,7 @@
 #include <barrier>
 #include <iostream>
 #include <fstream>
-#include "utimer.cpp"
+#include "../utimer.cpp"
 using namespace std;
 
 #define EXECUTION 5
