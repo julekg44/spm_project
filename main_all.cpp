@@ -18,7 +18,7 @@
 #define SEED 3
 
 //compile: g++ -std=c++20 -O3 -o main_all_double.out main_all_double.cpp util.hpp util.cpp utimer.cpp -pthread
-//exec: ./main_all.out [K_MAX_ITER] [N_EXECUTIONS/RUNS] [N_LENGHT_MATRIX_AND_VECTOR] [N_THREAD] [MODE]
+//exec: ./main_all.out [K_MAX_ITER] [N_EXECUTIONS/RUNS] [N_LENGHT_MATRIX_AND_VECTOR] [N_THREAD]
 using namespace std;
 
 vector<double> jacobiSeq(vector<vector<float>> matriceA, vector<float> vettoreB, int N_LENGHT, int K_MAX_ITER, long &tempo_catturato);
@@ -26,18 +26,18 @@ vector<double> jacobiThread(vector<vector<float>> matriceA, vector<float> vettor
 vector<double> jacobiFastFlow(vector<vector<float>> matriceA, vector<float> vettoreB, int N_LENGHT, int K_MAX_ITER, long &tempo_catturato, int n_thread);
 
 int main(int argc, char *argv[]) {
-    /*
+
     if (argc > 5 || argc < 5) { //Check arguments by command line
         cout << "Usage: " << argv[0]<< " \"K_MAX_ITER\" \"N_TEST/ESECUZIONI/ESECUZIONI\" \"N_LENGHT_MATRIX_AND_VECTOR\" \"N_THREAD\" " << endl;
         exit(1);
-    }*/
+    }
     std::cout<<"GIULIANO GALLOPPI 646443 - SPM Project A.Y.2021/22 - Jacobi iterative method implementation"<<endl;
 
     const int K_MAX_ITER = stoi(argv[1]);
     const int ESECUZIONI = stoi(argv[2]); //numero di volte in cui lanci l'esecuzione dello stesso programma per stimare una media dei tempi
     const int N_LENGHT = stoi(argv[3]); //lunghezza della matrice e dei vettori
     const int n_thread = stoi(argv[4]); //numero dei thread
-    const int mode = stoi(argv[5]); //numero dei thread
+
 
 
     if (n_thread > N_LENGHT) {
@@ -52,14 +52,14 @@ int main(int argc, char *argv[]) {
     long tempo_catturato; //Perchè l'oggetto utimer e' creato e distrutto ogni volta che si crea la funzione e quindi si resetta
     long double mediaTempi = 0;
     vector<double> res_nextIt_vec_X(N_LENGHT, 0); //Final vector that contains the solution founded by jacobi method
-    int versione = mode;
+
     int exit = 0;
     while (exit != -1) {
         cout <<endl<<"K_MAX_ITERATIONS = "<<K_MAX_ITER<<", N = "<<N_LENGHT<<", LANCI/ESECUZIONI =  "<<ESECUZIONI<< ", n_Thread/Worker = " << n_thread <<endl;
         cout << "INSERISCI\n1: SEQUENZIALE\n2: THREAD\n3: FAST FLOW\n5: Stampa Matrice A\n6: Stampa Vettore B\n7: Stampa Vettore X Risultato Finale\n8: Verifica se la matrice converge\n9: USCITA PROGRAMMA"<< endl;
         bool converge;
-        //int versione = mode;
-        //cin >> versione;
+        int versione;
+        cin >> versione;
         cout<<endl;
         switch (versione) {
             case 1:
@@ -69,19 +69,10 @@ int main(int argc, char *argv[]) {
                 }
                 mediaTempi = mediaTempi / ESECUZIONI;
 
-                {
-                    ofstream myfile;
-                    myfile.open ("./results/tempi_seq.csv", std::ios_base::app);
-                    myfile << N_LENGHT <<","<< n_thread <<"," << mediaTempi <<","<<"seq"<< endl;
-                    myfile.close();
-
-                }
-
                 cout << "La media del tempo sequenziale su " << ESECUZIONI << " lanci/esecuzioni e': " << mediaTempi << " μsec (usec)" << endl;
                 cout<<"------------------------------------------------------------------------------------"<<endl;
                 tempo_catturato=0;
                 mediaTempi = 0;
-                versione=9;
                 break;
 
             case 2:
@@ -90,14 +81,6 @@ int main(int argc, char *argv[]) {
                     mediaTempi = mediaTempi + tempo_catturato;
                 }
                 mediaTempi = mediaTempi / ESECUZIONI;
-
-                {
-                    ofstream myfile;
-                    myfile.open ("./results/tempi_thread.csv", std::ios_base::app);
-                    myfile << N_LENGHT <<","<< n_thread <<"," << mediaTempi <<","<<"th"<< endl;
-                    myfile.close();
-                }
-
                 cout << "La media del tempo THREAD su " << ESECUZIONI << " lanci/esecuzioni e': " << mediaTempi << " μsec (usec)" << endl;
                 cout<<"------------------------------------------------------------------------------------"<<endl;
                 tempo_catturato=0;
