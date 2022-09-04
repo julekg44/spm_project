@@ -88,6 +88,7 @@ int main(int argc, char *argv[]) {
                 cout << "La media del tempo THREAD su " << ESECUZIONI << " lanci/esecuzioni e': " << mediaTempi << " μsec (usec)" << endl;
                 cout<<"------------------------------------------------------------------------------------"<<endl;
                 mediaTempi = 0;
+                sommatempi = 0;
                 break;
 
             case 3:
@@ -197,8 +198,9 @@ vector<double> jacobiThread(vector<vector<float>> matriceA, vector<float> vettor
                 nextIt_vec_X[i] = temp1 * temp2;
                 i++;
             }
-
+            auto inizio = chrono::high_resolution_clock::now(); //MIO - funziona solo prima di utimer
             barrieraThread.arrive_and_wait(); //Thread are synchronized before the next iteration
+            auto fine = chrono::high_resolution_clock::now();//MIO
 
         }
     };
@@ -212,7 +214,7 @@ vector<double> jacobiThread(vector<vector<float>> matriceA, vector<float> vettor
         arrayThread[i].join();
     }
 
-    cout<<"OVERHEAD MEDIO DELLA BARRIERA TID = "<<sommatempi/(K_MAX_ITER*n_thread)<<endl;
+    cout<<"OVERHEAD MEDIO DELLA BARRIERA TID = "<<sommatempi<<endl;
 
     return nextIt_vec_X;
 }
