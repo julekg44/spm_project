@@ -26,11 +26,11 @@ vector<double> jacobiThread(vector<vector<float>> matriceA, vector<float> vettor
 vector<double> jacobiFastFlow(vector<vector<float>> matriceA, vector<float> vettoreB, int N_LENGHT, int K_MAX_ITER, long &tempo_catturato, int n_thread);
 
 int main(int argc, char *argv[]) {
-
+    /*
     if (argc > 5 || argc < 5) { //Check arguments by command line
         cout << "Usage: " << argv[0]<< " \"K_MAX_ITER\" \"N_TEST/ESECUZIONI/ESECUZIONI\" \"N_LENGHT_MATRIX_AND_VECTOR\" \"N_THREAD\" " << endl;
         exit(1);
-    }
+    }*/
     std::cout<<"GIULIANO GALLOPPI 646443 - SPM Project A.Y.2021/22 - Jacobi iterative method implementation"<<endl;
 
     const int K_MAX_ITER = stoi(argv[1]);
@@ -81,6 +81,7 @@ int main(int argc, char *argv[]) {
                 cout<<"------------------------------------------------------------------------------------"<<endl;
                 tempo_catturato=0;
                 mediaTempi = 0;
+                exit = -1; //----------------------
                 break;
 
             case 2:
