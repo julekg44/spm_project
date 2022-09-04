@@ -84,9 +84,9 @@ float randomBetween( int lowerBound, int upperBound ) //FORTISSIMA
 {
     random_device rd;
     default_random_engine eng(rd());
-    uniform_real_distribution<float> dist(lowerBound, upperBound);
-    //uniform_int_distribution<int> dist(lowerBound, upperBound);
-    float r = dist(eng);
+    //uniform_real_distribution<float> dist(lowerBound, upperBound);
+    uniform_int_distribution<int> dist(lowerBound, upperBound);
+    auto r = (float) dist(eng);
     /*int upperbound, lowerbound;
     //float randomBetween = rand() % (upperbound-lowerbound) + upperbound;
     return randomBetween;*/
