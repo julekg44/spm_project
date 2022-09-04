@@ -172,7 +172,7 @@ vector<double> jacobiThread(vector<vector<float>> matriceA, vector<float> vettor
     };
 
     std::barrier barrieraThread(n_thread, on_completion); //barriera per sincronizzare i thread
-
+    long int sommatempi=0;
     auto lambdaJacobiThread = [&](int threadPartito) {
         int startOnWork = threadPartito * pieceWorkOnPerThread; //Starting position
         int endOnWork = startOnWork + pieceWorkOnPerThread;//Ending position
@@ -197,7 +197,10 @@ vector<double> jacobiThread(vector<vector<float>> matriceA, vector<float> vettor
                 i++;
             }
 
+            auto inizio = chrono::high_resolution_clock::now();//MIO
             barrieraThread.arrive_and_wait(); //Thread are synchronized before the next iteration
+            auto fine = chrono::high_resolution_clock::now();//MIO
+            sommatempi= sommatempi + std::chrono::duration_cast<std::chrono::microseconds>(fine-inizio).count();
         }
     };
 
