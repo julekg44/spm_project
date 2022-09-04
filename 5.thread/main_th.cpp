@@ -39,6 +39,8 @@ int main(int argc, char* argv[]) {
     vector<thread> arrayThread(n_thread);
 
     std::cout<<"\nVERSIONE THREAD: Num_ITER = "<<K_MAX_ITER<<", N_LEN = "<<N_LENGHT<<", N_THREAD = "<<n_thread<<endl;
+    auto inizio = chrono::high_resolution_clock::now(); //MIO - funziona solo prima di utimer
+    auto fine = chrono::high_resolution_clock::now();//MIO
 
     auto on_completion = [&]() noexcept {
         //static auto phase = "Iterazione finita thread hanno raggiunto la barriera e si cambia iterazione\n";
@@ -70,8 +72,9 @@ int main(int argc, char* argv[]) {
                 nextIt_vec_X[i] = temp1 * temp2;
                 i++;
             }
-
+            auto inizio = chrono::high_resolution_clock::now(); //MIO - funziona solo prima di utimer
             barrieraThread.arrive_and_wait(); //Thread are synchronized before the next iteration
+            auto fine = chrono::high_resolution_clock::now();//MIO
         }
     };
 
@@ -79,13 +82,18 @@ int main(int argc, char* argv[]) {
     utimer tempo_seq = utimer("Tempo Esecuzione VERSIONE THREAD Jacobi", &tempo_catturato);
     for(int i=0;i<n_thread;i++){
         arrayThread[i]=thread(lambdaJacobiThread,i);
+        printMicroSec(inizio,fine);
+
     }
 
     for(int i=0;i<n_thread;i++){
         arrayThread[i].join();
     }
 
-    printArray(nextIt_vec_X,N_LENGHT);
+
+    cout<<"OVERHEAD DELLA BARRIERA: ";
+
+    //printArray(nextIt_vec_X,N_LENGHT);
     cout<<"Fine programma"<<endl;
     return 0;
 }
