@@ -69,8 +69,8 @@ int main(int argc, char *argv[]) {
                     mediaTempi = mediaTempi + tempo_catturato;
                 }
                 mediaTempi = mediaTempi / ESECUZIONI;
-                cout << "\nSTAMPO nextIt_vec_X:\n";
-                printArray(res_nextIt_vec_X, N_LENGHT);
+                //cout << "\nSTAMPO nextIt_vec_X:\n";
+                //printArray(res_nextIt_vec_X, N_LENGHT);
                 cout << "La media del tempo sequenziale su " << ESECUZIONI << " lanci/esecuzioni e': " << mediaTempi << " μsec (usec)" << endl;
                 mediaTempi = 0;
                 break;
@@ -81,8 +81,8 @@ int main(int argc, char *argv[]) {
                     mediaTempi = mediaTempi + tempo_catturato;
                 }
                 mediaTempi = mediaTempi / ESECUZIONI;
-                cout << "\nSTAMPO nextIt_vec_X:\n";
-                printArray(res_nextIt_vec_X, N_LENGHT);
+                //cout << "\nSTAMPO nextIt_vec_X:\n";
+                //printArray(res_nextIt_vec_X, N_LENGHT);
                 cout << "La media del tempo THREAD su " << ESECUZIONI << " lanci/esecuzioni e': " << mediaTempi << " μsec (usec)" << endl;
                 mediaTempi = 0;
                 break;
@@ -94,8 +94,8 @@ int main(int argc, char *argv[]) {
                     mediaTempi = mediaTempi + tempo_catturato;
                 }
                 mediaTempi = mediaTempi / ESECUZIONI;
-                cout << "\nSTAMPO nextIt_vec_X:\n";
-                printArray(res_nextIt_vec_X, N_LENGHT);
+                //cout << "\nSTAMPO nextIt_vec_X:\n";
+                //printArray(res_nextIt_vec_X, N_LENGHT);
                 cout << "La media del tempo  FAST FLOW su " << ESECUZIONI << " lanci/esecuzioni e': " << mediaTempi << " μsec (usec)" << endl;
                 mediaTempi = 0;
                 break;
