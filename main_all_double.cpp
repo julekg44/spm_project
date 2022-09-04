@@ -15,6 +15,7 @@
 #define LOWER_BOUND 0 //1
 #define UPPER_BOUND 20 //4
 #define SEED 3
+atomic_long sommatempi=0;
 
 //option command L fai il reformatting del codice
 //compile: g++ -std=c++20 -O3 -o main_all_double.out main_all_double.cpp util.hpp util.cpp utimer.cpp -pthread
@@ -24,8 +25,6 @@ using namespace std;
 vector<double> jacobiSeq(vector<vector<float>> matriceA, vector<float> vettoreB, int N_LENGHT, int K_MAX_ITER, long &tempo_catturato);
 vector<double> jacobiThread(vector<vector<float>> matriceA, vector<float> vettoreB, int N_LENGHT, int K_MAX_ITER, long &tempo_catturato, int n_thread);
 vector<double> jacobiFastFlow(vector<vector<float>> matriceA, vector<float> vettoreB, int N_LENGHT, int K_MAX_ITER, long &tempo_catturato, int n_thread);
-
-atomic_long sommatempi=0;
 
 int main(int argc, char *argv[]) {
 
@@ -199,10 +198,8 @@ vector<double> jacobiThread(vector<vector<float>> matriceA, vector<float> vettor
                 i++;
             }
 
-            auto inizio = chrono::high_resolution_clock::now();//MIO
             barrieraThread.arrive_and_wait(); //Thread are synchronized before the next iteration
-            auto fine = chrono::high_resolution_clock::now();//MIO
-            sommatempi= sommatempi + std::chrono::duration_cast<std::chrono::microseconds>(fine-inizio).count();
+
         }
     };
 
@@ -215,7 +212,7 @@ vector<double> jacobiThread(vector<vector<float>> matriceA, vector<float> vettor
         arrayThread[i].join();
     }
 
-    cout<<"OVERHEAD DELLA BARRIERA TID = "<<sommatempi/(K_MAX_ITER*n_thread)<<endl;
+    cout<<"OVERHEAD MEDIO DELLA BARRIERA TID = "<<sommatempi/(K_MAX_ITER*n_thread)<<endl;
 
     return nextIt_vec_X;
 }

@@ -12,10 +12,9 @@
 #define LOWER_BOUND 0 //1
 #define UPPER_BOUND 20 //4
 #define SEED 3
+atomic_long sommatempi=0;
 
 using namespace std;
-
-atomic_long sommatempi=0;
 
 //compile: g++ -std=c++20 -O3 -o main_th.out main_th.cpp util.hpp util.cpp utimer.cpp -pthread
 //exec: ./main_th.out [K_ITERATION] [N_LENGHT] [N_THREAD]
