@@ -72,6 +72,7 @@ int main(int argc, char *argv[]) {
                 //cout << "\nSTAMPO nextIt_vec_X:\n";
                 //printArray(res_nextIt_vec_X, N_LENGHT);
                 cout << "La media del tempo sequenziale su " << ESECUZIONI << " lanci/esecuzioni e': " << mediaTempi << " μsec (usec)" << endl;
+                cout<<"------------------------------------------------------------------------------------"<<endl;
                 mediaTempi = 0;
                 break;
 
@@ -84,6 +85,7 @@ int main(int argc, char *argv[]) {
                 //cout << "\nSTAMPO nextIt_vec_X:\n";
                 //printArray(res_nextIt_vec_X, N_LENGHT);
                 cout << "La media del tempo THREAD su " << ESECUZIONI << " lanci/esecuzioni e': " << mediaTempi << " μsec (usec)" << endl;
+                cout<<"------------------------------------------------------------------------------------"<<endl;
                 mediaTempi = 0;
                 break;
 
@@ -97,6 +99,7 @@ int main(int argc, char *argv[]) {
                 //cout << "\nSTAMPO nextIt_vec_X:\n";
                 //printArray(res_nextIt_vec_X, N_LENGHT);
                 cout << "La media del tempo  FAST FLOW su " << ESECUZIONI << " lanci/esecuzioni e': " << mediaTempi << " μsec (usec)" << endl;
+                cout<<"------------------------------------------------------------------------------------"<<endl;
                 mediaTempi = 0;
                 break;
             case 5:
