@@ -52,13 +52,13 @@ int main(int argc, char *argv[]) {
     long tempo_catturato; //Perchè l'oggetto utimer e' creato e distrutto ogni volta che si crea la funzione e quindi si resetta
     long double mediaTempi = 0;
     vector<double> res_nextIt_vec_X(N_LENGHT, 0); //Final vector that contains the solution founded by jacobi method
-
+    int versione = mode;
     int exit = 0;
     while (exit != -1) {
         cout <<endl<<"K_MAX_ITERATIONS = "<<K_MAX_ITER<<", N = "<<N_LENGHT<<", LANCI/ESECUZIONI =  "<<ESECUZIONI<< ", n_Thread/Worker = " << n_thread <<endl;
         cout << "INSERISCI\n1: SEQUENZIALE\n2: THREAD\n3: FAST FLOW\n5: Stampa Matrice A\n6: Stampa Vettore B\n7: Stampa Vettore X Risultato Finale\n8: Verifica se la matrice converge\n9: USCITA PROGRAMMA"<< endl;
         bool converge;
-        int versione = mode;
+        //int versione = mode;
         //cin >> versione;
         cout<<endl;
         switch (versione) {
@@ -81,7 +81,7 @@ int main(int argc, char *argv[]) {
                 cout<<"------------------------------------------------------------------------------------"<<endl;
                 tempo_catturato=0;
                 mediaTempi = 0;
-                exit = -1; //----------------------
+                versione=9;
                 break;
 
             case 2:
