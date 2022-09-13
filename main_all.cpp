@@ -232,6 +232,8 @@ vector<double> jacobiFastFlow(vector<vector<float>> matriceA, vector<float> vett
     for (int k = 0; k < K_MAX_ITER; k++) {
 
         par_for_obj.parallel_for(0, N_LENGHT, 1, pezzoVettorePerThread, [&](ulong i) {
+            //1000 righe con quell'0ggetto lì, se hai parallelismo 7 fai 1000/7 viene una cosa che l'ultimo thread è atteso da tutto gli altri mentre fa un giro in piu'
+            //(se avanza qualcosa prenderlo dividerlo per i worker ed aggiungerlo ad ogni worker)
             double somma = 0;
             double temp1 = (1 / matriceA[i][i]);
 
