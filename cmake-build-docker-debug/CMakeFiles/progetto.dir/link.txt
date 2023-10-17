@@ -1,1 +1,0 @@
-/usr/bin/g++ -g CMakeFiles/progetto.dir/main_seq.cpp.o -o progetto 
